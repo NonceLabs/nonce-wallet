@@ -1,9 +1,9 @@
 import I18n from 'i18n-js'
 import { NavArrowRight } from 'iconoir-react-native'
 import { StyleSheet, Pressable } from 'react-native'
-import Colors from 'constants/Colors'
+import Colors from 'theme/Colors'
 import useColorScheme from 'hooks/useColorScheme'
-import Fonts from 'constants/Fonts'
+import Fonts from 'theme/Fonts'
 import { View, Text } from 'components/Themed'
 
 interface SettingItem {

@@ -1,8 +1,8 @@
 import { StyleSheet, TouchableOpacity } from 'react-native'
-import Colors from 'constants/Colors'
+import Colors from 'theme/Colors'
 import useColorScheme from 'hooks/useColorScheme'
 import { ButtonType } from 'types'
-import Fonts from 'constants/Fonts'
+import Fonts from 'theme/Fonts'
 import { Text } from 'components/Themed'
 
 export default function Button({

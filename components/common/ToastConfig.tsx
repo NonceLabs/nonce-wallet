@@ -1,5 +1,5 @@
 import { BaseToast, BaseToastProps } from 'react-native-toast-message'
-import Fonts from 'constants/Fonts'
+import Fonts from 'theme/Fonts'
 import { View } from 'components/Themed'
 
 const CustomToast = (props: BaseToastProps & { backgroundColor: string }) => {

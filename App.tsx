@@ -5,11 +5,19 @@ import { Provider } from 'react-redux'
 import { Host } from 'react-native-portalize'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
+import './shim'
 import './locale'
 import useCachedResources from './hooks/useCachedResources'
 import Navigation from './navigation'
 import { toastConfig } from './components/common/ToastConfig'
 import { store } from './store'
+
+import Client from 'mina-signer'
+const client = new Client({ network: 'mainnet' })
+
+// Generate keys
+let keypair = client.genKeys()
+// console.log('keypair', keypair)
 
 export default function App() {
   const isLoadingComplete = useCachedResources()

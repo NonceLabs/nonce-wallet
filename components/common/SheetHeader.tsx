@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import Fonts from 'constants/Fonts'
+import Fonts from 'theme/Fonts'
 import { Text, View } from 'components/Themed'
 
 export default function SheetHeader({ title }: { title: string }) {

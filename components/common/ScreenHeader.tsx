@@ -7,9 +7,9 @@ import {
   StyleProp,
 } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import Colors from 'constants/Colors'
+import Colors from 'theme/Colors'
 import useColorScheme from 'hooks/useColorScheme'
-import Fonts from 'constants/Fonts'
+import Fonts from 'theme/Fonts'
 import { Text, View } from 'components/Themed'
 
 export default function ScreenHeader({

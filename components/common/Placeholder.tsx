@@ -1,8 +1,8 @@
 import { ImageSourcePropType, StyleSheet } from 'react-native'
 import { Text, View } from 'components/Themed'
-import Fonts from 'constants/Fonts'
+import Fonts from 'theme/Fonts'
 import { EmojiLookBottom, EmojiLookTop } from 'iconoir-react-native'
-import Colors from 'constants/Colors'
+import Colors from 'theme/Colors'
 
 export function Empty({
   title,

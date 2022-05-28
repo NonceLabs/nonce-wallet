@@ -6,7 +6,7 @@ import { HomeAlt, Settings } from 'iconoir-react-native'
 import I18n from 'i18n-js'
 import { StyleProp, TextStyle } from 'react-native'
 
-import Colors from 'constants/Colors'
+import Colors from 'theme/Colors'
 import useColorScheme from 'hooks/useColorScheme'
 import ModalScreen from 'screens/ModalScreen'
 import NotFoundScreen from 'screens/NotFoundScreen'
