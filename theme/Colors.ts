@@ -7,6 +7,7 @@ export default {
   white: 'white',
   gray: '#666',
   gray9: '#999',
+  link: '#008cd5',
   light: {
     text: '#000',
     background: '#fff',

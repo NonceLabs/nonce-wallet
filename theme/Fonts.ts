@@ -1,6 +1,6 @@
 export default {
-  variable: 'DMMono',
-  heading: 'Inter',
+  variable: 'Inter',
+  heading: 'Oxanium',
   common: 'Inter',
   number: 'Lato-Regular',
   numberBold: 'Lato-Bold',

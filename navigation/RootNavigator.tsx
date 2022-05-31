@@ -15,6 +15,7 @@ import TabTwoScreen from 'screens/Setting'
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from 'types'
 import Start from 'screens/Start'
 import Restore from 'screens/Restore'
+import Transfer from 'screens/Transfer'
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
@@ -29,6 +30,11 @@ export default function RootNavigator() {
       <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}
+        options={{ title: 'Oops!' }}
+      />
+      <Stack.Screen
+        name="Transfer"
+        component={Transfer}
         options={{ title: 'Oops!' }}
       />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>

@@ -4,25 +4,23 @@ import { Text, View } from 'components/Themed'
 import { RootTabScreenProps } from 'types'
 import { useEffect } from 'react'
 import { useAppSelector } from 'store/hooks'
+import Banner from 'components/Banner'
+import Assets from 'components/Assets'
 
 export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
   const accountList = useAppSelector((state) => state.account.list)
-  const currentAccount = useAppSelector((state) => state.account.current)
+  const account = useAppSelector((state) => state.account.current)
 
   useEffect(() => {
-    if (accountList.length === 0 && !currentAccount) {
+    if (accountList.length === 0 && !account) {
       navigation.push('Start')
     }
-  }, [accountList, currentAccount])
+  }, [accountList, account])
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Home</Text>
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      />
+      <Banner account={account} />
+      <Assets />
     </View>
   )
 }
@@ -30,8 +28,6 @@ export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   title: {
     fontSize: 20,

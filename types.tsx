@@ -9,6 +9,7 @@ import {
   NavigatorScreenParams,
 } from '@react-navigation/native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { ImageSourcePropType } from 'react-native'
 
 declare global {
   namespace ReactNavigation {
@@ -20,6 +21,7 @@ export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined
   Start: undefined
   Restore: undefined
+  Transfer: undefined
   Modal: undefined
   NotFound: undefined
 }
@@ -53,4 +55,28 @@ export enum Chain {
 export interface Account {
   publicKey: string
   chain: Chain
+}
+
+export enum Currency {
+  USD = 'USD',
+  EUR = 'EUR',
+  CNY = 'CNY',
+}
+
+export type CurrencyRate = {
+  [key in Currency]?: number
+}
+
+export type Token = {
+  name: string
+  symbol: string
+  price: number
+  balance: string
+  icon: ImageSourcePropType
+  decimals: number
+  isNative?: boolean
+}
+
+export enum PUB {
+  REFRESH_TOKENLIST = 'REFRESH_TOKENLIST',
 }
