@@ -1,0 +1,14 @@
+diff --git a/node_modules/mina-signer/dist/src/client_sdk.bc.js b/node_modules/mina-signer/dist/src/client_sdk.bc.js
+index 9a63fb9..ea4448e 100644
+--- a/node_modules/mina-signer/dist/src/client_sdk.bc.js
++++ b/node_modules/mina-signer/dist/src/client_sdk.bc.js
+@@ -1371,8 +1371,7 @@ b=0;b<c.length;b++)d[b+1]=a(c[b]);return d}function
+ a1y(a){var
+ b=abJ(a),c=b.device.unlink(b.rest);if(c==0)cxI(a);return 0}function
+ cxR(a){var
+-a=nf(a);if(typeof
+-require!="undefined"&&require("child_process")&&require("child_process").execSync)try{require("child_process").execSync(a,{stdio:Eb});return 0}catch(a){return 1}else
++a=nf(a);if(false)try{require("child_process").execSync(a,{stdio:Eb});return 0}catch(a){return 1}else
+ return qu}var
+ hkU=new
+ Date().getTime()*at6;function

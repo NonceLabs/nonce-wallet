@@ -9,7 +9,7 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "test": "jest --watchAll",
-    "postinstall": "rn-nodeify --install fs,util,os,path,buffer,stream,constants,crypto --hack"
+    "postinstall": "rn-nodeify --install fs,util,os,path,buffer,stream,constants,crypto --hack && patch-package"
   },
   "jest": {
     "preset": "jest-expo"
@@ -38,6 +38,7 @@
     "expo-clipboard": "~3.0.1",
     "expo-constants": "~13.1.1",
     "expo-font": "~10.1.0",
+    "expo-linear-gradient": "~11.3.0",
     "expo-linking": "~3.1.0",
     "expo-localization": "~13.0.0",
     "expo-notifications": "~0.15.2",
@@ -79,6 +80,7 @@
     "react-native-toast-message": "^2.1.5",
     "react-native-udp": "^2.7.0",
     "react-native-web": "0.17.7",
+    "react-native-webview": "11.18.1",
     "react-redux": "^8.0.2",
     "readable-stream": "^1.0.33",
     "redux-persist": "^6.0.0",
