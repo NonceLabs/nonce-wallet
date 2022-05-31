@@ -2,8 +2,19 @@ import { StyleSheet } from 'react-native'
 
 import { Text, View } from 'components/Themed'
 import { RootTabScreenProps } from 'types'
+import { useEffect } from 'react'
+import { useAppSelector } from 'store/hooks'
 
 export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
+  const accountList = useAppSelector((state) => state.account.list)
+  const currentAccount = useAppSelector((state) => state.account.current)
+
+  useEffect(() => {
+    if (accountList.length === 0 && !currentAccount) {
+      navigation.push('Start')
+    }
+  }, [accountList, currentAccount])
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Home</Text>

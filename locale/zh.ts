@@ -154,6 +154,10 @@ const zh = {
   'Input DApp URL': '输入 DApp 地址',
   'Editor choice': '编辑精选',
   Open: '打开',
+  'Welcome to': '欢迎来到',
+  Restore: '恢复',
+  'I already have mnemonic or private keys': '我已经有助记词或私钥',
+  'I am new to crypto world': '我是新手',
 }
 
 export default zh

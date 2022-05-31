@@ -27,7 +27,7 @@ export default function ScreenHeader({
   const navigation = useNavigation()
   const theme = useColorScheme()
   return (
-    <View style={[styles.header, { paddingTop: insets.top + 15 }, style]}>
+    <View style={[styles.header, { paddingTop: insets.top }, style]}>
       <View style={styles.row}>
         {isBackable && (
           <TouchableOpacity onPress={() => navigation.goBack()}>

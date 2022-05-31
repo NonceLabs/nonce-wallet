@@ -12,6 +12,7 @@ export default function Button({
   icon = null,
   type = ButtonType.DEFAULT,
   disabled = false,
+  primary = true,
 }: {
   label: string
   onPress: () => void
@@ -19,6 +20,7 @@ export default function Button({
   icon?: any
   type?: ButtonType
   disabled?: boolean
+  primary?: boolean
 }) {
   const theme = useColorScheme()
   const bstyles = {
@@ -27,8 +29,8 @@ export default function Button({
         borderColor: Colors[theme].borderColor,
       },
       primary: {
-        backgroundColor: '#008cd5',
-        borderColor: '#008cd5',
+        backgroundColor: '#333',
+        borderColor: '#333',
       },
       danger: {
         backgroundColor: '#FF4040',
@@ -45,7 +47,7 @@ export default function Button({
     <TouchableOpacity
       style={[
         styles.button,
-        bstyles.wrap[type],
+        bstyles.wrap[primary ? ButtonType.PRIMARY : type],
         style,
         { opacity: disabled ? 0.5 : 1 },
       ]}
@@ -58,7 +60,7 @@ export default function Button({
         style={[
           styles.buttonText,
           {
-            color: bstyles.text[type],
+            color: bstyles.text[primary ? ButtonType.PRIMARY : type],
             marginLeft: icon ? 8 : 0,
           },
         ]}

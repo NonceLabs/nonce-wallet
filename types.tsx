@@ -18,6 +18,8 @@ declare global {
 
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined
+  Start: undefined
+  Restore: undefined
   Modal: undefined
   NotFound: undefined
 }
@@ -42,4 +44,13 @@ export enum ButtonType {
   DEFAULT = 'default',
   PRIMARY = 'primary',
   DANGER = 'danger',
+}
+
+export enum Chain {
+  MINA = 'MINA',
+}
+
+export interface Account {
+  publicKey: string
+  chain: Chain
 }

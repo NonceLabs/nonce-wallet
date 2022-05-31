@@ -159,6 +159,11 @@ const en = {
   'Input DApp URL': 'Input DApp URL',
   'Editor choice': 'Editor choice',
   Open: 'Open',
+  'Welcome to': 'Welcome to',
+  Restore: 'Restore',
+  'I already have mnemonic or private keys':
+    'I already have mnemonic or private keys',
+  'I am new to crypto world': 'I am new to crypto world',
 }
 
 export default en

@@ -13,13 +13,13 @@ import { toastConfig } from './components/common/ToastConfig'
 import { store } from './store'
 import { polyfillWebCrypto } from 'expo-standard-web-crypto'
 
-import Client from 'mina-signer'
-const client = new Client({ network: 'mainnet' })
+// import Client from 'mina-signer'
+// const client = new Client({ network: 'mainnet' })
 
 polyfillWebCrypto()
 // Generate keys
-let keypair = client.genKeys()
-console.log('keypair', keypair)
+// let keypair = client.genKeys()
+// console.log('keypair', keypair)
 
 export default function App() {
   const isLoadingComplete = useCachedResources()

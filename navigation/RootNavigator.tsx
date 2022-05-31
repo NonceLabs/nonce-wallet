@@ -13,6 +13,8 @@ import NotFoundScreen from 'screens/NotFoundScreen'
 import TabOneScreen from 'screens/Home'
 import TabTwoScreen from 'screens/Setting'
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from 'types'
+import Start from 'screens/Start'
+import Restore from 'screens/Restore'
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
@@ -31,6 +33,18 @@ export default function RootNavigator() {
       />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
+      </Stack.Group>
+      <Stack.Group screenOptions={{ presentation: 'fullScreenModal' }}>
+        <Stack.Screen
+          name="Start"
+          component={Start}
+          options={{ header: () => null }}
+        />
+        <Stack.Screen
+          name="Restore"
+          component={Restore}
+          options={{ header: () => null }}
+        />
       </Stack.Group>
     </Stack.Navigator>
   )

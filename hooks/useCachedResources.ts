@@ -18,7 +18,8 @@ export default function useCachedResources() {
           DMMono: require('assets/fonts/DMMono.ttf'),
           'Lato-Bold': require('assets/fonts/Lato-Bold.ttf'),
           'Lato-Regular': require('assets/fonts/Lato-Regular.ttf'),
-          Oxanium: require('assets/fonts/Oxanium.ttf'),
+          Inter: require('assets/fonts/Inter.ttf'),
+          Alata: require('assets/fonts/Alata.ttf'),
         })
       } catch (e) {
         // We might want to provide this error information to an error reporting service
