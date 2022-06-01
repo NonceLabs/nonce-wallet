@@ -90,7 +90,10 @@ export default function Assets({ isLoading = false }: { isLoading?: boolean }) {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+    height: '100%',
+  },
   pageWrap: {
     flex: 1,
     alignItems: 'center',
@@ -109,7 +112,7 @@ const styles = StyleSheet.create({
   },
   tabBarButton: {
     flex: 1,
-    paddingVertical: 16,
+    paddingVertical: 10,
     borderBottomWidth: 3,
   },
   tabBarTitle: {

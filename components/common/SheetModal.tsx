@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
   },
   itemText: {
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: Fonts.variable,
     marginLeft: 10,
   },

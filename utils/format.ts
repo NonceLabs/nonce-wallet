@@ -8,9 +8,9 @@ export function capitalizeFirstLetter(string: string) {
 export function formatAccountId(account: Account) {
   if (account.chain === Chain.MINA) {
     return (
-      account.publicKey.substring(0, 6) +
+      account.publicKey.substring(0, 12) +
       '...' +
-      account.publicKey.substring(account.publicKey.length - 4)
+      account.publicKey.substring(account.publicKey.length - 8)
     )
   }
   return account.publicKey

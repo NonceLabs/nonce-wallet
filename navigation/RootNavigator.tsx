@@ -1,8 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { useNavigation } from '@react-navigation/native'
 import * as React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { HomeAlt, Settings } from 'iconoir-react-native'
+import { HomeAlt, Settings, Tunnel } from 'iconoir-react-native'
 import I18n from 'i18n-js'
 import { StyleProp, TextStyle } from 'react-native'
 
@@ -10,12 +9,13 @@ import Colors from 'theme/Colors'
 import useColorScheme from 'hooks/useColorScheme'
 import ModalScreen from 'screens/ModalScreen'
 import NotFoundScreen from 'screens/NotFoundScreen'
-import TabOneScreen from 'screens/Home'
-import TabTwoScreen from 'screens/Setting'
+import Setting from 'screens/Setting'
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from 'types'
 import Start from 'screens/Start'
 import Restore from 'screens/Restore'
 import Transfer from 'screens/Transfer'
+import Staking from 'screens/Staking'
+import Home from 'screens/Home'
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
@@ -76,7 +76,7 @@ function BottomTabNavigator() {
     >
       <BottomTab.Screen
         name="Home"
-        component={TabOneScreen}
+        component={Home}
         options={({ navigation }: RootTabScreenProps<'Home'>) => ({
           tabBarIcon: ({ color }) => (
             <HomeAlt width={30} height={30} color={color} />
@@ -87,8 +87,20 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
+        name="Staking"
+        component={Staking}
+        options={({ navigation }: RootTabScreenProps<'Staking'>) => ({
+          tabBarIcon: ({ color }) => (
+            <Tunnel width={30} height={30} color={color} />
+          ),
+          headerShown: false,
+          title: I18n.t('Staking'),
+          tabBarLabelStyle,
+        })}
+      />
+      <BottomTab.Screen
         name="Setting"
-        component={TabTwoScreen}
+        component={Setting}
         options={{
           tabBarIcon: ({ color }) => (
             <Settings width={30} height={30} color={color} />

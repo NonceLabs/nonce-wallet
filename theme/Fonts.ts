@@ -1,5 +1,5 @@
 export default {
-  variable: 'Inter',
+  variable: 'SpaceMono',
   heading: 'Oxanium',
   common: 'Inter',
   number: 'Lato-Regular',

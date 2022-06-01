@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { Currency, CurrencyRate } from 'types'
+import { Currency, CurrencyRate, NetworkType } from 'types'
 
 interface SettingSlice {
   theme: string
   currencyRates: CurrencyRate
   currentCurrency: Currency
+  network: NetworkType
 }
 
 const initialState: SettingSlice = {
@@ -13,6 +14,7 @@ const initialState: SettingSlice = {
     USD: 1,
   },
   currentCurrency: Currency.USD,
+  network: NetworkType.MAINNET,
 }
 
 export const settingSlice = createSlice({

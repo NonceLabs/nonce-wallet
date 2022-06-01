@@ -32,6 +32,7 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
 export type RootTabParamList = {
   Home: undefined
   Setting: undefined
+  Staking: undefined
 }
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
@@ -41,6 +42,11 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
   >
 
 export type ToastType = 'success' | 'error' | 'info' | 'warning'
+
+export enum NetworkType {
+  MAINNET = 'mainnet',
+  TESTNET = 'testnet',
+}
 
 export enum ButtonType {
   DEFAULT = 'default',
@@ -79,4 +85,23 @@ export type Token = {
 
 export enum PUB {
   REFRESH_TOKENLIST = 'REFRESH_TOKENLIST',
+}
+
+export interface MinaSummary {
+  blockchainLength: number
+  chainId: string
+  circulatingSupply: string
+  dateTime: string
+  epoch: number
+  globalSlot: number
+  lockedSupply: string
+  minWindowDensity: number
+  nextEpochLedgerHash: string
+  previousStateHash: string
+  slot: number
+  snarkedLedgerHash: string
+  stagedLedgerHash: string
+  stakingEpochLedgerHash: string
+  stateHash: string
+  totalCurrency: string
 }
