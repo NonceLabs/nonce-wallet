@@ -65,7 +65,7 @@ export default function Banner({ account }: { account: Account | null }) {
       >
         <View style={[styles.header, { top: insets.top }]}>
           <Icon
-            icon={<Wallet width={24} height={24} color={Colors.white} />}
+            icon={<Wallet width={30} height={30} color={Colors.white} />}
             isTransparent
             onPress={() => {
               accountsRef?.current?.open()
@@ -90,7 +90,7 @@ export default function Banner({ account }: { account: Account | null }) {
             isTransparent
             icon={
               <View style={{ position: 'relative' }}>
-                <Bell width={24} height={24} color={Colors.white} />
+                <Bell width={25} height={25} color={Colors.white} />
               </View>
             }
             onPress={() => {}}

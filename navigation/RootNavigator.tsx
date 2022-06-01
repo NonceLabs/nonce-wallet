@@ -17,6 +17,7 @@ import Transfer from 'screens/Transfer'
 import Staking from 'screens/Staking'
 import Home from 'screens/Home'
 import TokenScreen from 'screens/Token'
+import Create from 'screens/Create'
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
@@ -55,6 +56,11 @@ export default function RootNavigator() {
         <Stack.Screen
           name="Restore"
           component={Restore}
+          options={{ header: () => null }}
+        />
+        <Stack.Screen
+          name="Create"
+          component={Create}
           options={{ header: () => null }}
         />
       </Stack.Group>

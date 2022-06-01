@@ -158,6 +158,12 @@ const zh = {
   Restore: '恢复',
   'I already have mnemonic or private keys': '我已经有助记词或私钥',
   'I am new to crypto world': '我是新手',
+  Password: '密码',
+  'Repeat Password': '重复密码',
+  'Setup Password': '设定密码',
+  'Password length must be equal or more than 6 characters':
+    '密码长度必须等于或大于 6 个字符',
+  Mnemonic: '助记词',
 }
 
 export default zh

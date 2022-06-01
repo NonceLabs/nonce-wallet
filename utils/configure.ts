@@ -14,3 +14,5 @@ export const CURRENCY_SYMBOL = {
 }
 
 export const IGNORE_APP_STORE = Platform.OS === 'android'
+
+export const MNEMONIC_STRENGTH = 128

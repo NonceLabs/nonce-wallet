@@ -63,9 +63,6 @@ export default function ReceiveModal({ onClose }: { onClose: () => void }) {
             value={account?.publicKey || ''}
           />
         </View>
-        <Text style={styles.gloss}>
-          {I18n.t('Please send NEAR or NEP141 token')}
-        </Text>
         <View style={styles.buttonGroup}>
           <Icon
             backgroundColor={isCopied ? '#00C781' : undefined}

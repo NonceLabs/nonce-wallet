@@ -5,6 +5,7 @@ import { Text, View } from 'components/Themed'
 import useColorScheme from 'hooks/useColorScheme'
 import I18n from 'i18n-js'
 import { KeyAltPlus, Wallet } from 'iconoir-react-native'
+import { useState } from 'react'
 import { Image, Pressable, StyleSheet, useWindowDimensions } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import Colors from 'theme/Colors'
@@ -16,6 +17,7 @@ export default function Start() {
   const theme = useColorScheme()
   const { width } = useWindowDimensions()
   const navigation = useNavigation()
+
   return (
     <View style={{ flex: 1, paddingTop: insets.top, padding: 15 }}>
       <Heading>{I18n.t('Welcome to')}</Heading>
@@ -33,8 +35,9 @@ export default function Start() {
         <Box
           justify="space-between"
           align="flex-end"
-          style={{ width: '100%', backgroundColor: '#ff603b' }}
+          style={{ backgroundColor: '#ff603b' }}
           pad="medium"
+          full
         >
           <Heading level={2} style={{ color: Colors.white, lineHeight: 38 }}>
             MINA
@@ -71,7 +74,7 @@ export default function Start() {
               />
             </View>
             <View>
-              <Pressable>
+              <Pressable onPress={() => navigation.navigate('Create')}>
                 <Heading level={3} style={{ color: Colors[theme].link }}>
                   {I18n.t('Create')}
                 </Heading>

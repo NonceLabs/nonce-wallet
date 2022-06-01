@@ -6,6 +6,7 @@ interface SettingSlice {
   currencyRates: CurrencyRate
   currentCurrency: Currency
   network: NetworkType
+  password: string
 }
 
 const initialState: SettingSlice = {
@@ -15,6 +16,7 @@ const initialState: SettingSlice = {
   },
   currentCurrency: Currency.USD,
   network: NetworkType.MAINNET,
+  password: '',
 }
 
 export const settingSlice = createSlice({
@@ -23,6 +25,9 @@ export const settingSlice = createSlice({
   reducers: {
     updateTheme: (state, action) => {
       state.theme = action.payload
+    },
+    setupPswd: (state, action) => {
+      state.password = action.payload
     },
   },
 })

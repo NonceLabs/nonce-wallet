@@ -3,8 +3,11 @@ import {
   Discord,
   GitHub,
   Globe,
+  HistoricShieldAlt,
+  Network,
   Translate,
   Twitter,
+  Wallet,
 } from 'iconoir-react-native'
 import { useRef } from 'react'
 import { StyleSheet, ScrollView, Linking } from 'react-native'
@@ -19,7 +22,7 @@ import Colors from 'theme/Colors'
 import useColorScheme from 'hooks/useColorScheme'
 import { useAppSelector } from 'store/hooks'
 import Fonts from 'theme/Fonts'
-import { capitalizeFirstLetter } from 'utils/format'
+import { capitalizeFirstLetter, formatAccountId } from 'utils/format'
 import { useNavigation } from '@react-navigation/native'
 
 export default function SettingScreen() {
@@ -27,6 +30,7 @@ export default function SettingScreen() {
   const themeRef = useRef<Modalize>(null)
 
   const themeSetting = useAppSelector((state) => state.setting.theme)
+  const account = useAppSelector((state) => state.account.current)
 
   const navigation = useNavigation()
   const theme = useColorScheme()
@@ -38,6 +42,26 @@ export default function SettingScreen() {
         style={[styles.container]}
         contentContainerStyle={styles.contentContainer}
       >
+        <SettingBlock
+          title="Wallet"
+          items={[
+            {
+              icon: Wallet,
+              title: 'Account',
+              value: '',
+              onPress: () => {
+                // navigation.navigate('AccountListScreen')
+              },
+            },
+            {
+              icon: HistoricShieldAlt,
+              title: 'Security',
+              value: '',
+              onPress: () => {},
+            },
+          ]}
+        />
+
         <SettingBlock
           title="Display"
           items={[

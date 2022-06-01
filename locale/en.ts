@@ -164,6 +164,12 @@ const en = {
   'I already have mnemonic or private keys':
     'I already have mnemonic or private keys',
   'I am new to crypto world': 'I am new to crypto world',
+  Password: 'Password',
+  'Repeat Password': 'Repeat Password',
+  'Setup Password': 'Setup Password',
+  'Password length must be equal or more than 6 characters':
+    'Password length must be equal or more than 6 characters',
+  Mnemonic: 'Mnemonic',
 }
 
 export default en

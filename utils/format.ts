@@ -5,7 +5,10 @@ export function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
-export function formatAccountId(account: Account) {
+export function formatAccountId(account: Account | null) {
+  if (!account) {
+    return ''
+  }
   if (account.chain === Chain.MINA) {
     return (
       account.publicKey.substring(0, 12) +

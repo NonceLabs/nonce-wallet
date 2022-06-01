@@ -20,6 +20,7 @@ export default function Box({
   gap = 'none',
   border = false,
   pad = 'none',
+  full = false,
 }: {
   children: any[]
   align?: FlexStyle['alignItems']
@@ -29,6 +30,7 @@ export default function Box({
   border?: boolean
   gap?: 'none' | 'small' | 'medium' | 'large'
   pad?: 'none' | 'small' | 'medium' | 'large'
+  full?: boolean
 }) {
   const _children = []
   for (let i = 0; i < children.length; i++) {
@@ -49,7 +51,7 @@ export default function Box({
         },
         style,
         border && { borderColor: Colors[theme].borderColor, borderWidth: 1 },
-        { padding: padding[pad] },
+        { padding: padding[pad], width: full ? '100%' : undefined },
       ]}
     >
       {_children}
