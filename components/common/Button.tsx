@@ -12,7 +12,7 @@ export default function Button({
   icon = null,
   type = ButtonType.DEFAULT,
   disabled = false,
-  primary = true,
+  primary = false,
 }: {
   label: string
   onPress: () => void

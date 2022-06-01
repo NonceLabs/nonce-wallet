@@ -7,7 +7,6 @@ import { useState } from 'react'
 import { ScrollView, TextInput, StyleSheet } from 'react-native'
 import { useAppDispatch } from 'store/hooks'
 import Colors from 'theme/Colors'
-import Styles from 'theme/Styles'
 
 export default function SetupPswd({ onNext }: { onNext: () => void }) {
   const [pswd, setPswd] = useState('zxasqw12')
@@ -17,8 +16,8 @@ export default function SetupPswd({ onNext }: { onNext: () => void }) {
   const dispatch = useAppDispatch()
 
   return (
-    <ScrollView style={Styles.page} contentContainerStyle={{ paddingTop: 50 }}>
-      <Heading>(1/3)</Heading>
+    <ScrollView style={styles.container}>
+      <Heading>(3/3)</Heading>
       <Heading>{I18n.t('Setup Password')}</Heading>
 
       <Box
@@ -49,8 +48,9 @@ export default function SetupPswd({ onNext }: { onNext: () => void }) {
           {I18n.t('Password length must be equal or more than 6 characters')}
         </Text>
         <Button
-          label={I18n.t('Next')}
+          label={I18n.t('Confirm')}
           disabled={!isValid}
+          primary
           onPress={() => {
             dispatch({
               type: 'setting/setupPswd',
@@ -65,6 +65,10 @@ export default function SetupPswd({ onNext }: { onNext: () => void }) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
   label: {
     fontSize: 16,
   },

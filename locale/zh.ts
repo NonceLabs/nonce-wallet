@@ -112,7 +112,7 @@ const zh = {
     '此应用正在请求你的账户的完全访问权限。为开启完全访问，你将会被要求确认即将连接的账户 ID。',
   'Account imported successfully': '账户导入成功',
   'Fund New Account': '激活新账户',
-  'Please keep the seed phrase safe': '请保存好助记词',
+  'Please keep the mnemonic safe': '请保存好助记词',
   'Fund new account': '激活新账户',
   'Share QR code': '分享二维码',
   'Please fund at least min Ⓝ to active your new account':
@@ -164,6 +164,8 @@ const zh = {
   'Password length must be equal or more than 6 characters':
     '密码长度必须等于或大于 6 个字符',
   Mnemonic: '助记词',
+  Back: '上一步',
+  'Verify Mnemonic': '验证助记词',
 }
 
 export default zh

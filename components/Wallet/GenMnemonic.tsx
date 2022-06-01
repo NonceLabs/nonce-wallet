@@ -1,4 +1,4 @@
-import { StackActions, useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
 import { useEffect, useState } from 'react'
 import { ScrollView, StyleSheet } from 'react-native'
 import Colors from 'theme/Colors'
@@ -7,7 +7,7 @@ import { useAppDispatch } from 'store/hooks'
 import Fonts from 'theme/Fonts'
 import Button from 'components/common/Button'
 import { Text, View } from 'components/Themed'
-import { ButtonType, NetworkType } from 'types'
+import { ButtonType } from 'types'
 import { toast } from 'utils/toast'
 import I18n from 'i18n-js'
 import _ from 'lodash'
@@ -15,13 +15,14 @@ import { WarningTriangleOutline } from 'iconoir-react-native'
 import Heading from 'components/common/Heading'
 import { generateMnemonic, parseMnemonic } from 'utils/crypto'
 
-export default function GenMnemonic() {
-  const [modalVisible, setModalVisible] = useState(false)
+export default function GenMnemonic({
+  onNext,
+}: {
+  onNext: (mnemonic: string) => void
+}) {
   const [mnemonic, setMnemonic] = useState('')
   const [confirmTick, setConfirmTick] = useState(1)
 
-  const dispatch = useAppDispatch()
-  const navigation = useNavigation()
   const theme = useColorScheme()
 
   useEffect(() => {
@@ -42,7 +43,7 @@ export default function GenMnemonic() {
 
   return (
     <ScrollView style={styles.container}>
-      <Heading>(2/3)</Heading>
+      <Heading>(1/3)</Heading>
       <Heading>{I18n.t('Mnemonic')}</Heading>
 
       <View style={styles.mnemonicWrap}>
@@ -68,22 +69,17 @@ export default function GenMnemonic() {
       <View style={styles.tipWrap}>
         <WarningTriangleOutline width={18} height={18} color="red" />
         <Text style={styles.tip} numberOfLines={2}>
-          {I18n.t('Please keep the seed phrase safe')}
+          {I18n.t('Please keep the mnemonic safe')}
         </Text>
       </View>
       <Button
-        label={`${I18n.t('Confirm')} ${
+        label={`${I18n.t('Next')} ${
           confirmTick > 0 ? `(${confirmTick}s)` : ''
         }`}
         type={ButtonType.PRIMARY}
         disabled={confirmTick > 0}
         style={{ width: '100%', marginTop: 40, marginHorizontal: 0 }}
-        onPress={async () => {
-          try {
-            const result = await parseMnemonic(mnemonic)
-            console.log(result)
-          } catch (error) {}
-        }}
+        onPress={() => onNext(mnemonic)}
       />
     </ScrollView>
   )

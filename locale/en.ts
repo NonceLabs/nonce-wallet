@@ -115,7 +115,7 @@ const en = {
     'This site is requesting full access to your account. To enable fullaccess, you’ll be asked to verify your account ID.',
   'Account imported successfully': 'Account imported successfully',
   'Fund New Account': 'Fund New Account',
-  'Please keep the seed phrase safe': 'Please keep the seed phrase safe',
+  'Please keep the mnemonic safe': 'Please keep the mnemonic safe',
   'Fund new account': 'Fund new account',
   'Share QR code': 'Share QR code',
   'Please fund at least min Ⓝ to active your new account':
@@ -170,6 +170,8 @@ const en = {
   'Password length must be equal or more than 6 characters':
     'Password length must be equal or more than 6 characters',
   Mnemonic: 'Mnemonic',
+  Back: 'Back',
+  'Verify Mnemonic': 'Verify Mnemonic',
 }
 
 export default en
