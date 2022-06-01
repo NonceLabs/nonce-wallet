@@ -65,13 +65,11 @@ export default function Banner({ account }: { account: Account | null }) {
       >
         <View style={[styles.header, { top: insets.top }]}>
           <Icon
+            icon={<Wallet width={24} height={24} color={Colors.white} />}
             isTransparent
-            icon={
-              <View style={{ position: 'relative' }}>
-                <Bell width={24} height={24} color={Colors.white} />
-              </View>
-            }
-            onPress={() => {}}
+            onPress={() => {
+              accountsRef?.current?.open()
+            }}
           />
 
           <TouchableOpacity
@@ -89,12 +87,13 @@ export default function Banner({ account }: { account: Account | null }) {
           </TouchableOpacity>
 
           <Icon
-            icon={<Wallet width={24} height={24} color={Colors.white} />}
             isTransparent
-            onPress={() => {
-              accountsRef?.current?.open()
-              // navigation.navigate('Scanner', { fromPage: 'HomeScreen' })
-            }}
+            icon={
+              <View style={{ position: 'relative' }}>
+                <Bell width={24} height={24} color={Colors.white} />
+              </View>
+            }
+            onPress={() => {}}
           />
         </View>
         <Box direction="column" gap="medium" style={{ paddingTop: 10 }}>
@@ -132,19 +131,6 @@ export default function Banner({ account }: { account: Account | null }) {
               />
             }
             onPress={() => receiveRef.current?.open()}
-          />
-          <Icon
-            icon={
-              <Bank
-                width={24}
-                height={24}
-                color={Colors[theme].screenBackground}
-                strokeWidth={2}
-              />
-            }
-            onPress={() => {
-              // navigation.navigate('StakingScreen')
-            }}
           />
         </View>
         <Portal>

@@ -11,6 +11,7 @@ import Colors from 'theme/Colors'
 import useColorScheme from 'hooks/useColorScheme'
 import Fonts from 'theme/Fonts'
 import { Text, View } from 'components/Themed'
+import I18n from 'i18n-js'
 
 export default function ScreenHeader({
   title,
@@ -35,7 +36,7 @@ export default function ScreenHeader({
           </TouchableOpacity>
         )}
         <Text style={[styles.headerText, { marginLeft: isBackable ? 0 : 20 }]}>
-          {title}
+          {I18n.t(title)}
         </Text>
       </View>
       {rightEle}

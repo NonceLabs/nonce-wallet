@@ -12,7 +12,6 @@ import { CURRENCY_SYMBOL, DEFAULT_CURRENCY_RATE } from 'utils/configure'
 import TokenItem from 'components/Assets/TokenItem'
 
 export default function TokenList({ isLoading }: { isLoading: boolean }) {
-  const account = useAppSelector((state) => state.account.current)
   const currencyRates: CurrencyRate = useAppSelector(
     (state) => state.setting.currencyRates || DEFAULT_CURRENCY_RATE
   )
@@ -32,7 +31,7 @@ export default function TokenList({ isLoading }: { isLoading: boolean }) {
     })
 
   const onSelect = (item: Token) => {
-    // navigation.navigate('Token', { token: item })
+    navigation.navigate('Token', { token: item })
   }
 
   return (

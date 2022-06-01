@@ -22,6 +22,7 @@ export type RootStackParamList = {
   Start: undefined
   Restore: undefined
   Transfer: undefined
+  Token: { token?: Token }
   Modal: undefined
   NotFound: undefined
 }

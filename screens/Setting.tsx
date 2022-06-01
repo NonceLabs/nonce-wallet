@@ -33,7 +33,7 @@ export default function SettingScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: Colors[theme].screenBackground }}>
-      <ScreenHeader title={I18n.t('Setting')} isBackable={false} />
+      <ScreenHeader title="Setting" isBackable={false} />
       <ScrollView
         style={[styles.container]}
         contentContainerStyle={styles.contentContainer}

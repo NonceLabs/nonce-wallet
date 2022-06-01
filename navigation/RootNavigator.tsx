@@ -16,6 +16,7 @@ import Restore from 'screens/Restore'
 import Transfer from 'screens/Transfer'
 import Staking from 'screens/Staking'
 import Home from 'screens/Home'
+import TokenScreen from 'screens/Token'
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
@@ -33,9 +34,14 @@ export default function RootNavigator() {
         options={{ title: 'Oops!' }}
       />
       <Stack.Screen
+        name="Token"
+        component={TokenScreen}
+        options={{ header: () => null }}
+      />
+      <Stack.Screen
         name="Transfer"
         component={Transfer}
-        options={{ title: 'Oops!' }}
+        options={{ header: () => null }}
       />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
