@@ -1,5 +1,5 @@
 export default {
-  variable: 'SpaceMono',
+  variable: 'CourierPrime',
   heading: 'Oxanium',
   common: 'Inter',
   number: 'Lato-Regular',

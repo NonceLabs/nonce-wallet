@@ -87,8 +87,8 @@ export default function Start() {
 
           <View
             style={{
-              height: StyleSheet.hairlineWidth,
-              width: width - 50,
+              height: 1, //StyleSheet.hairlineWidth,
+              width: width - 40,
               backgroundColor: Colors[theme].borderColor,
             }}
           />

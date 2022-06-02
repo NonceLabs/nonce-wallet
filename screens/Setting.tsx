@@ -6,24 +6,27 @@ import {
   HistoricShieldAlt,
   Network,
   Translate,
+  Tunnel,
   Twitter,
   Wallet,
 } from 'iconoir-react-native'
 import { useRef } from 'react'
-import { StyleSheet, ScrollView, Linking } from 'react-native'
+import { StyleSheet, ScrollView, Linking, Image } from 'react-native'
 import { Modalize } from 'react-native-modalize'
 import { Portal } from 'react-native-portalize'
 import ScreenHeader from 'components/common/ScreenHeader'
 import LanguageModal from 'components/Setting/LanguageModal'
 import SettingBlock from 'components/Setting/SettingBlock'
 import ThemeModal from 'components/Setting/ThemeModal'
-import { View } from 'components/Themed'
+import { Text, View } from 'components/Themed'
 import Colors from 'theme/Colors'
 import useColorScheme from 'hooks/useColorScheme'
 import { useAppSelector } from 'store/hooks'
 import Fonts from 'theme/Fonts'
 import { capitalizeFirstLetter, formatAccountId } from 'utils/format'
 import { useNavigation } from '@react-navigation/native'
+import Box from 'components/common/Box'
+import icons from 'utils/icons'
 
 export default function SettingScreen() {
   const languageRef = useRef<Modalize>(null)
@@ -103,6 +106,23 @@ export default function SettingScreen() {
             },
           ]}
         />
+
+        <SettingBlock
+          title="About"
+          items={[
+            {
+              icon: Tunnel,
+              title: 'Nonce',
+              value: '',
+              onPress: () => Linking.openURL('#'),
+            },
+          ]}
+        />
+
+        <Box align="center" justify="center" pad="large">
+          <Image source={icons.LOGO} style={styles.logo} />
+          <Text></Text>
+        </Box>
       </ScrollView>
       <Portal>
         <Modalize ref={languageRef} adjustToContentHeight>

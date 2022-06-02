@@ -172,6 +172,9 @@ const en = {
   Mnemonic: 'Mnemonic',
   Back: 'Back',
   'Verify Mnemonic': 'Verify Mnemonic',
+  'Confirm PIN Code': 'Confirm PIN Code',
+  'PIN code does not match': 'PIN code does not match',
+  Nonce: 'Nonce',
 }
 
 export default en

@@ -15,12 +15,11 @@ export default function useCachedResources() {
         // Load fonts
         await Font.loadAsync({
           ...Feather.font,
-          Roboto: require('assets/fonts/Roboto.ttf'),
           'Lato-Bold': require('assets/fonts/Lato-Bold.ttf'),
           'Lato-Regular': require('assets/fonts/Lato-Regular.ttf'),
           Inter: require('assets/fonts/Inter.ttf'),
           Oxanium: require('assets/fonts/Oxanium.ttf'),
-          SpaceMono: require('assets/fonts/SpaceMono.ttf'),
+          CourierPrime: require('assets/fonts/CourierPrime.ttf'),
         })
       } catch (e) {
         // We might want to provide this error information to an error reporting service

@@ -166,6 +166,9 @@ const zh = {
   Mnemonic: '助记词',
   Back: '上一步',
   'Verify Mnemonic': '验证助记词',
+  'Confirm PIN Code': '确认 PIN 码',
+  'PIN code does not match': 'PIN 码不匹配',
+  Nonce: 'Nonce',
 }
 
 export default zh

@@ -31,6 +31,7 @@ export default function VerifyMnemonic({
   useEffect(() => {
     const nth = Math.ceil(Math.random() * 100) % words.length
     setWordIndex(nth + 1)
+    setWord(words[nth])
   }, [])
 
   const isValid = words[wordIndex - 1] === word
@@ -45,7 +46,7 @@ export default function VerifyMnemonic({
           style={styles.input}
           value={word}
           onChangeText={(text) => setWord(text)}
-          placeholder={`Enter the ${wordIndex} word`}
+          placeholder={`Enter the #${wordIndex} word`}
           autoCapitalize="none"
         />
       </View>

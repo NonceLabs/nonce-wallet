@@ -1,19 +1,16 @@
-import { useNavigation } from '@react-navigation/native'
 import { useEffect, useState } from 'react'
 import { ScrollView, StyleSheet } from 'react-native'
 import Colors from 'theme/Colors'
 import useColorScheme from 'hooks/useColorScheme'
-import { useAppDispatch } from 'store/hooks'
 import Fonts from 'theme/Fonts'
 import Button from 'components/common/Button'
 import { Text, View } from 'components/Themed'
 import { ButtonType } from 'types'
-import { toast } from 'utils/toast'
 import I18n from 'i18n-js'
 import _ from 'lodash'
 import { WarningTriangleOutline } from 'iconoir-react-native'
 import Heading from 'components/common/Heading'
-import { generateMnemonic, parseMnemonic } from 'utils/crypto'
+import { generateMnemonic } from 'utils/cryptos'
 
 export default function GenMnemonic({
   onNext,

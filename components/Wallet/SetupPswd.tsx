@@ -1,19 +1,29 @@
 import Box from 'components/common/Box'
-import Button from 'components/common/Button'
 import Heading from 'components/common/Heading'
-import { Text } from 'components/Themed'
+import { Text, View } from 'components/Themed'
+import useColorScheme from 'hooks/useColorScheme'
 import I18n from 'i18n-js'
+import _ from 'lodash'
 import { useState } from 'react'
 import { ScrollView, TextInput, StyleSheet } from 'react-native'
 import { useAppDispatch } from 'store/hooks'
 import Colors from 'theme/Colors'
+import { toast } from 'utils/toast'
 
 export default function SetupPswd({ onNext }: { onNext: () => void }) {
-  const [pswd, setPswd] = useState('zxasqw12')
-  const [repeatPswd, setRepeatPswd] = useState('zxasqw12')
+  const [pswd, setPswd] = useState('')
+  const [repeatPswd, setRepeatPswd] = useState('')
+  const [isConfirming, setIsConfirming] = useState(false)
 
-  const isValid = pswd === repeatPswd && pswd.length >= 6
   const dispatch = useAppDispatch()
+  const theme = useColorScheme()
+
+  const onConfirmed = async () => {
+    dispatch({
+      type: 'setting/setupPINCode',
+      payload: pswd,
+    })
+  }
 
   return (
     <ScrollView style={styles.container}>
@@ -23,42 +33,61 @@ export default function SetupPswd({ onNext }: { onNext: () => void }) {
       <Box
         direction="column"
         gap="medium"
-        align="flex-start"
+        // align="flex-start"
         style={{ marginTop: 40 }}
       >
-        <Box direction="column" gap="small" full align="flex-start">
-          <Text style={styles.label}>{I18n.t('Password')}</Text>
-          <TextInput
-            style={styles.input}
-            secureTextEntry
-            value={pswd}
-            onChangeText={(text) => setPswd(text)}
-          />
-        </Box>
-        <Box direction="column" gap="small" full align="flex-start">
-          <Text style={styles.label}>{I18n.t('Repeat Password')}</Text>
-          <TextInput
-            style={styles.input}
-            secureTextEntry
-            value={repeatPswd}
-            onChangeText={(text) => setRepeatPswd(text)}
-          />
-        </Box>
-        <Text style={styles.tip}>
-          {I18n.t('Password length must be equal or more than 6 characters')}
-        </Text>
-        <Button
-          label={I18n.t('Confirm')}
-          disabled={!isValid}
-          primary
-          onPress={() => {
-            dispatch({
-              type: 'setting/setupPswd',
-              payload: pswd,
-            })
-            onNext()
+        <TextInput
+          style={styles.input}
+          secureTextEntry
+          value={isConfirming ? repeatPswd : pswd}
+          keyboardType="number-pad"
+          autoFocus
+          maxLength={6}
+          onChangeText={(text) => {
+            if (!isConfirming) {
+              setPswd(text)
+              if (text.length === 6) {
+                setIsConfirming(true)
+              }
+            } else {
+              setRepeatPswd(text)
+              if (text.length === 6) {
+                if (text === pswd) {
+                  onConfirmed()
+                }
+              }
+            }
           }}
+          selectionColor="transparent"
         />
+
+        <Text style={styles.tip}>
+          {isConfirming ? I18n.t('Confirm PIN Code') : ''}
+        </Text>
+
+        <Box justify="space-around" full style={{ paddingHorizontal: 50 }}>
+          {_.fill(Array(6), 0).map((_, i) => {
+            const isActive = i < (isConfirming ? repeatPswd : pswd).length
+            return (
+              <View
+                key={i}
+                style={[
+                  styles.pin,
+                  {
+                    borderColor: Colors[theme].text,
+                  },
+                  isActive && { backgroundColor: Colors[theme].text },
+                ]}
+              />
+            )
+          })}
+        </Box>
+
+        <Text style={styles.match}>
+          {repeatPswd.length === 6 && repeatPswd !== pswd
+            ? I18n.t('PIN code does not match')
+            : ''}
+        </Text>
       </Box>
     </ScrollView>
   )
@@ -73,16 +102,20 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   input: {
-    width: '100%',
-    borderWidth: 1,
-    borderColor: Colors.gray9,
-    fontSize: 20,
-    paddingVertical: 8,
-    paddingHorizontal: 8,
-    borderRadius: 4,
+    color: 'transparent',
   },
   tip: {
+    fontSize: 16,
+    textAlign: 'center',
+  },
+  pin: {
+    width: 20,
+    height: 20,
+    borderWidth: 2,
+    borderRadius: 10,
+  },
+  match: {
+    color: Colors.red,
     fontSize: 14,
-    color: Colors.gray9,
   },
 })
