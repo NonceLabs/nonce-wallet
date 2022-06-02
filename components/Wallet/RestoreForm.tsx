@@ -9,10 +9,13 @@ import { ScrollView, TextInput, StyleSheet } from 'react-native'
 import Colors from 'theme/Colors'
 import Fonts from 'theme/Fonts'
 import Styles from 'theme/Styles'
+import { parseMnemonic } from 'utils/crypto'
 
 export default function RestoreForm({ onNext }: { onNext: () => void }) {
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState(
+    'glare hunt strike analyst differ slam powder okay love width fat pig'
+  )
 
   const theme = useColorScheme()
 
@@ -42,8 +45,12 @@ export default function RestoreForm({ onNext }: { onNext: () => void }) {
         <Button
           label={I18n.t('Confirm')}
           primary
-          onPress={() => {
-            onNext()
+          onPress={async () => {
+            try {
+              const result = await parseMnemonic(value)
+              console.log(result)
+              onNext()
+            } catch (error) {}
           }}
         />
       </Box>

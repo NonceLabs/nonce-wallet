@@ -1,7 +1,8 @@
-import BIP32Factory from 'bip32'
-import * as ecc from 'tiny-secp256k1'
+import bs58check from 'bs58check'
+import HDKey from 'hdkey'
 import * as bip39 from 'bip39'
 import * as Random from 'expo-random'
+import Client from 'mina-signer'
 import { MNEMONIC_STRENGTH } from './configure'
 
 const getDerivedPath = (index: number) => `m/44'/12586'/${index}'/0/0`
@@ -21,11 +22,31 @@ const normalizeSeedPhrase = (mnemonic: string) =>
     .map((part) => part.toLowerCase())
     .join(' ')
 
+function reverse(bytes: Buffer) {
+  const reversed = new Buffer(bytes.length)
+  for (let i = bytes.length; i > 0; i--) {
+    reversed[bytes.length - i] = bytes[i - 1]
+  }
+  return reversed
+}
+
 export const parseMnemonic = async (mnemonic: string, index: number = 0) => {
-  // const bip32 = BIP32Factory(ecc)
-  // const seed = await bip39.mnemonicToSeed(normalizeSeedPhrase(mnemonic))
-  // const masterNode = bip32.fromSeed(seed)
-  // const hdPath = getDerivedPath(index)
-  // const child0 = masterNode.derivePath(hdPath)
-  // return child0
+  const seed = await bip39.mnemonicToSeed(normalizeSeedPhrase(mnemonic))
+  const hdkey = HDKey.fromMasterSeed(seed)
+  const hdPath = getDerivedPath(index)
+  const child0 = hdkey.derive(hdPath)
+
+  child0.privateKey[0] &= 0x3f
+
+  const childPrivateKey = reverse(child0.privateKey)
+  const privateKeyHex = `5a01${childPrivateKey.toString('hex')}`
+  const privateKey = bs58check.encode(Buffer.from(privateKeyHex, 'hex'))
+  const client = new Client({ network: 'mainnet' })
+  const publicKey = client.derivePublicKey(privateKey)
+  return {
+    privateKey: privateKey,
+    publicKey: publicKey,
+    hdIndex: index,
+    mnemonic,
+  }
 }
