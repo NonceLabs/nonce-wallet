@@ -118,7 +118,7 @@ export default function Banner({ account }: { account: Account | null }) {
               />
             }
             onPress={() => {
-              navigation.navigate('Transfer')
+              navigation.navigate('Transfer', {})
             }}
           />
           <Icon
@@ -172,7 +172,8 @@ const styles = StyleSheet.create({
   button: {
     borderWidth: 1,
     paddingLeft: 6,
-    paddingVertical: 2,
+    paddingTop: 4,
+    paddingBottom: 2,
     borderRadius: 4,
   },
   buttonGroup: {

@@ -16,7 +16,7 @@ const Styles = StyleSheet.create({
   },
   page: {
     flex: 1,
-    paddingHorizontal: 20,
+    padding: 20,
   },
 })
 

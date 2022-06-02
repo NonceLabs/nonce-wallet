@@ -1,7 +1,13 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import * as React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { HomeAlt, Settings, Tunnel } from 'iconoir-react-native'
+import {
+  HomeAlt,
+  Settings,
+  Svg3DSelectFace,
+  Svg3DSelectSolid,
+  Tunnel,
+} from 'iconoir-react-native'
 import I18n from 'i18n-js'
 import { StyleProp, TextStyle } from 'react-native'
 
@@ -19,6 +25,7 @@ import Home from 'screens/Home'
 import TokenScreen from 'screens/Token'
 import Create from 'screens/Create'
 import Security from 'screens/Security'
+import About from 'screens/About'
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
@@ -48,6 +55,11 @@ export default function RootNavigator() {
       <Stack.Screen
         name="Transfer"
         component={Transfer}
+        options={{ header: () => null }}
+      />
+      <Stack.Screen
+        name="About"
+        component={About}
         options={{ header: () => null }}
       />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
@@ -100,7 +112,7 @@ function BottomTabNavigator() {
             <HomeAlt width={30} height={30} color={color} />
           ),
           headerShown: false,
-          title: I18n.t('Home'),
+          title: I18n.t('Asset'),
           tabBarLabelStyle,
         })}
       />
@@ -109,7 +121,7 @@ function BottomTabNavigator() {
         component={Staking}
         options={({ navigation }: RootTabScreenProps<'Staking'>) => ({
           tabBarIcon: ({ color }) => (
-            <Tunnel width={30} height={30} color={color} />
+            <Svg3DSelectFace width={30} height={30} color={color} />
           ),
           headerShown: false,
           title: I18n.t('Staking'),

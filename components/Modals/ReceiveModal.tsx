@@ -125,11 +125,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   title: {
-    fontSize: 14,
+    fontSize: 18,
     fontWeight: 'bold',
     color: Colors.link,
     fontFamily: Fonts.variable,
-    width: 300,
+    width: 310,
   },
   qrcodeWrap: {
     marginTop: 20,

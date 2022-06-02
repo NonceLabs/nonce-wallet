@@ -7,6 +7,9 @@ interface SettingSlice {
   currentCurrency: Currency
   network: NetworkType
   pincode: string
+  bioAuthEnabled: boolean
+  pushToken: string
+  isDevMode: boolean
 }
 
 const initialState: SettingSlice = {
@@ -17,6 +20,9 @@ const initialState: SettingSlice = {
   currentCurrency: Currency.USD,
   network: NetworkType.MAINNET,
   pincode: '',
+  bioAuthEnabled: false,
+  pushToken: '',
+  isDevMode: false,
 }
 
 export const settingSlice = createSlice({
@@ -28,6 +34,12 @@ export const settingSlice = createSlice({
     },
     setupPINCode: (state, action) => {
       state.pincode = action.payload
+    },
+    updateBioAuth: (state, action) => {
+      state.bioAuthEnabled = action.payload
+    },
+    updateCurrentCurrency: (state, action) => {
+      state.currentCurrency = action.payload
     },
   },
 })

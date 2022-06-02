@@ -1,5 +1,5 @@
 export default {
-  variable: 'CourierPrime',
+  variable: 'DMMono',
   heading: 'Oxanium',
   common: 'Inter',
   number: 'Lato-Regular',

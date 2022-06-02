@@ -5,6 +5,7 @@ import Colors from 'theme/Colors'
 import useColorScheme from 'hooks/useColorScheme'
 import Fonts from 'theme/Fonts'
 import { View, Text } from 'components/Themed'
+import Styles from 'theme/Styles'
 
 interface SettingItem {
   icon: any
@@ -49,11 +50,11 @@ export default function SettingBlock({
               ]}
               onPress={item.onPress}
             >
-              <View style={styles.row}>
+              <View style={Styles.row}>
                 <Icon width={24} height={24} color={Colors[theme].text} />
                 <Text style={styles.key}>{I18n.t(item.title)}</Text>
               </View>
-              <View style={styles.row}>
+              <View style={Styles.row}>
                 {typeof item.value === 'string' ? (
                   <Text style={[styles.value, { color: Colors[theme].link }]}>
                     {item.value}
@@ -95,10 +96,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingLeft: 10,
     paddingVertical: 10,
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
   },
   key: {
     fontSize: 18,

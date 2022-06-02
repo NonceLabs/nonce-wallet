@@ -1,58 +1,29 @@
-import SegmentedControl from '@react-native-segmented-control/segmented-control'
-import Button from 'components/common/Button'
 import ScreenHeader from 'components/common/ScreenHeader'
 import { View } from 'components/Themed'
-import useColorScheme from 'hooks/useColorScheme'
+import RestoreForm from 'components/Wallet/RestoreForm'
+import SetupPIN from 'components/Wallet/SetupPIN'
 import I18n from 'i18n-js'
 import { useState } from 'react'
-import { StyleSheet, TextInput } from 'react-native'
-import Colors from 'theme/Colors'
-import Fonts from 'theme/Fonts'
-import Styles from 'theme/Styles'
+
+enum RESTORE_STEP {
+  RESTORE = 'RESTORE',
+  SETUP_PIN = 'SETUP_PIN',
+}
 
 export default function Restore() {
-  const [selectedIndex, setSelectedIndex] = useState(0)
-  const [value, setValue] = useState('')
-
-  const theme = useColorScheme()
+  const [step, setStep] = useState(RESTORE_STEP.RESTORE)
 
   return (
     <View style={{ flex: 1 }}>
-      <ScreenHeader title={I18n.t('Restore')} />
-      <View style={Styles.page}>
-        <SegmentedControl
-          values={[I18n.t('Seed Phrase'), I18n.t('Private Key')]}
-          selectedIndex={selectedIndex}
-          onChange={(event) => {
-            setSelectedIndex(event.nativeEvent.selectedSegmentIndex)
-          }}
-        />
+      <ScreenHeader title="Start" />
 
-        <TextInput
-          multiline
-          autoCapitalize="none"
-          numberOfLines={5}
-          style={[styles.textarea, { color: Colors[theme].text }]}
-          value={value}
-          onChangeText={(text: string) => setValue(text)}
-        />
+      {step === RESTORE_STEP.RESTORE && (
+        <RestoreForm onNext={() => setStep(RESTORE_STEP.SETUP_PIN)} />
+      )}
 
-        <Button label={I18n.t('Confirm')} primary onPress={() => {}} />
-      </View>
+      {step === RESTORE_STEP.SETUP_PIN && (
+        <SetupPIN onNext={() => {}} type="restore" />
+      )}
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  textarea: {
-    width: '100%',
-    height: 140,
-    borderColor: '#333',
-    borderWidth: 2,
-    borderRadius: 4,
-    padding: 10,
-    fontSize: 20,
-    marginVertical: 20,
-    fontFamily: Fonts.variable,
-  },
-})

@@ -38,8 +38,10 @@ export default function VerifyMnemonic({
 
   return (
     <ScrollView style={styles.container}>
-      <Heading>(2/3)</Heading>
-      <Heading>{I18n.t('Verify Mnemonic')}</Heading>
+      <Box direction="column">
+        <Heading>(2/3)</Heading>
+        <Heading>{I18n.t('Verify Mnemonic')}</Heading>
+      </Box>
 
       <View style={styles.mnemonicWrap}>
         <TextInput

@@ -15,7 +15,7 @@ const zh = {
   Search: '搜索',
   Trending: '流行',
   New: '最新',
-  Home: '主页',
+  Asset: '资产',
   Explore: '发现',
   Setting: '设置',
   Accounts: '账户',
@@ -43,7 +43,7 @@ const zh = {
   Transfer: '转账',
   Next: '下一步',
   Balance: '余额',
-  'Receiver ID': '接收者地址',
+  'Receiver Address': '接收者地址',
   Amount: '数量',
   'Invalid receiver ID': '无效接收者地址',
   'Invalid amount': '无效数量',
@@ -160,7 +160,7 @@ const zh = {
   'I am new to crypto world': '我是新手',
   Password: '密码',
   'Repeat Password': '重复密码',
-  'Setup Password': '设定密码',
+  'Setup PIN Code': '设定 PIN 码',
   'Password length must be equal or more than 6 characters':
     '密码长度必须等于或大于 6 个字符',
   Mnemonic: '助记词',
@@ -169,6 +169,9 @@ const zh = {
   'Confirm PIN Code': '确认 PIN 码',
   'PIN code does not match': 'PIN 码不匹配',
   Nonce: 'Nonce',
+  Start: 'Start',
+  'Update PIN Code': '修改 PIN 码',
+  'Enable Bio Auth': '开启生物识别',
 }
 
 export default zh

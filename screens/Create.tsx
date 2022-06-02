@@ -1,7 +1,7 @@
 import ScreenHeader from 'components/common/ScreenHeader'
-import { View, Text } from 'components/Themed'
+import { View } from 'components/Themed'
 import GenMnemonic from 'components/Wallet/GenMnemonic'
-import SetupPswd from 'components/Wallet/SetupPswd'
+import SetupPIN from 'components/Wallet/SetupPIN'
 import VerifyMnemonic from 'components/Wallet/VerifyMnemonic'
 import { useState } from 'react'
 import { StyleSheet } from 'react-native'
@@ -9,7 +9,7 @@ import { StyleSheet } from 'react-native'
 enum CREATE_STEP {
   GEN_MNEMONIC = 'GEN_MNEMONIC',
   VERIFY_MNEMONIC = 'VERIFY_MNEMONIC',
-  SETUP_PSWD = 'SETUP_PSWD',
+  SETUP_PIN = 'SETUP_PIN',
 }
 
 export default function Create() {
@@ -18,7 +18,7 @@ export default function Create() {
 
   return (
     <View style={{ flex: 1 }}>
-      <ScreenHeader title="Create" />
+      <ScreenHeader title="Start" />
       {step === CREATE_STEP.GEN_MNEMONIC && (
         <GenMnemonic
           onNext={(_mnemonic) => {
@@ -29,14 +29,12 @@ export default function Create() {
       )}
       {step === CREATE_STEP.VERIFY_MNEMONIC && (
         <VerifyMnemonic
-          onNext={() => setStep(CREATE_STEP.SETUP_PSWD)}
+          onNext={() => setStep(CREATE_STEP.SETUP_PIN)}
           onBack={() => setStep(CREATE_STEP.GEN_MNEMONIC)}
           mnemonic={mnemonic}
         />
       )}
-      {step === CREATE_STEP.SETUP_PSWD && (
-        <SetupPswd onNext={() => setStep(CREATE_STEP.GEN_MNEMONIC)} />
-      )}
+      {step === CREATE_STEP.SETUP_PIN && <SetupPIN onNext={() => {}} />}
     </View>
   )
 }

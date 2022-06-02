@@ -4,7 +4,7 @@ import {
   GitHub,
   Globe,
   HistoricShieldAlt,
-  Network,
+  LotOfCash,
   Translate,
   Tunnel,
   Twitter,
@@ -23,16 +23,20 @@ import Colors from 'theme/Colors'
 import useColorScheme from 'hooks/useColorScheme'
 import { useAppSelector } from 'store/hooks'
 import Fonts from 'theme/Fonts'
-import { capitalizeFirstLetter, formatAccountId } from 'utils/format'
+import { capitalizeFirstLetter } from 'utils/format'
 import { useNavigation } from '@react-navigation/native'
 import Box from 'components/common/Box'
 import icons from 'utils/icons'
+import CurrencyModal from 'components/Modals/CurrencyModal'
 
 export default function SettingScreen() {
   const languageRef = useRef<Modalize>(null)
   const themeRef = useRef<Modalize>(null)
+  const currencyRef = useRef<Modalize>(null)
 
-  const themeSetting = useAppSelector((state) => state.setting.theme)
+  const { theme: _theme, currentCurrency } = useAppSelector(
+    (state) => state.setting
+  )
   const account = useAppSelector((state) => state.account.current)
 
   const navigation = useNavigation()
@@ -52,9 +56,7 @@ export default function SettingScreen() {
               icon: Wallet,
               title: 'Account',
               value: '',
-              onPress: () => {
-                // navigation.navigate('AccountListScreen')
-              },
+              onPress: () => {},
             },
             {
               icon: HistoricShieldAlt,
@@ -77,9 +79,15 @@ export default function SettingScreen() {
               onPress: () => languageRef.current?.open(),
             },
             {
+              icon: LotOfCash,
+              title: 'Currency',
+              value: currentCurrency,
+              onPress: () => currencyRef.current?.open(),
+            },
+            {
               icon: Globe,
               title: 'Theme',
-              value: I18n.t(capitalizeFirstLetter(themeSetting)),
+              value: I18n.t(capitalizeFirstLetter(_theme)),
               onPress: () => themeRef.current?.open(),
             },
           ]}
@@ -116,7 +124,7 @@ export default function SettingScreen() {
               icon: Tunnel,
               title: 'Nonce',
               value: '',
-              onPress: () => Linking.openURL('#'),
+              onPress: () => navigation.navigate('About'),
             },
           ]}
         />
@@ -137,6 +145,9 @@ export default function SettingScreen() {
         </Modalize>
         <Modalize ref={themeRef} adjustToContentHeight>
           <ThemeModal onClose={() => themeRef.current?.close()} />
+        </Modalize>
+        <Modalize ref={currencyRef} adjustToContentHeight>
+          <CurrencyModal onClose={() => currencyRef.current?.close()} />
         </Modalize>
       </Portal>
     </View>

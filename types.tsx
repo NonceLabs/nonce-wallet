@@ -21,10 +21,11 @@ export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined
   Start: undefined
   Restore: undefined
-  Transfer: undefined
+  Transfer: { token?: Token }
   Token: { token?: Token }
   Security: undefined
   Create: undefined
+  About: undefined
   Modal: undefined
   NotFound: undefined
 }

@@ -25,8 +25,8 @@ export default function Staking() {
 
   return (
     <View style={{ flex: 1 }}>
-      <ScreenHeader title="Staking" />
-      <ScrollView style={Styles.page}>
+      <ScreenHeader title="Staking" isBackable={false} />
+      <ScrollView style={[Styles.page]}>
         <Box
           direction="column"
           align="flex-start"
@@ -36,18 +36,18 @@ export default function Staking() {
         >
           <Box align="flex-start" direction="column">
             <Text style={styles.title}>Block Height</Text>
-            <Heading>{data?.blockchainLength}</Heading>
+            <Heading>{data?.blockchainLength ?? '-'}</Heading>
           </Box>
 
           <Box align="flex-start" direction="column">
             <Text style={styles.title}>Epoch</Text>
-            <Heading>{data?.epoch}</Heading>
+            <Heading>{data?.epoch ?? '-'}</Heading>
           </Box>
 
           <Box align="flex-start" direction="column" full>
             <Text style={styles.title}>Slot</Text>
             <Box direction="row">
-              <Heading>{data?.slot}</Heading>
+              <Heading>{data?.slot ?? '-'}</Heading>
               <Text style={[styles.title, styles.number]}> / 7140</Text>
             </Box>
             <View

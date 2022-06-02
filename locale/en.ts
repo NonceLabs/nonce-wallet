@@ -15,7 +15,7 @@ const en = {
   Search: 'Search',
   Trending: 'Trending',
   New: 'New',
-  Home: 'Home',
+  Asset: 'Asset',
   Explore: 'Explore',
   Setting: 'Setting',
   Accounts: 'Accounts',
@@ -43,7 +43,7 @@ const en = {
   Transfer: 'Transfer',
   Next: 'Next',
   Balance: 'Balance',
-  'Receiver ID': 'Receiver ID',
+  'Receiver Address': 'Receiver Address',
   Amount: 'Amount',
   'Invalid receiver ID': 'Invalid receiver ID',
   'Invalid amount': 'Invalid amount',
@@ -166,7 +166,7 @@ const en = {
   'I am new to crypto world': 'I am new to crypto world',
   Password: 'Password',
   'Repeat Password': 'Repeat Password',
-  'Setup Password': 'Setup Password',
+  'Setup PIN Code': 'Setup PIN Code',
   'Password length must be equal or more than 6 characters':
     'Password length must be equal or more than 6 characters',
   Mnemonic: 'Mnemonic',
@@ -175,6 +175,9 @@ const en = {
   'Confirm PIN Code': 'Confirm PIN Code',
   'PIN code does not match': 'PIN code does not match',
   Nonce: 'Nonce',
+  Start: 'Start',
+  'Update PIN Code': 'Update PIN Code',
+  'Enable Bio Auth': 'Enable Bio Auth',
 }
 
 export default en

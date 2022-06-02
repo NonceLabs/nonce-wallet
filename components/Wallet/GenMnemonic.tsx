@@ -11,6 +11,7 @@ import _ from 'lodash'
 import { WarningTriangleOutline } from 'iconoir-react-native'
 import Heading from 'components/common/Heading'
 import { generateMnemonic } from 'utils/cryptos'
+import Box from 'components/common/Box'
 
 export default function GenMnemonic({
   onNext,
@@ -40,8 +41,10 @@ export default function GenMnemonic({
 
   return (
     <ScrollView style={styles.container}>
-      <Heading>(1/3)</Heading>
-      <Heading>{I18n.t('Mnemonic')}</Heading>
+      <Box direction="column">
+        <Heading>(1/3)</Heading>
+        <Heading>{I18n.t('Mnemonic')}</Heading>
+      </Box>
 
       <View style={styles.mnemonicWrap}>
         {_.chunk(mnemonic.split(' '), 3).map((words, index) => {

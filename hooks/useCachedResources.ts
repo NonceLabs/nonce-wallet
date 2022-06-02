@@ -19,7 +19,7 @@ export default function useCachedResources() {
           'Lato-Regular': require('assets/fonts/Lato-Regular.ttf'),
           Inter: require('assets/fonts/Inter.ttf'),
           Oxanium: require('assets/fonts/Oxanium.ttf'),
-          CourierPrime: require('assets/fonts/CourierPrime.ttf'),
+          DMMono: require('assets/fonts/DMMono.ttf'),
         })
       } catch (e) {
         // We might want to provide this error information to an error reporting service

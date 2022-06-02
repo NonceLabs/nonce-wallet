@@ -4,16 +4,22 @@ import { Text, View } from 'components/Themed'
 import useColorScheme from 'hooks/useColorScheme'
 import I18n from 'i18n-js'
 import _ from 'lodash'
-import { useState } from 'react'
-import { ScrollView, TextInput, StyleSheet } from 'react-native'
+import { useRef, useState } from 'react'
+import { ScrollView, TextInput, StyleSheet, Pressable } from 'react-native'
 import { useAppDispatch } from 'store/hooks'
 import Colors from 'theme/Colors'
-import { toast } from 'utils/toast'
 
-export default function SetupPswd({ onNext }: { onNext: () => void }) {
+export default function SetupPIN({
+  onNext,
+  type = 'create',
+}: {
+  onNext: () => void
+  type?: 'create' | 'restore'
+}) {
   const [pswd, setPswd] = useState('')
   const [repeatPswd, setRepeatPswd] = useState('')
   const [isConfirming, setIsConfirming] = useState(false)
+  const inputRef = useRef<TextInput>(null)
 
   const dispatch = useAppDispatch()
   const theme = useColorScheme()
@@ -27,8 +33,10 @@ export default function SetupPswd({ onNext }: { onNext: () => void }) {
 
   return (
     <ScrollView style={styles.container}>
-      <Heading>(3/3)</Heading>
-      <Heading>{I18n.t('Setup Password')}</Heading>
+      <Box direction="column">
+        <Heading>({type === 'create' ? '3/3' : '2/2'})</Heading>
+        <Heading>{I18n.t('Setup PIN Code')}</Heading>
+      </Box>
 
       <Box
         direction="column"
@@ -37,6 +45,7 @@ export default function SetupPswd({ onNext }: { onNext: () => void }) {
         style={{ marginTop: 40 }}
       >
         <TextInput
+          ref={inputRef}
           style={styles.input}
           secureTextEntry
           value={isConfirming ? repeatPswd : pswd}
@@ -65,23 +74,25 @@ export default function SetupPswd({ onNext }: { onNext: () => void }) {
           {isConfirming ? I18n.t('Confirm PIN Code') : ''}
         </Text>
 
-        <Box justify="space-around" full style={{ paddingHorizontal: 50 }}>
-          {_.fill(Array(6), 0).map((_, i) => {
-            const isActive = i < (isConfirming ? repeatPswd : pswd).length
-            return (
-              <View
-                key={i}
-                style={[
-                  styles.pin,
-                  {
-                    borderColor: Colors[theme].text,
-                  },
-                  isActive && { backgroundColor: Colors[theme].text },
-                ]}
-              />
-            )
-          })}
-        </Box>
+        <Pressable onPress={() => inputRef?.current?.focus()}>
+          <Box justify="space-around" full style={{ paddingHorizontal: 50 }}>
+            {_.fill(Array(6), 0).map((_, i) => {
+              const isActive = i < (isConfirming ? repeatPswd : pswd).length
+              return (
+                <View
+                  key={i}
+                  style={[
+                    styles.pin,
+                    {
+                      borderColor: Colors[theme].text,
+                    },
+                    isActive && { backgroundColor: Colors[theme].text },
+                  ]}
+                />
+              )
+            })}
+          </Box>
+        </Pressable>
 
         <Text style={styles.match}>
           {repeatPswd.length === 6 && repeatPswd !== pswd

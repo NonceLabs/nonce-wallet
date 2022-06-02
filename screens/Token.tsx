@@ -79,9 +79,9 @@ export default function TokenScreen({
                   />
                 }
                 onPress={() => {
-                  // navigation.navigate('Transfer', {
-                  //   token,
-                  // })
+                  navigation.navigate('Transfer', {
+                    token,
+                  })
                 }}
               />
               <Icon
