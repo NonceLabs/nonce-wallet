@@ -82,7 +82,7 @@ export default function Banner({ account }: { account: Account | null }) {
               <Text style={[styles.account, { fontSize: 14 }]}>
                 {capitalizeFirstLetter(network)}
               </Text>
-              <NavArrowDown color={Colors.white} width={24} height={24} />
+              <NavArrowDown color={Colors.white} width={20} height={20} />
             </View>
           </TouchableOpacity>
 
@@ -171,7 +171,8 @@ const styles = StyleSheet.create({
   },
   button: {
     borderWidth: 1,
-    paddingLeft: 4,
+    paddingLeft: 6,
+    paddingVertical: 2,
     borderRadius: 4,
   },
   buttonGroup: {

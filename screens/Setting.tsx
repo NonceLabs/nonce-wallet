@@ -60,7 +60,9 @@ export default function SettingScreen() {
               icon: HistoricShieldAlt,
               title: 'Security',
               value: '',
-              onPress: () => {},
+              onPress: () => {
+                navigation.navigate('Security')
+              },
             },
           ]}
         />

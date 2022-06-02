@@ -18,6 +18,7 @@ import Staking from 'screens/Staking'
 import Home from 'screens/Home'
 import TokenScreen from 'screens/Token'
 import Create from 'screens/Create'
+import Security from 'screens/Security'
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
@@ -37,6 +38,11 @@ export default function RootNavigator() {
       <Stack.Screen
         name="Token"
         component={TokenScreen}
+        options={{ header: () => null }}
+      />
+      <Stack.Screen
+        name="Security"
+        component={Security}
         options={{ header: () => null }}
       />
       <Stack.Screen

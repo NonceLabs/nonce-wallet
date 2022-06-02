@@ -22,7 +22,7 @@ export default function Box({
   pad = 'none',
   full = false,
 }: {
-  children: any[]
+  children: any
   align?: FlexStyle['alignItems']
   justify?: FlexStyle['justifyContent']
   direction?: 'row' | 'column'
@@ -33,11 +33,15 @@ export default function Box({
   full?: boolean
 }) {
   const _children = []
-  for (let i = 0; i < children.length; i++) {
-    _children.push(children[i])
-    if (gap !== 'none' && i < children.length - 1) {
-      _children.push(<View key={i} style={styles[gap]} />)
+  if (Array.isArray(children)) {
+    for (let i = 0; i < children.length; i++) {
+      _children.push(children[i])
+      if (gap !== 'none' && i < children.length - 1) {
+        _children.push(<View key={i} style={styles[gap]} />)
+      }
     }
+  } else {
+    _children.push(children)
   }
   const theme = useColorScheme()
   return (
