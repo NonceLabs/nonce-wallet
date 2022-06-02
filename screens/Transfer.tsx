@@ -69,7 +69,7 @@ export default function Transfer() {
         { backgroundColor: Colors[theme].screenBackground },
       ]}
     >
-      <ScreenHeader title={I18n.t('Transfer')} />
+      <ScreenHeader title="Transfer" />
       <ScrollView
         style={{ flex: 1 }}
         contentContainerStyle={{

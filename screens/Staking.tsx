@@ -78,6 +78,9 @@ const styles = StyleSheet.create({
     color: Colors.gray,
     fontFamily: Fonts.variable,
   },
+  heading: {
+    fontFamily: Fonts.numberBold,
+  },
   number: {
     fontFamily: Fonts.numberBold,
     fontSize: 18,

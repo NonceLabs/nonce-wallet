@@ -12,8 +12,8 @@ const default_account = {
 }
 
 const initialState: AccountSlice = {
-  list: [default_account],
-  current: default_account,
+  list: [],
+  current: null,
 }
 
 export const accountSlice = createSlice({

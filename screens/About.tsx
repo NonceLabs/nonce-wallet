@@ -135,7 +135,7 @@ export default function About({ navigation }: RootStackScreenProps<'About'>) {
 
   return (
     <View style={styles.container}>
-      <ScreenHeader title={I18n.t('About')} />
+      <ScreenHeader title="About" />
       <View style={styles.content}>
         <SettingBlock
           title=""
