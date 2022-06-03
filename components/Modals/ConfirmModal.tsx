@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   container: {
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    paddingTop: 20,
+    paddingTop: 10,
   },
   subtitle: {
     fontSize: 16,

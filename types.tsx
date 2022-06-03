@@ -29,7 +29,7 @@ export type RootStackParamList = {
   WalletsManage: undefined
   WalletDetail: { wallet?: Wallet }
   ContactsManage: undefined
-  ContactNew: undefined
+  ContactNew: { contact?: Contact }
   PINCode: { onConfirmed: () => void }
   PrivateKey: { wallet?: Wallet }
   Modal: undefined
@@ -114,6 +114,7 @@ export interface MinaSummary {
 export interface Wallet {
   publicKey: string
   chain: Chain
+  name?: string
 }
 
 export interface KeyStoreFile {
@@ -125,6 +126,4 @@ export interface KeyStoreFile {
   createdAt: string
 }
 
-export interface Contact extends Wallet {
-  name: string
-}
+export interface Contact extends Wallet {}

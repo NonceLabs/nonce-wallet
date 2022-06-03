@@ -122,7 +122,7 @@ export default function SettingScreen() {
               icon: GitHub,
               title: 'Github',
               value: '',
-              onPress: () => Linking.openURL('#'),
+              onPress: () => Linking.openURL('https://github.com/noncelabs'),
             },
           ]}
         />

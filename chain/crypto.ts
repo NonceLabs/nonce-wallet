@@ -57,3 +57,12 @@ export const parseMnemonic = async (
     createdAt: new Date().toISOString(),
   }
 }
+
+export function isAddressValid(address: string) {
+  try {
+    const decodedAddress = bs58check.decode(address).toString('hex')
+    return !!decodedAddress && decodedAddress.length === 72
+  } catch (ex) {
+    return false
+  }
+}

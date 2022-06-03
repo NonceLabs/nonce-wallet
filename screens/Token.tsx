@@ -94,8 +94,15 @@ export default function TokenScreen({
         </ScrollView>
       </View>
       <Portal>
-        <Modalize ref={receiveRef} adjustToContentHeight closeOnOverlayTap>
+        <Modalize
+          ref={receiveRef}
+          adjustToContentHeight
+          closeOnOverlayTap
+          handlePosition="inside"
+          handleStyle={{ backgroundColor: Colors.gray9 }}
+        >
           <ReceiveModal
+            wallet={wallet}
             onClose={() => receiveRef.current?.close()}
             onManage={() => navigation.navigate('WalletDetail', { wallet })}
           />

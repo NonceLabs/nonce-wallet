@@ -73,6 +73,7 @@ export default function WalletDetail() {
           ref={confirmDeleteRef}
           adjustToContentHeight
           closeOnOverlayTap
+          withHandle={false}
         >
           <ConfirmModal
             title="Delete Wallet"
@@ -95,7 +96,12 @@ export default function WalletDetail() {
           />
         </Modalize>
 
-        <Modalize ref={exportKeyRef} adjustToContentHeight closeOnOverlayTap>
+        <Modalize
+          ref={exportKeyRef}
+          adjustToContentHeight
+          closeOnOverlayTap
+          withHandle={false}
+        >
           <ConfirmModal
             title="Export Private Key"
             icon={<Archive width={40} height={40} color={Colors.black} />}

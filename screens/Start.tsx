@@ -129,7 +129,7 @@ export default function Start() {
                   </Heading>
                 </Pressable>
                 <Text style={styles.subtitle}>
-                  {I18n.t('Have mnemonic or private keys?')}
+                  {I18n.t('Have a mnemonic or private key?')}
                 </Text>
               </View>
             </Box>

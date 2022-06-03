@@ -15,20 +15,24 @@ import icons from 'utils/icons'
 import I18n from 'i18n-js'
 import { Check, Copy, ShareAndroid, InfoEmpty } from 'iconoir-react-native'
 import { useState } from 'react'
+import { Wallet } from 'types'
+import Heading from 'components/common/Heading'
 
 export default function ReceiveModal({
+  wallet,
   onClose,
   onManage,
 }: {
+  wallet: Wallet | undefined
   onClose: () => void
   onManage: () => void
 }) {
-  const wallet = useAppSelector((state) => state.wallet.current)
+  const _wallet = useAppSelector((state) => state.wallet.current)
   const [isCopied, setIsCopied] = useState(false)
   const onShare = async () => {
     try {
       const result = await Share.share({
-        message: wallet?.publicKey || '',
+        message: wallet?.publicKey ?? '',
       })
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -56,8 +60,8 @@ export default function ReceiveModal({
         },
       ]}
     >
-      <SheetHeader title={I18n.t('My Wallet')} />
       <View style={styles.content}>
+        <Heading>{wallet?.name}</Heading>
         <Text style={styles.title}>{wallet?.publicKey}</Text>
         <View style={styles.qrcodeWrap}>
           <QRCode
@@ -66,7 +70,7 @@ export default function ReceiveModal({
             logoBackgroundColor="white"
             logoMargin={5}
             logoSize={40}
-            value={wallet?.publicKey || ''}
+            value={wallet?.publicKey ?? ''}
           />
         </View>
         <View style={styles.buttonGroup}>
@@ -90,7 +94,7 @@ export default function ReceiveModal({
             onPress={async () => {
               try {
                 setIsCopied(true)
-                await Clipboard.setStringAsync(wallet?.publicKey || '')
+                await Clipboard.setStringAsync(wallet?.publicKey ?? '')
                 setTimeout(() => {
                   setIsCopied(false)
                 }, 1000)
@@ -112,19 +116,21 @@ export default function ReceiveModal({
             }
             onPress={onShare}
           />
-          <Icon
-            icon={
-              <InfoEmpty
-                width={25}
-                height={25}
-                color={Colors[theme].screenBackground}
-              />
-            }
-            onPress={() => {
-              onClose()
-              onManage()
-            }}
-          />
+          {_wallet?.publicKey === wallet?.publicKey && (
+            <Icon
+              icon={
+                <InfoEmpty
+                  width={25}
+                  height={25}
+                  color={Colors[theme].screenBackground}
+                />
+              }
+              onPress={() => {
+                onClose()
+                onManage()
+              }}
+            />
+          )}
         </View>
       </View>
     </View>
@@ -137,6 +143,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
+    paddingTop: 15,
   },
   content: {
     alignItems: 'center',

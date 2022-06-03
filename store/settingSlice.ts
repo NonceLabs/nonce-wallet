@@ -24,7 +24,13 @@ const initialState: SettingSlice = {
   bioAuthEnabled: false,
   pushToken: '',
   isDevMode: false,
-  contacts: [],
+  contacts: [
+    {
+      publicKey: 'B62qre3erTHfzQckNuibViWQGyyKwZseztqrjPZBv6SQF384Rg6ESAy',
+      name: 'Jack',
+      chain: Chain.MINA,
+    },
+  ],
 }
 
 export const settingSlice = createSlice({
@@ -45,6 +51,20 @@ export const settingSlice = createSlice({
     },
     addContact: (state, action) => {
       state.contacts.push(action.payload)
+    },
+    removeContact: (state, action) => {
+      state.contacts = state.contacts.filter(
+        (t) => t.publicKey !== action.payload.publicKey
+      )
+    },
+    updateContact: (state, action) => {
+      const { oldContact, newContact } = action.payload
+      state.contacts = state.contacts.map((t) => {
+        if (oldContact.publicKey === t.publicKey) {
+          return newContact
+        }
+        return t
+      })
     },
   },
 })

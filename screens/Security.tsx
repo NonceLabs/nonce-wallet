@@ -26,7 +26,7 @@ export default function Security() {
           items={[
             {
               icon: KeyAlt,
-              title: 'Update PIN Code',
+              title: 'PIN Code',
               value: '',
               onPress: () => {
                 navigation.navigate('PINCode', {
@@ -36,7 +36,7 @@ export default function Security() {
             },
             {
               icon: FingerprintScan,
-              title: 'Enable Bio Auth',
+              title: 'Bio Auth',
               value: isAuthEnabled ? 'on' : 'off',
               onPress: () => bioAuthRef.current?.open(),
             },

@@ -104,6 +104,7 @@ export default function Transfer() {
                 onChangeText={(text) => setReceiver(text)}
                 autoCorrect={false}
                 onFocus={() => tokenListRef.current?.close()}
+                placeholderTextColor={Colors.gray9}
               />
             </View>
           </View>
@@ -146,6 +147,7 @@ export default function Transfer() {
                 placeholder={I18n.t('Amount')}
                 onChangeText={(text) => setAmount(text)}
                 onFocus={() => tokenListRef.current?.close()}
+                placeholderTextColor={Colors.gray9}
               />
 
               <TouchableOpacity
@@ -214,6 +216,7 @@ const styles = StyleSheet.create({
   formWrap: {
     borderRadius: 4,
     padding: 10,
+    marginBottom: 20,
   },
   row: {
     flexDirection: 'row',
