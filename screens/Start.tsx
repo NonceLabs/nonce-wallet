@@ -6,7 +6,7 @@ import { Text, View } from 'components/Themed'
 import useColorScheme from 'hooks/useColorScheme'
 import I18n from 'i18n-js'
 import { KeyAltPlus, Wallet } from 'iconoir-react-native'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Image, Pressable, StyleSheet, useWindowDimensions } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useAppSelector } from 'store/hooks'
@@ -76,7 +76,7 @@ export default function Start() {
             align="flex-start"
             gap="small"
             border
-            style={{ width: '100%', marginTop: 50 }}
+            style={{ width: '100%', marginTop: 50, borderRadius: 4 }}
           >
             <Box gap="medium" pad="medium">
               <View
@@ -129,7 +129,7 @@ export default function Start() {
                   </Heading>
                 </Pressable>
                 <Text style={styles.subtitle}>
-                  {I18n.t('I already have mnemonic or private keys')}
+                  {I18n.t('Have mnemonic or private keys?')}
                 </Text>
               </View>
             </Box>

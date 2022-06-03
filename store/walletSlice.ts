@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { Wallet, Chain } from 'types'
+import { Wallet } from 'types'
 
 interface WalletSlice {
   list: Wallet[]
@@ -15,12 +15,22 @@ export const walletSlice = createSlice({
   name: 'wallet',
   initialState,
   reducers: {
-    addAccount: (state, action) => {
+    add: (state, action) => {
       if (!state.list) {
         state.list = []
       }
       state.list.push(action.payload)
       state.current = action.payload
+    },
+    remove: (state, action) => {
+      state.list = state.list.filter(
+        (t) => t.publicKey !== action.payload.publicKey
+      )
+      if (state.list.length > 0) {
+        state.current = state.list[0]
+      } else {
+        state.current = undefined
+      }
     },
     setCurrent: (state, action) => {
       state.current = action.payload

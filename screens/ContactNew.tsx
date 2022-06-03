@@ -1,6 +1,5 @@
 import Box from 'components/common/Box'
 import Button from 'components/common/Button'
-import Icon from 'components/common/Icon'
 import ScreenHeader from 'components/common/ScreenHeader'
 import { View } from 'components/Themed'
 import useColorScheme from 'hooks/useColorScheme'

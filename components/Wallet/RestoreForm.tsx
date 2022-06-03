@@ -36,6 +36,7 @@ export default function RestoreForm({
         onChange={(event) => {
           setSelectedIndex(event.nativeEvent.selectedSegmentIndex)
         }}
+        tintColor={theme === 'dark' ? Colors.white : undefined}
       />
       <Box direction="column" gap="medium" style={{ marginTop: 20 }}>
         <TextInput

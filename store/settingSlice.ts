@@ -20,7 +20,7 @@ const initialState: SettingSlice = {
   },
   currentCurrency: Currency.USD,
   network: NetworkType.MAINNET,
-  pincode: '',
+  pincode: '111111',
   bioAuthEnabled: false,
   pushToken: '',
   isDevMode: false,

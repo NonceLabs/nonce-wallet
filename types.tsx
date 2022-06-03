@@ -30,7 +30,8 @@ export type RootStackParamList = {
   WalletDetail: { wallet?: Wallet }
   ContactsManage: undefined
   ContactNew: undefined
-  PINCode: undefined
+  PINCode: { onConfirmed: () => void }
+  PrivateKey: { wallet?: Wallet }
   Modal: undefined
   NotFound: undefined
 }

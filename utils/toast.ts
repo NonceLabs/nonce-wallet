@@ -1,10 +1,22 @@
-import Toast from 'react-native-toast-message'
-import { ToastType } from 'types'
+import Toasty from 'react-native-toast-message'
+import { ToastType } from '../types'
 
 export const toast = (type: ToastType, message: string): void => {
-  Toast.show({
+  Toasty.show({
     type,
     text1: message,
     visibilityTime: 2000,
   })
+}
+
+export default class Toast {
+  static error(error: unknown) {
+    if (error instanceof Error) {
+      toast('error', error.message)
+    }
+  }
+
+  static success(message: string) {
+    toast('success', message)
+  }
 }

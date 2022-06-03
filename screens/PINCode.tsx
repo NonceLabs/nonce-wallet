@@ -1,3 +1,4 @@
+import { useRoute } from '@react-navigation/native'
 import Box from 'components/common/Box'
 import SheetHeader from 'components/common/SheetHeader'
 import { Text, View } from 'components/Themed'
@@ -16,6 +17,9 @@ export default function PINCode() {
   const inputRef = useRef<TextInput>(null)
   const theme = useColorScheme()
 
+  const { params } = useRoute()
+  const onConfirmed = (params as any)?.onConfirmed as () => void
+
   return (
     <View style={{ flex: 1 }}>
       <SheetHeader title={I18n.t('Confirm PIN Code')} />
@@ -30,8 +34,10 @@ export default function PINCode() {
           maxLength={6}
           onChangeText={(text) => {
             setPINCode(text)
-            if (text.length === 6) {
-              //
+            if (text.length === 6 && _pincode === text) {
+              setTimeout(() => {
+                onConfirmed()
+              }, 300)
             }
           }}
           selectionColor="transparent"

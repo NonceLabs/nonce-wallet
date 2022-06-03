@@ -41,7 +41,7 @@ export default function Restore() {
               }
               await WalletAPI.setKey(keyFile)
               dispatch({
-                type: 'wallet/addAccount',
+                type: 'wallet/add',
                 payload: {
                   publicKey: keyFile.publicKey,
                   chain: keyFile.chain,

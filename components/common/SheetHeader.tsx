@@ -12,7 +12,7 @@ export default function SheetHeader({ title }: { title: string }) {
 
 const styles = StyleSheet.create({
   header: {
-    paddingVertical: 8,
+    paddingVertical: 14,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     width: '100%',

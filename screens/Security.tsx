@@ -3,7 +3,7 @@ import ScreenHeader from 'components/common/ScreenHeader'
 import BioAuthModal from 'components/Modals/BioAuthModal'
 import SettingBlock from 'components/Setting/SettingBlock'
 import { View } from 'components/Themed'
-import { Fingerprint, FingerprintScan, KeyAlt } from 'iconoir-react-native'
+import { FingerprintScan, KeyAlt } from 'iconoir-react-native'
 import { useRef } from 'react'
 import { ScrollView } from 'react-native'
 import { Modalize } from 'react-native-modalize'
@@ -29,7 +29,9 @@ export default function Security() {
               title: 'Update PIN Code',
               value: '',
               onPress: () => {
-                navigation.navigate('PINCode')
+                navigation.navigate('PINCode', {
+                  onConfirmed: () => {},
+                })
               },
             },
             {

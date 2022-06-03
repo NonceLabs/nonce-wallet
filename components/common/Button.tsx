@@ -9,6 +9,7 @@ export default function Button({
   label,
   onPress,
   style,
+  size = 'medium',
   icon = null,
   type = ButtonType.DEFAULT,
   disabled = false,
@@ -16,6 +17,7 @@ export default function Button({
 }: {
   label: string
   onPress: () => void
+  size?: 'small' | 'medium' | 'large'
   style?: any
   icon?: any
   type?: ButtonType
@@ -50,6 +52,7 @@ export default function Button({
         bstyles.wrap[primary ? ButtonType.PRIMARY : type],
         style,
         { opacity: disabled ? 0.5 : 1 },
+        styles[size],
       ]}
       onPress={onPress}
       disabled={disabled}
@@ -77,8 +80,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 4,
     width: '100%',
-    paddingVertical: 12,
-    marginTop: 20,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -92,5 +93,14 @@ const styles = StyleSheet.create({
   },
   buttonTextPrimary: {
     color: 'white',
+  },
+  small: {
+    paddingVertical: 4,
+  },
+  medium: {
+    paddingVertical: 8,
+  },
+  large: {
+    paddingVertical: 12,
   },
 })

@@ -1,6 +1,5 @@
 const en = {
   Wallet: 'Wallet',
-  Wallet: 'Wallet',
   Token: 'Token',
   Network: 'Network',
   Theme: 'Theme',
@@ -161,8 +160,7 @@ const en = {
   Open: 'Open',
   'Welcome to': 'Welcome to',
   Restore: 'Restore',
-  'I already have mnemonic or private keys':
-    'I already have mnemonic or private keys',
+  'Have mnemonic or private keys?': 'Have mnemonic or private keys?',
   'I am new to crypto world': 'I am new to crypto world',
   Password: 'Password',
   'Repeat Password': 'Repeat Password',
@@ -184,6 +182,9 @@ const en = {
   Contacts: 'Contacts',
   'New Contact': 'New Contact',
   'No contacts yet': 'No contacts yet',
+  Copy: 'Copy',
+  'Export Wallet': 'Export Wallet',
+  'Public Key': 'Public Key',
 }
 
 export default en

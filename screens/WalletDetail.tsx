@@ -1,4 +1,4 @@
-import { useRoute } from '@react-navigation/native'
+import { useNavigation, useRoute, StackActions } from '@react-navigation/native'
 import Address from 'components/common/Address'
 import Box from 'components/common/Box'
 import Heading from 'components/common/Heading'
@@ -9,13 +9,16 @@ import I18n from 'i18n-js'
 import Colors from 'theme/Colors'
 import { StyleSheet } from 'react-native'
 import Styles from 'theme/Styles'
-import { Wallet } from 'types'
+import { Chain, Wallet } from 'types'
 import SettingBlock from 'components/Setting/SettingBlock'
 import { Archive, Trash } from 'iconoir-react-native'
 import { useRef, useState } from 'react'
 import { Portal } from 'react-native-portalize'
 import { Modalize } from 'react-native-modalize'
 import ConfirmModal from 'components/Modals/ConfirmModal'
+import WalletAPI from 'chain/WalletAPI'
+import Toast, { toast } from 'utils/toast'
+import { useAppDispatch } from 'store/hooks'
 
 export default function WalletDetail() {
   const { params } = useRoute()
@@ -24,6 +27,9 @@ export default function WalletDetail() {
   const exportKeyRef = useRef<Modalize>()
 
   const theme = useColorScheme()
+  const dispatch = useAppDispatch()
+  const navigation = useNavigation()
+
   return (
     <View style={{ flex: 1 }}>
       <ScreenHeader title="Wallet" />
@@ -47,7 +53,9 @@ export default function WalletDetail() {
               icon: Archive,
               title: 'Export Private Key',
               value: '',
-              onPress: () => {},
+              onPress: () => {
+                exportKeyRef?.current?.open()
+              },
             },
             {
               icon: Trash,
@@ -68,18 +76,43 @@ export default function WalletDetail() {
         >
           <ConfirmModal
             title="Delete Wallet"
+            icon={<Trash width={40} height={40} color={Colors.black} />}
+            iconWrapColor={Colors.red}
             subtitle="Make sure you have a backup of your private key before you delete this wallet."
             onCancel={() => confirmDeleteRef?.current?.close()}
-            onConfirm={async () => {}}
+            onConfirm={async () => {
+              try {
+                await WalletAPI.removeKey(Chain.MINA, wallet.publicKey)
+                dispatch({
+                  type: 'wallet/remove',
+                  payload: wallet,
+                })
+                navigation.dispatch(StackActions.popToTop())
+              } catch (error) {
+                Toast.error(error)
+              }
+            }}
           />
         </Modalize>
 
         <Modalize ref={exportKeyRef} adjustToContentHeight closeOnOverlayTap>
           <ConfirmModal
             title="Export Private Key"
+            icon={<Archive width={40} height={40} color={Colors.black} />}
+            iconWrapColor={Colors.green}
             subtitle="Make sure you keep your private key safe. You will not be able to recover your funds if you lose your private key."
             onCancel={() => exportKeyRef?.current?.close()}
-            onConfirm={async () => {}}
+            onConfirm={async () => {
+              exportKeyRef?.current?.close()
+              navigation.navigate('PINCode', {
+                onConfirmed: () => {
+                  navigation.goBack()
+                  navigation.navigate('PrivateKey', {
+                    wallet,
+                  })
+                },
+              })
+            }}
           />
         </Modalize>
       </Portal>

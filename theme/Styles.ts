@@ -23,6 +23,10 @@ const Styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  card: {
+    padding: 10,
+    borderRadius: 4,
+  },
 })
 
 export default Styles

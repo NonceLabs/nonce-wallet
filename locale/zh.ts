@@ -156,7 +156,7 @@ const zh = {
   Open: '打开',
   'Welcome to': '欢迎来到',
   Restore: '恢复',
-  'I already have mnemonic or private keys': '我已经有助记词或私钥',
+  'Have mnemonic or private keys?': '已经有助记词或私钥了？',
   'I am new to crypto world': '我是新手',
   Password: '密码',
   'Repeat Password': '重复密码',
@@ -178,6 +178,9 @@ const zh = {
   Contacts: '地址本',
   'New Contact': '新增地址',
   'No contacts yet': '地址本是空的',
+  Copy: '复制',
+  'Export Wallet': '导出钱包',
+  'Public Key': '公钥',
 }
 
 export default zh

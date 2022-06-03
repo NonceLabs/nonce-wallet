@@ -19,6 +19,7 @@ export default function Box({
   align = 'center',
   justify,
   gap = 'none',
+  margin = 'none',
   border = false,
   pad = 'none',
   full = false,
@@ -32,6 +33,7 @@ export default function Box({
   border?: boolean
   gap?: 'none' | 'small' | 'medium' | 'large' | 'xlarge'
   pad?: 'none' | 'small' | 'medium' | 'large'
+  margin?: 'none' | 'small' | 'medium' | 'large'
   full?: boolean
 }) {
   const _children = []
@@ -58,7 +60,11 @@ export default function Box({
         },
         style,
         border && { borderColor: Colors[theme].borderColor, borderWidth: 1 },
-        { padding: padding[pad], width: full ? '100%' : undefined },
+        {
+          padding: padding[pad],
+          width: full ? '100%' : undefined,
+          margin: padding[margin],
+        },
       ]}
     >
       {_children}

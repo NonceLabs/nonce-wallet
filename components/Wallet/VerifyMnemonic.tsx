@@ -24,6 +24,7 @@ export default function VerifyMnemonic({
 }) {
   const [word, setWord] = useState('')
   const [wordIndex, setWordIndex] = useState(1)
+  const [inputFocus, setInputFocus] = useState(false)
   const theme = useColorScheme()
 
   const words = mnemonic.split(' ')
@@ -45,11 +46,21 @@ export default function VerifyMnemonic({
 
       <View style={styles.mnemonicWrap}>
         <TextInput
-          style={styles.input}
+          style={[
+            styles.input,
+            {
+              color: Colors[theme].text,
+              borderBottomColor: inputFocus
+                ? Colors[theme].text
+                : Colors[theme].borderColor,
+            },
+          ]}
           value={word}
           onChangeText={(text) => setWord(text)}
           placeholder={`Enter the #${wordIndex} word`}
           autoCapitalize="none"
+          onFocus={() => setInputFocus(true)}
+          onBlur={() => setInputFocus(false)}
         />
       </View>
 
@@ -100,7 +111,6 @@ const styles = StyleSheet.create({
   },
   input: {
     borderBottomWidth: 1,
-    borderColor: Colors.gray9,
     fontSize: 24,
     fontFamily: Fonts.variable,
     padding: 8,

@@ -31,6 +31,7 @@ import WalletDetail from 'screens/WalletDetail'
 import ContactsManage from 'screens/ContactsManage'
 import ContactNew from 'screens/ContactNew'
 import PINCode from 'screens/PINCode'
+import PrivateKey from 'screens/PrivateKey'
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
@@ -85,6 +86,11 @@ export default function RootNavigator() {
       <Stack.Screen
         name="ContactNew"
         component={ContactNew}
+        options={{ header: () => null }}
+      />
+      <Stack.Screen
+        name="PrivateKey"
+        component={PrivateKey}
         options={{ header: () => null }}
       />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
