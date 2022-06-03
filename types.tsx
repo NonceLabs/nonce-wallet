@@ -19,13 +19,14 @@ declare global {
 
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined
-  Start: undefined
+  Start: { new?: boolean }
   Restore: undefined
   Transfer: { token?: Token }
   Token: { token?: Token }
   Security: undefined
   Create: undefined
   About: undefined
+  AccountManage: undefined
   Modal: undefined
   NotFound: undefined
 }
@@ -60,11 +61,6 @@ export enum ButtonType {
 
 export enum Chain {
   MINA = 'MINA',
-}
-
-export interface Account {
-  publicKey: string
-  chain: Chain
 }
 
 export enum Currency {
@@ -108,4 +104,18 @@ export interface MinaSummary {
   stakingEpochLedgerHash: string
   stateHash: string
   totalCurrency: string
+}
+
+export interface Account {
+  publicKey: string
+  chain: Chain
+}
+
+export interface KeyStoreFile {
+  privateKey: string
+  publicKey: string
+  hdIndex: number
+  mnemonic: string
+  chain: Chain
+  createdAt: string
 }

@@ -164,7 +164,7 @@ const zh = {
   'Password length must be equal or more than 6 characters':
     '密码长度必须等于或大于 6 个字符',
   Mnemonic: '助记词',
-  Back: '上一步',
+  Back: '返回',
   'Verify Mnemonic': '验证助记词',
   'Confirm PIN Code': '确认 PIN 码',
   'PIN code does not match': 'PIN 码不匹配',
@@ -172,6 +172,7 @@ const zh = {
   Start: 'Start',
   'Update PIN Code': '修改 PIN 码',
   'Enable Bio Auth': '开启生物识别',
+  Wallets: '钱包',
 }
 
 export default zh

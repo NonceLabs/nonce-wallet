@@ -37,7 +37,6 @@ export default function SettingScreen() {
   const { theme: _theme, currentCurrency } = useAppSelector(
     (state) => state.setting
   )
-  const account = useAppSelector((state) => state.account.current)
 
   const navigation = useNavigation()
   const theme = useColorScheme()
@@ -54,9 +53,11 @@ export default function SettingScreen() {
           items={[
             {
               icon: Wallet,
-              title: 'Account',
+              title: 'Wallets',
               value: '',
-              onPress: () => {},
+              onPress: () => {
+                navigation.navigate('AccountManage')
+              },
             },
             {
               icon: HistoricShieldAlt,

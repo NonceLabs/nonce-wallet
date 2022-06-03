@@ -10,7 +10,7 @@ import I18n from 'i18n-js'
 import _ from 'lodash'
 import { WarningTriangleOutline } from 'iconoir-react-native'
 import Heading from 'components/common/Heading'
-import { generateMnemonic } from 'utils/crypto'
+import { generateMnemonic } from 'chain/crypto'
 import Box from 'components/common/Box'
 
 export default function GenMnemonic({

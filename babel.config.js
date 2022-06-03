@@ -18,6 +18,7 @@ module.exports = function (api) {
             navigation: './navigation',
             store: './store',
             locale: './locale',
+            chain: './chain',
           },
         },
       ],

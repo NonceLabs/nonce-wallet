@@ -6,11 +6,6 @@ interface AccountSlice {
   current: Account | null
 }
 
-const default_account = {
-  publicKey: 'B62qor3MfNXwrPyAjfP3f3cWzxwntsKfSMrcRVD7SxqQKa5qW1aJbGV',
-  chain: Chain.MINA,
-}
-
 const initialState: AccountSlice = {
   list: [],
   current: null,

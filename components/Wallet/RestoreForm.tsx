@@ -9,9 +9,14 @@ import { ScrollView, TextInput, StyleSheet } from 'react-native'
 import Colors from 'theme/Colors'
 import Fonts from 'theme/Fonts'
 import Styles from 'theme/Styles'
-import { parseMnemonic } from 'utils/crypto'
+import { parseMnemonic } from 'chain/crypto'
+import { KeyStoreFile } from 'types'
 
-export default function RestoreForm({ onNext }: { onNext: () => void }) {
+export default function RestoreForm({
+  onNext,
+}: {
+  onNext: (keyFile: KeyStoreFile) => void
+}) {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [value, setValue] = useState(
     'glare hunt strike analyst differ slam powder okay love width fat pig'
@@ -48,8 +53,7 @@ export default function RestoreForm({ onNext }: { onNext: () => void }) {
           onPress={async () => {
             try {
               const result = await parseMnemonic(value)
-              console.log(result)
-              onNext()
+              onNext(result)
             } catch (error) {}
           }}
         />

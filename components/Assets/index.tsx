@@ -79,11 +79,8 @@ export default function Assets({ isLoading = false }: { isLoading?: boolean }) {
       renderScene={renderScene}
       renderTabBar={renderTabBar}
       onIndexChange={setIndex}
-      style={styles.container}
-      sceneContainerStyle={[
-        styles.container,
-        { backgroundColor: Colors[theme].background },
-      ]}
+      style={[styles.container, { backgroundColor: Colors[theme].background }]}
+      sceneContainerStyle={[{ backgroundColor: Colors[theme].background }]}
       initialLayout={{ width: layout.width }}
     />
   )
@@ -92,17 +89,7 @@ export default function Assets({ isLoading = false }: { isLoading?: boolean }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: '100%',
-  },
-  pageWrap: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  placeholderText: {
-    fontSize: 20,
-    color: '#999',
-    fontFamily: Fonts.heading,
+    backgroundColor: Colors.gray,
   },
   tabBar: {
     display: 'flex',

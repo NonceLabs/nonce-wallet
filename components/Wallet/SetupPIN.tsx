@@ -29,6 +29,7 @@ export default function SetupPIN({
       type: 'setting/setupPINCode',
       payload: pswd,
     })
+    onNext()
   }
 
   return (

@@ -178,6 +178,7 @@ const en = {
   Start: 'Start',
   'Update PIN Code': 'Update PIN Code',
   'Enable Bio Auth': 'Enable Bio Auth',
+  Wallets: 'Wallets',
 }
 
 export default en

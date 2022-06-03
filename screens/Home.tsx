@@ -13,7 +13,7 @@ export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
 
   useEffect(() => {
     if (accountList.length === 0 && !account) {
-      navigation.push('Start')
+      navigation.push('Start', { new: true })
     }
   }, [accountList, account])
 

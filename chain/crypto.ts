@@ -3,7 +3,8 @@ import HDKey from 'hdkey'
 import * as bip39 from 'bip39'
 import * as Random from 'expo-random'
 import Client from 'mina-signer'
-import { MNEMONIC_STRENGTH } from './configure'
+import { MNEMONIC_STRENGTH } from '../utils/configure'
+import { Chain, KeyStoreFile } from 'types'
 
 const getDerivedPath = (index: number) => `m/44'/12586'/${index}'/0/0`
 
@@ -30,7 +31,10 @@ function reverse(bytes: Buffer) {
   return reversed
 }
 
-export const parseMnemonic = async (mnemonic: string, index: number = 0) => {
+export const parseMnemonic = async (
+  mnemonic: string,
+  index: number = 0
+): Promise<KeyStoreFile> => {
   const seed = await bip39.mnemonicToSeed(normalizeSeedPhrase(mnemonic))
   const hdkey = HDKey.fromMasterSeed(seed)
   const hdPath = getDerivedPath(index)
@@ -43,10 +47,13 @@ export const parseMnemonic = async (mnemonic: string, index: number = 0) => {
   const privateKey = bs58check.encode(Buffer.from(privateKeyHex, 'hex'))
   const client = new Client({ network: 'mainnet' })
   const publicKey = client.derivePublicKey(privateKey)
+
   return {
     privateKey: privateKey,
     publicKey: publicKey,
     hdIndex: index,
     mnemonic,
+    chain: Chain.MINA,
+    createdAt: new Date().toISOString(),
   }
 }

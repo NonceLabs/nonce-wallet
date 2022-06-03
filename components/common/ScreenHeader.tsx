@@ -12,6 +12,7 @@ import useColorScheme from 'hooks/useColorScheme'
 import Fonts from 'theme/Fonts'
 import { Text, View } from 'components/Themed'
 import I18n from 'i18n-js'
+import Styles from 'theme/Styles'
 
 export default function ScreenHeader({
   title,
@@ -29,16 +30,19 @@ export default function ScreenHeader({
   const theme = useColorScheme()
   return (
     <View style={[styles.header, { paddingTop: insets.top }, style]}>
-      <View style={styles.row}>
-        {isBackable && (
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <NavArrowLeft color={Colors[theme].link} width={40} height={40} />
-          </TouchableOpacity>
-        )}
-        <Text style={[styles.headerText, { marginLeft: isBackable ? 0 : 20 }]}>
-          {I18n.t(title)}
-        </Text>
-      </View>
+      {isBackable ? (
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <View style={[Styles.row, { paddingLeft: 5 }]}>
+            <NavArrowLeft color={Colors[theme].link} width={30} height={30} />
+            <Text style={[styles.backTitle]}>{I18n.t(title)}</Text>
+          </View>
+        </TouchableOpacity>
+      ) : (
+        <View style={Styles.row}>
+          <Text style={[styles.headerText]}>{I18n.t(title)}</Text>
+        </View>
+      )}
+
       {rightEle}
     </View>
   )
@@ -55,16 +59,16 @@ const styles = StyleSheet.create({
     paddingRight: 20,
   },
   headerText: {
-    textAlign: 'center',
     fontFamily: Fonts.heading,
     fontSize: 30,
+    marginLeft: 20,
   },
   icon: {
     width: 36,
     height: 36,
   },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  backTitle: {
+    fontFamily: Fonts.common,
+    fontSize: 20,
   },
 })

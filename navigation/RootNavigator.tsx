@@ -26,6 +26,7 @@ import TokenScreen from 'screens/Token'
 import Create from 'screens/Create'
 import Security from 'screens/Security'
 import About from 'screens/About'
+import AccountManage from 'screens/AccountManage'
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
@@ -60,6 +61,11 @@ export default function RootNavigator() {
       <Stack.Screen
         name="About"
         component={About}
+        options={{ header: () => null }}
+      />
+      <Stack.Screen
+        name="AccountManage"
+        component={AccountManage}
         options={{ header: () => null }}
       />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
