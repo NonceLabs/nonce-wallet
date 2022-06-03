@@ -51,7 +51,7 @@ export default function WalletDetail() {
           items={[
             {
               icon: Archive,
-              title: 'Export Private Key',
+              title: 'Export',
               value: '',
               onPress: () => {
                 exportKeyRef?.current?.open()
@@ -76,10 +76,10 @@ export default function WalletDetail() {
           withHandle={false}
         >
           <ConfirmModal
-            title="Delete Wallet"
+            title="Delete"
             icon={<Trash width={40} height={40} color={Colors.black} />}
             iconWrapColor={Colors.red}
-            subtitle="Make sure you have a backup of your private key before you delete this wallet."
+            subtitle="Make sure you have a backup of your private key before you delete this wallet"
             onCancel={() => confirmDeleteRef?.current?.close()}
             onConfirm={async () => {
               confirmDeleteRef.current?.close()
@@ -108,10 +108,10 @@ export default function WalletDetail() {
           withHandle={false}
         >
           <ConfirmModal
-            title="Export Private Key"
+            title="Export"
             icon={<Archive width={40} height={40} color={Colors.black} />}
             iconWrapColor={Colors.green}
-            subtitle="Make sure you keep your private key safe. You will not be able to recover your funds if you lose your private key."
+            subtitle="Make sure you keep your private key safe"
             onCancel={() => exportKeyRef?.current?.close()}
             onConfirm={async () => {
               exportKeyRef?.current?.close()

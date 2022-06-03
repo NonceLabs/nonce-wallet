@@ -37,7 +37,7 @@ export default function ConfirmModal({
       ]}
     >
       <Box direction="column" gap="medium" pad="large">
-        <Heading level={2}>{title}</Heading>
+        <Heading level={2}>{I18n.t(title)}</Heading>
         <View
           style={[
             Styles.center,
@@ -49,7 +49,7 @@ export default function ConfirmModal({
         >
           {icon}
         </View>
-        <Text style={styles.subtitle}>{subtitle}</Text>
+        <Text style={styles.subtitle}>{I18n.t(subtitle)}</Text>
         <Box justify="space-between" gap="medium" style={{ marginTop: 30 }}>
           <Button
             style={{ width: 150 }}

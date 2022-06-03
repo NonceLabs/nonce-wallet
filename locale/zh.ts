@@ -191,6 +191,11 @@ const zh = {
   Updated: '已更新',
   'Invalid mnemonic': '无效助记词',
   'Invalid private key': '无效私钥',
+  Export: '导出',
+  'Make sure you keep your private key safe':
+    '请确保你的私钥安全，如果你丢失了私钥，你将无法恢复你的资产。',
+  'Make sure you have a backup of your private key before you delete this wallet':
+    '请确保你已备份了私钥，如果你删除了钱包，你将无法恢复你的资产。',
 }
 
 export default zh

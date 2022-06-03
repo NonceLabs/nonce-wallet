@@ -195,6 +195,11 @@ const en = {
   Updated: 'Updated',
   'Invalid mnemonic': 'Invalid mnemonic',
   'Invalid private key': 'Invalid private key',
+  Export: 'Export',
+  'Make sure you keep your private key safe':
+    'Make sure you keep your private key safe',
+  'Make sure you have a backup of your private key before you delete this wallet':
+    'Make sure you have a backup of your private key before you delete this wallet',
 }
 
 export default en
