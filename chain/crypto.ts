@@ -5,6 +5,7 @@ import * as Random from 'expo-random'
 import Client from 'mina-signer'
 import { MNEMONIC_STRENGTH } from '../utils/configure'
 import { Chain, KeyStoreFile } from 'types'
+import I18n from 'i18n-js'
 
 const getDerivedPath = (index: number) => `m/44'/12586'/${index}'/0/0`
 
@@ -53,6 +54,20 @@ export const parseMnemonic = async (
     publicKey: publicKey,
     hdIndex: index,
     mnemonic,
+    chain: Chain.MINA,
+    createdAt: new Date().toISOString(),
+  }
+}
+
+export const parsePrivateKey = async (
+  privateKey: string
+): Promise<KeyStoreFile> => {
+  const client = new Client({ network: 'mainnet' })
+  const publicKey = client.derivePublicKey(privateKey)
+
+  return {
+    privateKey: privateKey,
+    publicKey: publicKey,
     chain: Chain.MINA,
     createdAt: new Date().toISOString(),
   }

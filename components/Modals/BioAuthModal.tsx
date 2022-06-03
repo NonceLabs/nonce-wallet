@@ -3,7 +3,7 @@ import * as LocalAuthentication from 'expo-local-authentication'
 
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 import SheetModal from 'components/common/SheetModal'
-import { toast } from 'utils/toast'
+import Toast from 'utils/toast'
 
 export default function BioAuthModal({ onClose }: { onClose: () => void }) {
   const isAuthEnabled = useAppSelector((state) => state.setting.bioAuthEnabled)
@@ -28,7 +28,7 @@ export default function BioAuthModal({ onClose }: { onClose: () => void }) {
                 type: 'setting/updateBioAuth',
                 payload: true,
               })
-              toast('success', I18n.t('Auth enabled'))
+              Toast.success(I18n.t('Auth enabled'))
             }
           }
 
@@ -38,12 +38,12 @@ export default function BioAuthModal({ onClose }: { onClose: () => void }) {
               type: 'setting/updateBioAuth',
               payload: false,
             })
-            toast('success', I18n.t('Auth disabled'))
+            Toast.success(I18n.t('Auth disabled'))
           }
           onClose()
         } catch (error) {
           if (error instanceof Error) {
-            toast('error', error.message)
+            Toast.error(error)
           }
         }
       }}

@@ -6,13 +6,11 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { Text, View } from 'components/Themed'
 import { useAppSelector } from 'store/hooks'
 import Icon from 'components/common/Icon'
-import { toast } from 'utils/toast'
+import Toast from 'utils/toast'
 import useColorScheme from 'hooks/useColorScheme'
 import Colors from 'theme/Colors'
 import Fonts from 'theme/Fonts'
-import SheetHeader from 'components/common/SheetHeader'
 import icons from 'utils/icons'
-import I18n from 'i18n-js'
 import { Check, Copy, ShareAndroid, InfoEmpty } from 'iconoir-react-native'
 import { useState } from 'react'
 import { Wallet } from 'types'
@@ -42,9 +40,7 @@ export default function ReceiveModal({
         }
       }
     } catch (error) {
-      if (error instanceof Error) {
-        toast('error', error.message)
-      }
+      Toast.error(error)
     }
   }
 
@@ -100,9 +96,7 @@ export default function ReceiveModal({
                 }, 1000)
               } catch (error) {
                 setIsCopied(false)
-                if (error instanceof Error) {
-                  toast('error', error.message)
-                }
+                Toast.error(error)
               }
             }}
           />

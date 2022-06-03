@@ -125,6 +125,8 @@ export default function ContactNew() {
               onFocus={() => setAddressFocus(true)}
               onBlur={() => setAddressFocus(false)}
               placeholderTextColor={Colors.gray9}
+              numberOfLines={2}
+              multiline
             />
             <Pressable>
               <Scanning width={20} height={20} color={Colors[theme].link} />

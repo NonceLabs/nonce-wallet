@@ -32,7 +32,13 @@ export default function Start() {
   }, [wallet])
 
   return (
-    <View style={{ flex: 1, paddingTop: isNew ? insets.top : 0 }}>
+    <View
+      style={{
+        flex: 1,
+        paddingTop: isNew ? insets.top : 0,
+        backgroundColor: Colors[theme].cardBackground,
+      }}
+    >
       {!isNew && <ScreenHeader title="Back" />}
       <View style={{ flex: 1, padding: 20 }}>
         <Heading>{I18n.t('Welcome to')}</Heading>
@@ -80,14 +86,12 @@ export default function Start() {
           >
             <Box gap="medium" pad="medium">
               <View
-                style={[
-                  Styles.iconWrap,
-                  { backgroundColor: Colors[theme].borderColor },
-                ]}
+                style={[Styles.iconWrap, { backgroundColor: Colors.green }]}
               >
                 <Wallet
                   width={ICON_WRAP_SIZE * 0.6}
                   height={ICON_WRAP_SIZE * 0.6}
+                  color={Colors.white}
                 />
               </View>
               <View>
@@ -112,14 +116,12 @@ export default function Start() {
 
             <Box gap="medium" pad="medium">
               <View
-                style={[
-                  Styles.iconWrap,
-                  { backgroundColor: Colors[theme].borderColor },
-                ]}
+                style={[Styles.iconWrap, { backgroundColor: Colors.purple }]}
               >
                 <KeyAltPlus
                   width={ICON_WRAP_SIZE * 0.6}
                   height={ICON_WRAP_SIZE * 0.6}
+                  color={Colors.white}
                 />
               </View>
               <View>

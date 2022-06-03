@@ -9,6 +9,7 @@ export default {
   gray9: '#999',
   link: '#008cd5',
   black: 'black',
+  purple: '#3D138D',
   light: {
     text: '#000',
     background: '#fff',

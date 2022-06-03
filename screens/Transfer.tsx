@@ -2,20 +2,14 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 import { useRef, useState } from 'react'
 import {
   Keyboard,
+  Pressable,
   ScrollView,
   StyleSheet,
   TextInput,
-  TouchableOpacity,
 } from 'react-native'
-import * as Clipboard from 'expo-clipboard'
 import BottomSheet, { BottomSheetFlatList } from '@gorhom/bottom-sheet'
 import { Portal } from 'react-native-portalize'
-import {
-  NavArrowDown,
-  PasteClipboard,
-  Scanning,
-  ScanQrCode,
-} from 'iconoir-react-native'
+import { NavArrowDown, UserCircleAlt } from 'iconoir-react-native'
 
 import Button from 'components/common/Button'
 import ScreenHeader from 'components/common/ScreenHeader'
@@ -26,12 +20,13 @@ import useColorScheme from 'hooks/useColorScheme'
 import { useAppSelector } from 'store/hooks'
 import { formatBalance } from 'utils/format'
 import Fonts from 'theme/Fonts'
-import { toast } from 'utils/toast'
 import I18n from 'i18n-js'
-import { ButtonType, Currency, CurrencyRate, Token } from 'types'
+import { ButtonType, Contact, Currency, CurrencyRate, Token } from 'types'
 import { CURRENCY_SYMBOL, DEFAULT_CURRENCY_RATE } from 'utils/configure'
 import TokenItem from 'components/Assets/TokenItem'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import Box from 'components/common/Box'
+import ContactItem from 'components/Setting/ContactItem'
 
 export default function Transfer() {
   const currencyRates: CurrencyRate = useAppSelector(
@@ -42,8 +37,10 @@ export default function Transfer() {
   )
 
   const tokens: Token[] = useAppSelector((state) => state.asset.tokens)
+  const contacts = useAppSelector((state) => state.setting.contacts)
 
   const tokenListRef = useRef<BottomSheet>(null)
+  const contactListRef = useRef<BottomSheet>(null)
 
   const navigation = useNavigation()
   const { params } = useRoute()
@@ -52,6 +49,8 @@ export default function Transfer() {
   const [receiver, setReceiver] = useState(_receiver)
   const [amount, setAmount] = useState('')
   const [selectedToken, setSelectedToken] = useState(_token || tokens[0])
+  const [addressFocus, setAddressFocus] = useState(false)
+  const [amountFocus, setAmountFocus] = useState(false)
 
   const theme = useColorScheme()
   const insets = useSafeAreaInsets()
@@ -61,6 +60,8 @@ export default function Transfer() {
     setAmount('')
     tokenListRef.current?.close()
   }
+
+  const contact = contacts.find((c) => c.publicKey === receiver)
 
   return (
     <View
@@ -77,49 +78,60 @@ export default function Transfer() {
         }}
         keyboardShouldPersistTaps="handled"
       >
-        <View
-          style={[
-            styles.formWrap,
-            { backgroundColor: Colors[theme].cardBackground },
-          ]}
-        >
-          <View style={[styles.row, { flexDirection: 'column' }]}>
-            <View style={[styles.row, styles.rowEnd]}>
-              <Scanning
-                width={18}
-                height={18}
-                color={Colors[theme].link}
-                onPress={async () => {
-                  try {
-                  } catch (error) {}
-                }}
-              />
-            </View>
-            <View style={styles.row}>
+        <Box direction="column" gap="xlarge" full>
+          <Box direction="column">
+            <Box justify="flex-end" full>
+              <Text style={{ color: Colors[theme].link, fontSize: 14 }}>
+                {contact?.name}
+              </Text>
+            </Box>
+
+            <Box
+              full
+              align="center"
+              style={{
+                paddingVertical: 4,
+                borderBottomWidth: 1,
+                borderBottomColor: addressFocus
+                  ? Colors[theme].text
+                  : Colors[theme].borderColor,
+              }}
+            >
               <TextInput
-                style={[styles.input, { color: Colors[theme].text }]}
-                value={receiver}
-                autoCapitalize="none"
                 placeholder={I18n.t('Receiver Address')}
-                onChangeText={(text) => setReceiver(text)}
-                autoCorrect={false}
-                onFocus={() => tokenListRef.current?.close()}
+                autoCapitalize="none"
+                style={[styles.input]}
+                value={receiver}
+                onChangeText={(_text) => setReceiver(_text)}
+                onFocus={() => {
+                  tokenListRef.current?.close()
+                  contactListRef.current?.close()
+                  setAddressFocus(true)
+                }}
+                onBlur={() => setAddressFocus(false)}
                 placeholderTextColor={Colors.gray9}
+                numberOfLines={3}
+                multiline
               />
-            </View>
-          </View>
-          <View
-            style={[
-              styles.divider,
-              {
-                backgroundColor: Colors[theme].borderColor,
-              },
-            ]}
-          />
-          <View style={[styles.row, { flexDirection: 'column' }]}>
-            <View style={[styles.row, styles.rowEnd]}>
-              <TouchableOpacity
-                activeOpacity={0.7}
+              <Pressable
+                onPress={() => {
+                  Keyboard.dismiss()
+                  tokenListRef.current?.close()
+                  contactListRef.current?.expand()
+                }}
+              >
+                <UserCircleAlt
+                  width={30}
+                  height={30}
+                  color={Colors[theme].link}
+                />
+              </Pressable>
+            </Box>
+          </Box>
+
+          <Box direction="column">
+            <Box justify="flex-end" full>
+              <Pressable
                 onPress={() => {
                   setAmount(
                     formatBalance(
@@ -130,30 +142,44 @@ export default function Transfer() {
                   )
                 }}
               >
-                <Text style={{ color: Colors[theme].link, fontSize: 12 }}>
+                <Text style={{ color: Colors[theme].link, fontSize: 14 }}>
                   {`${I18n.t('Balance')}: ${formatBalance(
                     selectedToken.balance,
                     selectedToken.decimals
                   )} ${selectedToken.symbol}`}
                 </Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.row}>
+              </Pressable>
+            </Box>
+            <Box
+              full
+              align="center"
+              style={{
+                paddingVertical: 4,
+                borderBottomWidth: 1,
+                borderBottomColor: amountFocus
+                  ? Colors[theme].text
+                  : Colors[theme].borderColor,
+              }}
+            >
               <TextInput
-                style={[styles.input, { color: Colors[theme].text }]}
+                placeholder={I18n.t('Amount')}
+                autoCapitalize="none"
+                style={[styles.input, { fontFamily: Fonts.variable }]}
                 value={amount}
                 keyboardType="numeric"
-                autoCapitalize="none"
-                placeholder={I18n.t('Amount')}
-                onChangeText={(text) => setAmount(text)}
-                onFocus={() => tokenListRef.current?.close()}
+                onChangeText={(_text) => setAmount(_text)}
+                onFocus={() => {
+                  setAmountFocus(true)
+                  tokenListRef.current?.close()
+                  contactListRef.current?.close()
+                }}
+                onBlur={() => setAmountFocus(false)}
                 placeholderTextColor={Colors.gray9}
               />
-
-              <TouchableOpacity
-                activeOpacity={0.7}
+              <Pressable
                 onPress={() => {
                   Keyboard.dismiss()
+                  contactListRef.current?.close()
                   tokenListRef.current?.expand()
                 }}
               >
@@ -165,14 +191,15 @@ export default function Transfer() {
                     height={28}
                   />
                 </View>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
+              </Pressable>
+            </Box>
+          </Box>
+        </Box>
 
         <Button
           label={I18n.t('Next')}
           type={ButtonType.PRIMARY}
+          style={{ marginTop: 20 }}
           onPress={() => {}}
         />
       </ScrollView>
@@ -204,6 +231,35 @@ export default function Transfer() {
             }}
           />
         </BottomSheet>
+        <BottomSheet
+          ref={contactListRef}
+          index={-1}
+          enablePanDownToClose
+          keyboardBehavior="fillParent"
+          snapPoints={['60%']}
+          backgroundStyle={{ backgroundColor: Colors[theme].cardBackground }}
+        >
+          <BottomSheetFlatList
+            data={contacts}
+            keyExtractor={(item: Contact) => item.publicKey}
+            renderItem={({ item }) => {
+              return (
+                <ContactItem
+                  item={item}
+                  isQRCodeVisible={false}
+                  onSelect={() => {
+                    setReceiver(item.publicKey)
+                    contactListRef.current?.close()
+                  }}
+                />
+              )
+            }}
+            contentContainerStyle={{
+              paddingBottom: insets.bottom,
+              paddingHorizontal: 20,
+            }}
+          />
+        </BottomSheet>
       </Portal>
     </View>
   )
@@ -213,36 +269,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  formWrap: {
-    borderRadius: 4,
-    padding: 10,
-    marginBottom: 20,
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
   input: {
+    fontSize: 18,
+    padding: 8,
     flex: 1,
-    fontSize: 20,
     fontFamily: Fonts.variable,
-  },
-  suffix: {
-    fontSize: 20,
-    fontFamily: Fonts.variable,
-    position: 'absolute',
-    opacity: 0.7,
-  },
-  paste: {
-    fontSize: 20,
-    marginHorizontal: 10,
-    fontWeight: 'bold',
-    fontFamily: Fonts.heading,
-  },
-  divider: {
-    width: '100%',
-    height: 1,
-    marginVertical: 15,
   },
   icon: {
     width: 30,

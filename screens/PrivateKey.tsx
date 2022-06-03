@@ -37,6 +37,8 @@ export default function PrivateKey() {
     getPrivateKey()
   }, [wallet])
 
+  const copy = <Copy width={24} height={24} color={Colors[theme].link} />
+
   return (
     <View style={{ flex: 1 }}>
       <ScreenHeader title="Export Wallet" />
@@ -49,7 +51,7 @@ export default function PrivateKey() {
               Toast.success(I18n.t('Copied'))
             }}
           >
-            <Copy width={30} height={30} color={Colors[theme].link} />
+            {copy}
           </Pressable>
         </Box>
         <View
@@ -61,25 +63,33 @@ export default function PrivateKey() {
           <Text style={styles.priv}>{keyStore?.publicKey}</Text>
         </View>
 
-        <Box align="center" justify="space-between" margin="small">
-          <Text style={styles.title}>{I18n.t('Mnemonic')}</Text>
-          <Pressable
-            onPress={async () => {
-              await ClipBoard.setStringAsync(keyStore?.publicKey)
-              Toast.success(I18n.t('Copied'))
-            }}
-          >
-            <Copy width={30} height={30} color={Colors[theme].link} />
-          </Pressable>
-        </Box>
-        <View
-          style={[
-            Styles.card,
-            { backgroundColor: Colors[theme].cardBackground, marginBottom: 20 },
-          ]}
-        >
-          <Text style={styles.priv}>{keyStore?.mnemonic}</Text>
-        </View>
+        {!!keyStore?.mnemonic && (
+          <Box direction="column" full align="flex-start">
+            <Box align="center" justify="space-between" margin="small" full>
+              <Text style={styles.title}>{I18n.t('Mnemonic')}</Text>
+              <Pressable
+                onPress={async () => {
+                  await ClipBoard.setStringAsync(keyStore?.publicKey)
+                  Toast.success(I18n.t('Copied'))
+                }}
+              >
+                {copy}
+              </Pressable>
+            </Box>
+            <View
+              style={[
+                Styles.card,
+                {
+                  backgroundColor: Colors[theme].cardBackground,
+                  marginBottom: 20,
+                  width: '100%',
+                },
+              ]}
+            >
+              <Text style={styles.priv}>{keyStore?.mnemonic}</Text>
+            </View>
+          </Box>
+        )}
 
         <Box align="center" justify="space-between" margin="small">
           <Text style={styles.title}>{I18n.t('Private Key')}</Text>
@@ -89,7 +99,7 @@ export default function PrivateKey() {
               Toast.success(I18n.t('Copied'))
             }}
           >
-            <Copy width={30} height={30} color={Colors[theme].link} />
+            {copy}
           </Pressable>
         </Box>
         <View

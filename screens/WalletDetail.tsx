@@ -3,7 +3,7 @@ import Address from 'components/common/Address'
 import Box from 'components/common/Box'
 import Heading from 'components/common/Heading'
 import ScreenHeader from 'components/common/ScreenHeader'
-import { Text, View } from 'components/Themed'
+import { View } from 'components/Themed'
 import useColorScheme from 'hooks/useColorScheme'
 import I18n from 'i18n-js'
 import Colors from 'theme/Colors'
@@ -12,12 +12,12 @@ import Styles from 'theme/Styles'
 import { Chain, Wallet } from 'types'
 import SettingBlock from 'components/Setting/SettingBlock'
 import { Archive, Trash } from 'iconoir-react-native'
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import { Portal } from 'react-native-portalize'
 import { Modalize } from 'react-native-modalize'
 import ConfirmModal from 'components/Modals/ConfirmModal'
 import WalletAPI from 'chain/WalletAPI'
-import Toast, { toast } from 'utils/toast'
+import Toast from 'utils/toast'
 import { useAppDispatch } from 'store/hooks'
 
 export default function WalletDetail() {
@@ -82,16 +82,21 @@ export default function WalletDetail() {
             subtitle="Make sure you have a backup of your private key before you delete this wallet."
             onCancel={() => confirmDeleteRef?.current?.close()}
             onConfirm={async () => {
-              try {
-                await WalletAPI.removeKey(Chain.MINA, wallet.publicKey)
-                dispatch({
-                  type: 'wallet/remove',
-                  payload: wallet,
-                })
-                navigation.dispatch(StackActions.popToTop())
-              } catch (error) {
-                Toast.error(error)
-              }
+              confirmDeleteRef.current?.close()
+              navigation.navigate('PINCode', {
+                onConfirmed: async () => {
+                  try {
+                    await WalletAPI.removeKey(Chain.MINA, wallet.publicKey)
+                    dispatch({
+                      type: 'wallet/remove',
+                      payload: wallet,
+                    })
+                    navigation.dispatch(StackActions.popToTop())
+                  } catch (error) {
+                    Toast.error(error)
+                  }
+                },
+              })
             }}
           />
         </Modalize>

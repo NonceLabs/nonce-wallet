@@ -115,13 +115,14 @@ export interface Wallet {
   publicKey: string
   chain: Chain
   name?: string
+  createdAt?: string
 }
 
 export interface KeyStoreFile {
   privateKey: string
   publicKey: string
-  hdIndex: number
-  mnemonic: string
+  hdIndex?: number
+  mnemonic?: string
   chain: Chain
   createdAt: string
 }

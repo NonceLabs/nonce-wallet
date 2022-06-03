@@ -30,7 +30,10 @@ export default function Staking() {
         <Box
           direction="column"
           align="flex-start"
-          style={{ backgroundColor: Colors[theme].cardBackground }}
+          style={{
+            backgroundColor: Colors[theme].cardBackground,
+            borderRadius: 6,
+          }}
           pad="large"
           gap="small"
         >

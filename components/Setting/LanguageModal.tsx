@@ -1,6 +1,6 @@
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
 import I18n from 'i18n-js'
-import { toast } from 'utils/toast'
+import Toast from 'utils/toast'
 import SheetModal from 'components/common/SheetModal'
 
 export default function LanguageModal({ onClose }: { onClose: () => void }) {
@@ -19,7 +19,7 @@ export default function LanguageModal({ onClose }: { onClose: () => void }) {
               onClose()
             })
             .catch((error) => {
-              toast('error', error.message)
+              Toast.error(error)
             })
         }
       }}

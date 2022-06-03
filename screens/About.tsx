@@ -21,7 +21,7 @@ import {
   UploadSquareOutline,
 } from 'iconoir-react-native'
 import { useAppSelector } from 'store/hooks'
-import { toast } from 'utils/toast'
+import Toast from 'utils/toast'
 import { useEffect, useState } from 'react'
 import SettingBlock from 'components/Setting/SettingBlock'
 import ScreenLoading from 'components/common/ScreenLoading'
@@ -75,9 +75,7 @@ export default function About({ navigation }: RootStackScreenProps<'About'>) {
       )
     } catch (error) {
       setIsLoading(false)
-      if (error instanceof Error) {
-        toast('error', error.message)
-      }
+      Toast.error(error)
     }
   }
 
@@ -113,11 +111,9 @@ export default function About({ navigation }: RootStackScreenProps<'About'>) {
       onPress: async () => {
         try {
           await Clipboard.setStringAsync(pushToken)
-          toast('success', I18n.t('Copied'))
+          Toast.success(I18n.t('Copied'))
         } catch (error) {
-          if (error instanceof Error) {
-            toast('error', error.message)
-          }
+          Toast.error(error)
         }
       },
     })

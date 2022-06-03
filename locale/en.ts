@@ -193,6 +193,8 @@ const en = {
   'Contact deleted': 'Contact deleted',
   Edited: 'Edited',
   Updated: 'Updated',
+  'Invalid mnemonic': 'Invalid mnemonic',
+  'Invalid private key': 'Invalid private key',
 }
 
 export default en

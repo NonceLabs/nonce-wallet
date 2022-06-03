@@ -1,6 +1,6 @@
 import I18n from 'i18n-js'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
-import { Wallet, PUB } from 'types'
+import { PUB } from 'types'
 import SheetModal from 'components/common/SheetModal'
 import PubSub from 'pubsub-js'
 import { formatAccountId } from 'utils/format'

@@ -4,6 +4,7 @@ import Box from 'components/common/Box'
 import { Empty } from 'components/common/Placeholder'
 import ScreenHeader from 'components/common/ScreenHeader'
 import ReceiveModal from 'components/Modals/ReceiveModal'
+import ContactItem from 'components/Setting/ContactItem'
 import { Text, View } from 'components/Themed'
 import useColorScheme from 'hooks/useColorScheme'
 import I18n from 'i18n-js'
@@ -50,28 +51,19 @@ export default function ContactsManage() {
           keyExtractor={(t) => t.publicKey}
           renderItem={({ item }) => {
             return (
-              <Pressable
-                onPress={() => {
+              <ContactItem
+                item={item}
+                onSelect={() => {
                   navigation.navigate('ContactNew', { contact: item })
                 }}
-              >
-                <Box justify="space-between" pad="medium" style={styles.item}>
-                  <Box direction="column" align="flex-start" gap="small">
-                    <Text style={styles.name}>{item.name}</Text>
-                    <Address wallet={item} fontSize={16} />
-                  </Box>
-                  <Pressable
-                    onPress={() => {
-                      setContact(item)
-                      setTimeout(() => {
-                        receiveRef.current?.open()
-                      }, 100)
-                    }}
-                  >
-                    <QrCode width={24} height={24} color={Colors.gray} />
-                  </Pressable>
-                </Box>
-              </Pressable>
+                isQRCodeVisible
+                onQRCodePress={() => {
+                  setContact(item)
+                  setTimeout(() => {
+                    receiveRef.current?.open()
+                  }, 100)
+                }}
+              />
             )
           }}
           contentContainerStyle={{ padding: 20 }}

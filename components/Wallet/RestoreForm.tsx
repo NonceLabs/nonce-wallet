@@ -1,3 +1,4 @@
+import * as bip39 from 'bip39'
 import SegmentedControl from '@react-native-segmented-control/segmented-control'
 import Box from 'components/common/Box'
 import Button from 'components/common/Button'
@@ -9,8 +10,9 @@ import { ScrollView, TextInput, StyleSheet } from 'react-native'
 import Colors from 'theme/Colors'
 import Fonts from 'theme/Fonts'
 import Styles from 'theme/Styles'
-import { parseMnemonic } from 'chain/crypto'
+import { parseMnemonic, parsePrivateKey } from 'chain/crypto'
 import { KeyStoreFile } from 'types'
+import Toast from 'utils/toast'
 
 export default function RestoreForm({
   onNext,
@@ -19,7 +21,7 @@ export default function RestoreForm({
 }) {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [value, setValue] = useState(
-    'glare hunt strike analyst differ slam powder okay love width fat pig'
+    'EKF6CW7cqvhmsupargcuzrQBsdZUCUm1AZ9UFHRN1LfEczVJMwk7'
   )
 
   const theme = useColorScheme()
@@ -31,7 +33,7 @@ export default function RestoreForm({
         <Heading>{I18n.t('Restore')}</Heading>
       </Box>
       <SegmentedControl
-        values={[I18n.t('Seed Phrase'), I18n.t('Private Key')]}
+        values={[I18n.t('Mnemonic'), I18n.t('Private Key')]}
         selectedIndex={selectedIndex}
         onChange={(event) => {
           setSelectedIndex(event.nativeEvent.selectedSegmentIndex)
@@ -53,9 +55,28 @@ export default function RestoreForm({
           primary
           onPress={async () => {
             try {
-              const result = await parseMnemonic(value)
-              onNext(result)
-            } catch (error) {}
+              let _keyfile = null
+              if (selectedIndex === 0) {
+                if (!bip39.validateMnemonic(value)) {
+                  throw new Error(I18n.t('Invalid mnemonic'))
+                }
+                _keyfile = await parseMnemonic(value)
+              } else {
+                _keyfile = await parsePrivateKey(value)
+              }
+              if (!_keyfile) {
+                throw new Error(
+                  I18n.t(
+                    `Invalid ${
+                      selectedIndex === 0 ? 'mnemonic' : 'private key'
+                    }`
+                  )
+                )
+              }
+              onNext(_keyfile)
+            } catch (error) {
+              Toast.error(error)
+            }
           }}
         />
       </Box>

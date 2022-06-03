@@ -189,6 +189,8 @@ const zh = {
   'Contact deleted': '地址已删除',
   Edited: '已编辑',
   Updated: '已更新',
+  'Invalid mnemonic': '无效助记词',
+  'Invalid private key': '无效私钥',
 }
 
 export default zh

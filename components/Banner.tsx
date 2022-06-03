@@ -4,16 +4,14 @@ import { Modalize } from 'react-native-modalize'
 import I18n from 'i18n-js'
 import { ImageBackground, StyleSheet, TouchableOpacity } from 'react-native'
 import {
-  Bank,
   Bell,
   Dollar,
   NavArrowDown,
   QrCode,
-  Scanning,
   Wallet as WalletIcon,
 } from 'iconoir-react-native'
 import { Text, View } from './Themed'
-import { capitalizeFirstLetter, formatAccountId } from 'utils/format'
+import { capitalizeFirstLetter } from 'utils/format'
 import { useAppSelector } from 'store/hooks'
 import { Wallet, Currency, CurrencyRate } from 'types'
 import { useNavigation } from '@react-navigation/native'

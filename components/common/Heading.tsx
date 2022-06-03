@@ -1,5 +1,5 @@
 import { Text } from 'components/Themed'
-import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
+import { StyleSheet, TextStyle } from 'react-native'
 import Fonts from 'theme/Fonts'
 
 export default function Heading({
