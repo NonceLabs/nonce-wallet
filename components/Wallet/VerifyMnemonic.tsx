@@ -30,7 +30,7 @@ export default function VerifyMnemonic({
   useEffect(() => {
     const nth = Math.ceil(Math.random() * 100) % words.length
     setWordIndex(nth + 1)
-    setWord(words[nth])
+    // setWord(words[nth])
   }, [])
 
   const isValid = words[wordIndex - 1] === word

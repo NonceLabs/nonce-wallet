@@ -20,9 +20,7 @@ export default function RestoreForm({
   onNext: (keyFile: KeyStoreFile) => void
 }) {
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const [value, setValue] = useState(
-    'EKF6CW7cqvhmsupargcuzrQBsdZUCUm1AZ9UFHRN1LfEczVJMwk7'
-  )
+  const [value, setValue] = useState('')
 
   const theme = useColorScheme()
 
@@ -38,7 +36,7 @@ export default function RestoreForm({
         onChange={(event) => {
           setSelectedIndex(event.nativeEvent.selectedSegmentIndex)
         }}
-        tintColor={theme === 'dark' ? Colors.white : undefined}
+        tintColor={Colors.gray}
       />
       <Box direction="column" gap="medium" style={{ marginTop: 20 }}>
         <TextInput

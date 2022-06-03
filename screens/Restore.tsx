@@ -1,3 +1,4 @@
+import * as LocalAuthentication from 'expo-local-authentication'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import WalletAPI from 'chain/WalletAPI'
 import ScreenHeader from 'components/common/ScreenHeader'
@@ -21,8 +22,29 @@ export default function Restore() {
 
   const walletList = useAppSelector((state) => state.wallet.list)
   const pincode = useAppSelector((state) => state.setting.pincode)
+  const bioAuthEnabled = useAppSelector((state) => state.setting.bioAuthEnabled)
   const dispatch = useAppDispatch()
   const navigation = useNavigation()
+
+  const onConfirmed = async (_keyFile: KeyStoreFile) => {
+    if (walletList.some((t) => t.publicKey === _keyFile.publicKey)) {
+      throw new Error(I18n.t('Wallet already exists'))
+    }
+
+    await WalletAPI.setKey(_keyFile)
+    dispatch({
+      type: 'wallet/add',
+      payload: {
+        publicKey: _keyFile.publicKey,
+        chain: _keyFile.chain,
+        hdIndex: _keyFile.hdIndex,
+        createdAt: _keyFile.createdAt,
+      },
+    })
+    setTimeout(() => {
+      navigation.dispatch(StackActions.popToTop())
+    }, 100)
+  }
 
   return (
     <View style={{ flex: 1 }}>
@@ -30,34 +52,20 @@ export default function Restore() {
 
       {step === RESTORE_STEP.RESTORE && (
         <RestoreForm
-          onNext={(_keyFile) => {
-            if (pincode) {
+          onNext={async (_keyFile) => {
+            if (bioAuthEnabled) {
+              try {
+                const result = await LocalAuthentication.authenticateAsync()
+                if (!result.success) {
+                  throw new Error(I18n.t('Authentication failed'))
+                }
+                await onConfirmed(_keyFile)
+              } catch (error) {
+                Toast.error(error)
+              }
+            } else if (pincode) {
               navigation.navigate('PINCode', {
-                onConfirmed: async () => {
-                  try {
-                    if (
-                      walletList.some((t) => t.publicKey === _keyFile.publicKey)
-                    ) {
-                      throw new Error(I18n.t('Wallet already exists'))
-                    }
-
-                    await WalletAPI.setKey(_keyFile)
-                    dispatch({
-                      type: 'wallet/add',
-                      payload: {
-                        publicKey: _keyFile.publicKey,
-                        chain: _keyFile.chain,
-                        hdIndex: _keyFile.hdIndex,
-                        createdAt: _keyFile.createdAt,
-                      },
-                    })
-                    setTimeout(() => {
-                      navigation.dispatch(StackActions.popToTop())
-                    }, 500)
-                  } catch (error) {
-                    Toast.error(error)
-                  }
-                },
+                onConfirmed: () => onConfirmed(_keyFile),
               })
             } else {
               setKeyFile(_keyFile)

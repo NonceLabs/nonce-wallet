@@ -136,7 +136,7 @@ const zh = {
   Rate: '评分',
   Notifications: '通知',
   Security: '安全',
-  Auto: 'Auto',
+  Auto: '跟随系统',
   'Authentication failed': '认证失败',
   'No notifications': '没有通知',
   'All notifications have been read': '所有通知已读',
@@ -196,6 +196,9 @@ const zh = {
     '请确保你的私钥安全，如果你丢失了私钥，你将无法恢复你的资产。',
   'Make sure you have a backup of your private key before you delete this wallet':
     '请确保你已备份了私钥，如果你删除了钱包，你将无法恢复你的资产。',
+  USD: '美元',
+  CNY: '人民币',
+  EUR: '欧元',
 }
 
 export default zh

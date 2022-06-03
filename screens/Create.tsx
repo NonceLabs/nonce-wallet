@@ -1,3 +1,4 @@
+import * as LocalAuthentication from 'expo-local-authentication'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import { parseMnemonic } from 'chain/crypto'
 import WalletAPI from 'chain/WalletAPI'
@@ -10,6 +11,7 @@ import { useState } from 'react'
 import { StyleSheet } from 'react-native'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 import Toast from 'utils/toast'
+import I18n from 'i18n-js'
 
 enum CREATE_STEP {
   GEN_MNEMONIC = 'GEN_MNEMONIC',
@@ -22,8 +24,26 @@ export default function Create() {
   const [mnemonic, setMnemonic] = useState('')
 
   const pincode = useAppSelector((state) => state.setting.pincode)
+  const bioAuthEnabled = useAppSelector((state) => state.setting.bioAuthEnabled)
   const navigation = useNavigation()
   const dispatch = useAppDispatch()
+
+  const onConfirmed = async () => {
+    const keyFile = await parseMnemonic(mnemonic)
+    await WalletAPI.setKey(keyFile)
+    dispatch({
+      type: 'wallet/add',
+      payload: {
+        publicKey: keyFile.publicKey,
+        chain: keyFile.chain,
+        hdIndex: keyFile.hdIndex,
+        createdAt: keyFile.createdAt,
+      },
+    })
+    setTimeout(() => {
+      navigation.dispatch(StackActions.popToTop())
+    }, 100)
+  }
 
   return (
     <View style={{ flex: 1 }}>
@@ -38,29 +58,20 @@ export default function Create() {
       )}
       {step === CREATE_STEP.VERIFY_MNEMONIC && (
         <VerifyMnemonic
-          onNext={() => {
-            if (pincode) {
+          onNext={async () => {
+            if (bioAuthEnabled) {
+              try {
+                const result = await LocalAuthentication.authenticateAsync()
+                if (!result.success) {
+                  throw new Error(I18n.t('Authentication failed'))
+                }
+                await onConfirmed()
+              } catch (error) {
+                Toast.error(error)
+              }
+            } else if (pincode) {
               navigation.navigate('PINCode', {
-                onConfirmed: async () => {
-                  try {
-                    const keyFile = await parseMnemonic(mnemonic)
-                    await WalletAPI.setKey(keyFile)
-                    dispatch({
-                      type: 'wallet/add',
-                      payload: {
-                        publicKey: keyFile.publicKey,
-                        chain: keyFile.chain,
-                        hdIndex: keyFile.hdIndex,
-                        createdAt: keyFile.createdAt,
-                      },
-                    })
-                    setTimeout(() => {
-                      navigation.dispatch(StackActions.popToTop())
-                    }, 500)
-                  } catch (error) {
-                    Toast.error(error)
-                  }
-                },
+                onConfirmed,
               })
             } else {
               setStep(CREATE_STEP.SETUP_PIN)

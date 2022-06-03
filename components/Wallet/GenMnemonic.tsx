@@ -19,7 +19,7 @@ export default function GenMnemonic({
   onNext: (mnemonic: string) => void
 }) {
   const [mnemonic, setMnemonic] = useState('')
-  const [confirmTick, setConfirmTick] = useState(1)
+  const [confirmTick, setConfirmTick] = useState(5)
 
   const theme = useColorScheme()
 

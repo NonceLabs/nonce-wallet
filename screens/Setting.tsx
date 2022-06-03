@@ -91,7 +91,7 @@ export default function SettingScreen() {
             {
               icon: LotOfCash,
               title: 'Currency',
-              value: currentCurrency,
+              value: I18n.t(currentCurrency),
               onPress: () => currencyRef.current?.open(),
             },
             {

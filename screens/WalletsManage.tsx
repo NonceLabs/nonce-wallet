@@ -70,6 +70,7 @@ export default function WalletsManage({
               new: false,
             })
           }}
+          size="large"
         />
       </View>
     </View>

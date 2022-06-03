@@ -100,7 +100,7 @@ export default function Transfer() {
               <TextInput
                 placeholder={I18n.t('Receiver Address')}
                 autoCapitalize="none"
-                style={[styles.input]}
+                style={[styles.input, { color: Colors[theme].text }]}
                 value={receiver}
                 onChangeText={(_text) => setReceiver(_text)}
                 onFocus={() => {
@@ -164,7 +164,7 @@ export default function Transfer() {
               <TextInput
                 placeholder={I18n.t('Amount')}
                 autoCapitalize="none"
-                style={[styles.input, { fontFamily: Fonts.variable }]}
+                style={[styles.input, { color: Colors[theme].text }]}
                 value={amount}
                 keyboardType="numeric"
                 onChangeText={(_text) => setAmount(_text)}

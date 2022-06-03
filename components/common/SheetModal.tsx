@@ -6,6 +6,7 @@ import useColorScheme from 'hooks/useColorScheme'
 import Fonts from 'theme/Fonts'
 import { Text, View } from 'components/Themed'
 import SheetHeader from './SheetHeader'
+import I18n from 'i18n-js'
 
 export default function SheetModal({
   title,
@@ -13,12 +14,14 @@ export default function SheetModal({
   active,
   onSelect,
   onClose,
+  isTranslate = false,
 }: {
   title: string
   items: string[]
   active: string
   onSelect: (item: string, idx: number | undefined) => void
   onClose: () => void
+  isTranslate?: boolean
 }) {
   const insets = useSafeAreaInsets()
   const theme = useColorScheme()
@@ -62,7 +65,7 @@ export default function SheetModal({
                   <Circle width={24} height={24} color={Colors[theme].tint} />
                 )}
                 <Text style={[styles.itemText, { color: Colors[theme].link }]}>
-                  {item}
+                  {isTranslate ? I18n.t(item) : item}
                 </Text>
               </View>
             </Pressable>

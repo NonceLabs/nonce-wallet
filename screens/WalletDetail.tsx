@@ -1,3 +1,4 @@
+import * as LocalAuthentication from 'expo-local-authentication'
 import { useNavigation, useRoute, StackActions } from '@react-navigation/native'
 import Address from 'components/common/Address'
 import Box from 'components/common/Box'
@@ -18,7 +19,7 @@ import { Modalize } from 'react-native-modalize'
 import ConfirmModal from 'components/Modals/ConfirmModal'
 import WalletAPI from 'chain/WalletAPI'
 import Toast from 'utils/toast'
-import { useAppDispatch } from 'store/hooks'
+import { useAppDispatch, useAppSelector } from 'store/hooks'
 
 export default function WalletDetail() {
   const { params } = useRoute()
@@ -29,6 +30,23 @@ export default function WalletDetail() {
   const theme = useColorScheme()
   const dispatch = useAppDispatch()
   const navigation = useNavigation()
+  const bioAuthEnabled = useAppSelector((state) => state.setting.bioAuthEnabled)
+
+  const onConfirmDelete = async () => {
+    await WalletAPI.removeKey(Chain.MINA, wallet.publicKey)
+    dispatch({
+      type: 'wallet/remove',
+      payload: wallet,
+    })
+    navigation.dispatch(StackActions.popToTop())
+  }
+
+  const onConfirmExport = async () => {
+    navigation.goBack()
+    navigation.navigate('PrivateKey', {
+      wallet,
+    })
+  }
 
   return (
     <View style={{ flex: 1 }}>
@@ -43,7 +61,7 @@ export default function WalletDetail() {
           style={{ borderRadius: 4, marginBottom: 20 }}
         >
           <Heading level={3}>{I18n.t('Wallet Address')}</Heading>
-          <Address wallet={wallet} ecllipsis={false} />
+          <Address wallet={wallet} ecllipsis={false} fontSize={16} />
         </Box>
 
         <SettingBlock
@@ -83,20 +101,21 @@ export default function WalletDetail() {
             onCancel={() => confirmDeleteRef?.current?.close()}
             onConfirm={async () => {
               confirmDeleteRef.current?.close()
-              navigation.navigate('PINCode', {
-                onConfirmed: async () => {
-                  try {
-                    await WalletAPI.removeKey(Chain.MINA, wallet.publicKey)
-                    dispatch({
-                      type: 'wallet/remove',
-                      payload: wallet,
-                    })
-                    navigation.dispatch(StackActions.popToTop())
-                  } catch (error) {
-                    Toast.error(error)
+              if (bioAuthEnabled) {
+                try {
+                  const result = await LocalAuthentication.authenticateAsync()
+                  if (!result.success) {
+                    throw new Error(I18n.t('Authentication failed'))
                   }
-                },
-              })
+                  await onConfirmDelete()
+                } catch (error) {
+                  Toast.error(error)
+                }
+              } else {
+                navigation.navigate('PINCode', {
+                  onConfirmed: onConfirmDelete,
+                })
+              }
             }}
           />
         </Modalize>
@@ -115,14 +134,21 @@ export default function WalletDetail() {
             onCancel={() => exportKeyRef?.current?.close()}
             onConfirm={async () => {
               exportKeyRef?.current?.close()
-              navigation.navigate('PINCode', {
-                onConfirmed: () => {
-                  navigation.goBack()
-                  navigation.navigate('PrivateKey', {
-                    wallet,
-                  })
-                },
-              })
+              if (bioAuthEnabled) {
+                try {
+                  const result = await LocalAuthentication.authenticateAsync()
+                  if (!result.success) {
+                    throw new Error(I18n.t('Authentication failed'))
+                  }
+                  await onConfirmExport()
+                } catch (error) {
+                  Toast.error(error)
+                }
+              } else {
+                navigation.navigate('PINCode', {
+                  onConfirmed: onConfirmExport,
+                })
+              }
             }}
           />
         </Modalize>

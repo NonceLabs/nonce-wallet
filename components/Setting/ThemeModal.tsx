@@ -19,6 +19,7 @@ export default function ThemeModal({ onClose }: { onClose: () => void }) {
         })
         onClose()
       }}
+      isTranslate
     />
   )
 }

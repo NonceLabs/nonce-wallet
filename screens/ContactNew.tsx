@@ -98,7 +98,7 @@ export default function ContactNew() {
           >
             <TextInput
               placeholder={I18n.t('Name')}
-              style={styles.input}
+              style={[styles.input, { color: Colors[theme].text }]}
               value={name}
               onChangeText={(_text) => setName(_text)}
               onFocus={() => setNameFocus(true)}
@@ -119,7 +119,10 @@ export default function ContactNew() {
             <TextInput
               placeholder={I18n.t('Wallet Address')}
               autoCapitalize="none"
-              style={[styles.input, { fontFamily: Fonts.variable }]}
+              style={[
+                styles.input,
+                { fontFamily: Fonts.variable, color: Colors[theme].text },
+              ]}
               value={address}
               onChangeText={(_text) => setAddress(_text)}
               onFocus={() => setAddressFocus(true)}
@@ -139,6 +142,7 @@ export default function ContactNew() {
                 style={{ width: 150 }}
                 label={I18n.t('Delete')}
                 onPress={onDelete}
+                size="medium"
               />
             )}
             <Button
@@ -146,6 +150,7 @@ export default function ContactNew() {
               label={I18n.t('Confirm')}
               primary
               onPress={onAdd}
+              size={isEdit ? 'medium' : 'large'}
             />
           </Box>
         </Box>

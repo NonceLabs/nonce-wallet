@@ -15,6 +15,7 @@ export default function CurrencyModal({ onClose }: { onClose: () => void }) {
       items={Object.keys(Currency).map((t) => t)}
       active={currency}
       onClose={onClose}
+      isTranslate
       onSelect={(item: string) => {
         dispatch({
           type: 'setting/updateCurrentCurrency',

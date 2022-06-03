@@ -9,7 +9,7 @@ export default function Button({
   label,
   onPress,
   style,
-  size = 'medium',
+  size = 'large',
   icon = null,
   type = ButtonType.DEFAULT,
   disabled = false,
@@ -66,6 +66,7 @@ export default function Button({
             color: bstyles.text[primary ? ButtonType.PRIMARY : type],
             marginLeft: icon ? 8 : 0,
           },
+          styles[`${size}Text`],
         ]}
       >
         {label}
@@ -102,5 +103,14 @@ const styles = StyleSheet.create({
   },
   large: {
     paddingVertical: 12,
+  },
+  smallText: {
+    fontSize: 14,
+  },
+  mediumText: {
+    fontSize: 16,
+  },
+  largeText: {
+    fontSize: 18,
   },
 })

@@ -200,6 +200,9 @@ const en = {
     'Make sure you keep your private key safe',
   'Make sure you have a backup of your private key before you delete this wallet':
     'Make sure you have a backup of your private key before you delete this wallet',
+  USD: 'USD',
+  CNY: 'CNY',
+  EUR: 'EUR',
 }
 
 export default en

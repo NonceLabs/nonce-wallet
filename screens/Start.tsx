@@ -36,7 +36,7 @@ export default function Start() {
       style={{
         flex: 1,
         paddingTop: isNew ? insets.top : 0,
-        backgroundColor: Colors[theme].cardBackground,
+        backgroundColor: Colors[theme].screenBackground,
       }}
     >
       {!isNew && <ScreenHeader title="Back" />}
