@@ -22,7 +22,7 @@ export default function Navigation() {
       try {
         const minas = await WalletAPI.getAccounts(Chain.MINA)
         dispatch({
-          type: 'account/restore',
+          type: 'wallet/restore',
           payload: minas,
         })
       } catch (error) {}

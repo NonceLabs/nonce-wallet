@@ -1,5 +1,5 @@
 const en = {
-  Account: 'Account',
+  Wallet: 'Wallet',
   Wallet: 'Wallet',
   Token: 'Token',
   Network: 'Network',
@@ -19,7 +19,7 @@ const en = {
   Explore: 'Explore',
   Setting: 'Setting',
   Accounts: 'Accounts',
-  'Add Account': 'Add Account',
+  'Add Wallet': 'Add Wallet',
   Create: 'Create',
   Import: 'Import',
   Confirm: 'Confirm',
@@ -34,10 +34,10 @@ const en = {
   'Deleted key': 'Deleted key',
   Staked: 'Staked',
   'Deployed contract': 'Deployed contract',
-  'Created account': 'Created account',
+  'Created wallet': 'Created wallet',
   'Scan QR Code': 'Scan QR Code',
   'Unrecognized QR code': 'Unrecognized QR code',
-  'My Account': 'My Account',
+  'My Wallet': 'My Wallet',
   'Please send NEAR or NEP141 token': 'Please send NEAR or NEP141 token',
   Copied: 'Copied',
   Transfer: 'Transfer',
@@ -47,7 +47,7 @@ const en = {
   Amount: 'Amount',
   'Invalid receiver ID': 'Invalid receiver ID',
   'Invalid amount': 'Invalid amount',
-  'No account found': 'No account found',
+  'No wallet found': 'No wallet found',
   Sending: 'Sending',
   From: 'From',
   To: 'To',
@@ -80,53 +80,53 @@ const en = {
   'Hide Private Key': 'Hide Private Key',
   'Show Seed Phrase': 'Show Seed Phrase',
   'Hide Seed Phrase': 'Hide Seed Phrase',
-  'Delete Account': 'Delete Account',
-  'Your account ID can contain any of the following':
-    'Your account ID can contain any of the following',
+  'Delete Wallet': 'Delete Wallet',
+  'Your wallet ID can contain any of the following':
+    'Your wallet ID can contain any of the following',
   'Lowercase characters (a-z)': 'Lowercase characters (a-z)',
   'Digits (0-9)': 'Digits (0-9)',
   'Characters (_-) can be used as separators':
     'Characters (_-) can be used as separators',
-  'Your account ID CANNOT contain': 'Your account ID CANNOT contain',
+  'Your wallet ID CANNOT contain': 'Your wallet ID CANNOT contain',
   'Characters symbol': 'Characters "@" or "."',
   'Fewer than 2 characters': 'Fewer than 2 characters',
   'More than 64 characters': 'More than 64 characters',
-  'Name your account ID': 'Name your account ID',
-  'Account ID': 'Account ID',
-  'Account already exists': 'Account already exists',
+  'Name your wallet ID': 'Name your wallet ID',
+  'Wallet ID': 'Wallet ID',
+  'Wallet already exists': 'Wallet already exists',
   Delete: 'Delete',
   Warning: 'Warning',
-  'Account deleted': 'Account deleted',
+  'Wallet deleted': 'Wallet deleted',
   Request: 'Request',
-  'View the address of your permitted account':
-    'View the address of your permitted account',
-  'View the balance of your permitted account':
-    'View the balance of your permitted account',
-  'Call methods on the smart contract on behalf of your permitted account':
-    'Call methods on the smart contract on behalf of your permitted account',
+  'View the address of your permitted wallet':
+    'View the address of your permitted wallet',
+  'View the balance of your permitted wallet':
+    'View the balance of your permitted wallet',
+  'Call methods on the smart contract on behalf of your permitted wallet':
+    'Call methods on the smart contract on behalf of your permitted wallet',
   'Create new accounts': 'Create new accounts',
   'Deploy smart contracts': 'Deploy smart contracts',
   'Detailed description of transaction': 'Detailed description of transaction',
-  'Transfer tokens from your account to other accounts':
-    'Transfer tokens from your account to other accounts',
+  'Transfer tokens from your wallet to other accounts':
+    'Transfer tokens from your wallet to other accounts',
   'Stake and unstake NEAR tokens': 'Stake and unstake NEAR tokens',
   'Create and delete access keys': 'Create and delete access keys',
-  'This site is requesting full access to your account. To enable full access, you’ll be asked to verify your account ID.':
-    'This site is requesting full access to your account. To enable fullaccess, you’ll be asked to verify your account ID.',
-  'Account imported successfully': 'Account imported successfully',
-  'Fund New Account': 'Fund New Account',
+  'This site is requesting full access to your wallet. To enable full access, you’ll be asked to verify your wallet ID.':
+    'This site is requesting full access to your wallet. To enable fullaccess, you’ll be asked to verify your wallet ID.',
+  'Wallet imported successfully': 'Wallet imported successfully',
+  'Fund New Wallet': 'Fund New Wallet',
   'Please keep the mnemonic safe': 'Please keep the mnemonic safe',
-  'Fund new account': 'Fund new account',
+  'Fund new wallet': 'Fund new wallet',
   'Share QR code': 'Share QR code',
-  'Please fund at least min Ⓝ to active your new account':
-    'Please fund at least %{min} Ⓝ to active your new account',
-  'Share to friends to activate your new account':
-    'Share to friends to activate your new account',
+  'Please fund at least min Ⓝ to active your new wallet':
+    'Please fund at least %{min} Ⓝ to active your new wallet',
+  'Share to friends to activate your new wallet':
+    'Share to friends to activate your new wallet',
   'Search Validator': 'Search Validator',
-  'No account ID found': 'No account ID found',
-  'Valid Account ID': 'Valid Account',
-  'No mainnet account found': 'No mainnet account found',
-  'No testnet account found': 'No testnet account found',
+  'No wallet ID found': 'No wallet ID found',
+  'Valid Wallet ID': 'Valid Wallet',
+  'No mainnet wallet found': 'No mainnet wallet found',
+  'No testnet wallet found': 'No testnet wallet found',
   Fee: 'Fee',
   Deposited: 'Deposited',
   Deposit: 'Deposit',
@@ -179,6 +179,8 @@ const en = {
   'Update PIN Code': 'Update PIN Code',
   'Enable Bio Auth': 'Enable Bio Auth',
   Wallets: 'Wallets',
+  'Wallet Address': 'Wallet Address',
+  'Export Private Key': 'Export Private Key',
 }
 
 export default en

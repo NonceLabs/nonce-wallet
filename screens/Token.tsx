@@ -1,10 +1,7 @@
 import { useRoute } from '@react-navigation/native'
-import dayjs from 'dayjs'
 import { ArrowDown, ArrowUp, OpenInBrowser } from 'iconoir-react-native'
-import * as WebBrowser from 'expo-web-browser'
 import _ from 'lodash'
 import { ScrollView, StyleSheet } from 'react-native'
-import useSWR from 'swr'
 import Icon from 'components/common/Icon'
 import ScreenHeader from 'components/common/ScreenHeader'
 import TokenLogo from 'components/Assets/TokenLogo'
@@ -12,16 +9,13 @@ import { Text, View } from 'components/Themed'
 import Colors from 'theme/Colors'
 import useColorScheme from 'hooks/useColorScheme'
 import { useAppSelector } from 'store/hooks'
-import { NetworkType, RootStackScreenProps, Token } from 'types'
-import { fetcher } from 'utils/fetcher'
+import { RootStackScreenProps, Token } from 'types'
 import { formatBalance } from 'utils/format'
 import Fonts from 'theme/Fonts'
-import { Empty } from 'components/common/Placeholder'
 import { Portal } from 'react-native-portalize'
 import { Modalize } from 'react-native-modalize'
 import ReceiveModal from 'components/Modals/ReceiveModal'
 import { useRef } from 'react'
-import { BN } from 'bn.js'
 import Box from 'components/common/Box'
 
 export default function TokenScreen({
@@ -30,7 +24,7 @@ export default function TokenScreen({
   const { params } = useRoute()
   const token = (params as any).token as Token
 
-  const tokens: Token[] = useAppSelector((state) => state.asset.tokens)
+  const wallet = useAppSelector((state) => state.wallet.current)
   const receiveRef = useRef<Modalize>()
 
   const theme = useColorScheme()
@@ -101,7 +95,10 @@ export default function TokenScreen({
       </View>
       <Portal>
         <Modalize ref={receiveRef} adjustToContentHeight closeOnOverlayTap>
-          <ReceiveModal onClose={() => receiveRef.current?.close()} />
+          <ReceiveModal
+            onClose={() => receiveRef.current?.close()}
+            onManage={() => navigation.navigate('WalletDetail', { wallet })}
+          />
         </Modalize>
       </Portal>
     </View>

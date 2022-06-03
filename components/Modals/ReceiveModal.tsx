@@ -13,16 +13,22 @@ import Fonts from 'theme/Fonts'
 import SheetHeader from 'components/common/SheetHeader'
 import icons from 'utils/icons'
 import I18n from 'i18n-js'
-import { Check, Copy, ShareAndroid } from 'iconoir-react-native'
+import { Check, Copy, ShareAndroid, InfoEmpty } from 'iconoir-react-native'
 import { useState } from 'react'
 
-export default function ReceiveModal({ onClose }: { onClose: () => void }) {
-  const account = useAppSelector((state) => state.account.current)
+export default function ReceiveModal({
+  onClose,
+  onManage,
+}: {
+  onClose: () => void
+  onManage: () => void
+}) {
+  const wallet = useAppSelector((state) => state.wallet.current)
   const [isCopied, setIsCopied] = useState(false)
   const onShare = async () => {
     try {
       const result = await Share.share({
-        message: account?.publicKey || '',
+        message: wallet?.publicKey || '',
       })
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -50,9 +56,9 @@ export default function ReceiveModal({ onClose }: { onClose: () => void }) {
         },
       ]}
     >
-      <SheetHeader title={I18n.t('My Account')} />
+      <SheetHeader title={I18n.t('My Wallet')} />
       <View style={styles.content}>
-        <Text style={styles.title}>{account?.publicKey}</Text>
+        <Text style={styles.title}>{wallet?.publicKey}</Text>
         <View style={styles.qrcodeWrap}>
           <QRCode
             size={200}
@@ -60,7 +66,7 @@ export default function ReceiveModal({ onClose }: { onClose: () => void }) {
             logoBackgroundColor="white"
             logoMargin={5}
             logoSize={40}
-            value={account?.publicKey || ''}
+            value={wallet?.publicKey || ''}
           />
         </View>
         <View style={styles.buttonGroup}>
@@ -84,7 +90,7 @@ export default function ReceiveModal({ onClose }: { onClose: () => void }) {
             onPress={async () => {
               try {
                 setIsCopied(true)
-                await Clipboard.setString(account?.publicKey || '')
+                await Clipboard.setStringAsync(wallet?.publicKey || '')
                 setTimeout(() => {
                   setIsCopied(false)
                 }, 1000)
@@ -105,6 +111,19 @@ export default function ReceiveModal({ onClose }: { onClose: () => void }) {
               />
             }
             onPress={onShare}
+          />
+          <Icon
+            icon={
+              <InfoEmpty
+                width={25}
+                height={25}
+                color={Colors[theme].screenBackground}
+              />
+            }
+            onPress={() => {
+              onClose()
+              onManage()
+            }}
           />
         </View>
       </View>

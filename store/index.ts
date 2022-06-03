@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
-import accountSlice from './accountSlice'
+import walletSlice from './walletSlice'
 import assetSlice from './assetSlice'
 import settingSlice from './settingSlice'
 
 export const store = configureStore({
   reducer: {
     setting: settingSlice,
-    account: accountSlice,
+    wallet: walletSlice,
     asset: assetSlice,
   },
 })

@@ -13,6 +13,7 @@ const padding = {
 
 export default function Box({
   children,
+  backgroundColor,
   style = {},
   direction = 'row',
   align = 'center',
@@ -23,6 +24,7 @@ export default function Box({
   full = false,
 }: {
   children: any
+  backgroundColor?: string
   align?: FlexStyle['alignItems']
   justify?: FlexStyle['justifyContent']
   direction?: 'row' | 'column'
@@ -52,6 +54,7 @@ export default function Box({
           flexDirection: direction,
           alignItems: align,
           justifyContent: justify,
+          backgroundColor,
         },
         style,
         border && { borderColor: Colors[theme].borderColor, borderWidth: 1 },

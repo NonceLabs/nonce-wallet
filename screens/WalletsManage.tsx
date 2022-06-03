@@ -9,17 +9,18 @@ import { Text, View } from 'components/Themed'
 import Colors from 'theme/Colors'
 import useColorScheme from 'hooks/useColorScheme'
 import { useAppSelector } from 'store/hooks'
-import { ButtonType, RootStackScreenProps, Account } from 'types'
+import { ButtonType, RootStackScreenProps, Wallet } from 'types'
 import Fonts from 'theme/Fonts'
 import { formatAccountId } from 'utils/format'
 
-export default function AccountManage({
+export default function WalletsManage({
   navigation,
-}: RootStackScreenProps<'AccountManage'>) {
-  const accountIds: Account[] = useAppSelector((state) => state.account.list)
-  const currentAccountId = useAppSelector((state) => state.account.current)
+}: RootStackScreenProps<'WalletsManage'>) {
+  const accountIds: Wallet[] = useAppSelector((state) => state.wallet.list)
+  const currentAccountId = useAppSelector((state) => state.wallet.current)
   const theme = useColorScheme()
   const insets = useSafeAreaInsets()
+
   return (
     <View style={styles.container}>
       <ScreenHeader title="Wallets" />
@@ -31,7 +32,7 @@ export default function AccountManage({
             <TouchableOpacity
               activeOpacity={0.7}
               onPress={() => {
-                // navigation.navigate('AccountDetailScreen', { accountId: item })
+                navigation.navigate('WalletDetail', { wallet: item })
               }}
               style={{ marginBottom: 10 }}
             >
@@ -70,7 +71,7 @@ export default function AccountManage({
       />
       <View style={{ marginBottom: insets.bottom + 20, paddingHorizontal: 20 }}>
         <Button
-          label={I18n.t('Add Account')}
+          label={I18n.t('Add Wallet')}
           type={ButtonType.PRIMARY}
           onPress={() => {
             navigation.navigate('Start', {

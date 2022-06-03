@@ -23,16 +23,16 @@ export default function Start() {
   const { params } = useRoute()
   const isNew = (params as any).new as boolean
 
-  const account = useAppSelector((state) => state.account.current)
+  const wallet = useAppSelector((state) => state.wallet.current)
 
   useEffect(() => {
-    if (isNew && account) {
+    if (isNew && wallet) {
       navigation.goBack()
     }
-  }, [account])
+  }, [wallet])
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, paddingTop: isNew ? insets.top : 0 }}>
       {!isNew && <ScreenHeader title="Back" />}
       <View style={{ flex: 1, padding: 20 }}>
         <Heading>{I18n.t('Welcome to')}</Heading>

@@ -10,12 +10,12 @@ import {
   NavArrowDown,
   QrCode,
   Scanning,
-  Wallet,
+  Wallet as WalletIcon,
 } from 'iconoir-react-native'
 import { Text, View } from './Themed'
 import { capitalizeFirstLetter, formatAccountId } from 'utils/format'
 import { useAppSelector } from 'store/hooks'
-import { Account, Currency, CurrencyRate } from 'types'
+import { Wallet, Currency, CurrencyRate } from 'types'
 import { useNavigation } from '@react-navigation/native'
 import Icon from './common/Icon'
 import Fonts from 'theme/Fonts'
@@ -23,7 +23,7 @@ import useColorScheme from 'hooks/useColorScheme'
 import Colors from 'theme/Colors'
 import ReceiveModal from 'components/Modals/ReceiveModal'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import AccountsModal from 'components/Modals/AccountsModal'
+import WalletsModal from 'components/Modals/WalletsModal'
 import { calcTotal } from 'utils/helper'
 import { CURRENCY_SYMBOL, DEFAULT_CURRENCY_RATE } from 'utils/configure'
 import Styles from 'theme/Styles'
@@ -31,7 +31,8 @@ import Box from './common/Box'
 import icons from 'utils/icons'
 import NetworksModal from './Modals/NetworksModal'
 
-export default function Banner({ account }: { account: Account | null }) {
+export default function Banner() {
+  const wallet = useAppSelector((state) => state.wallet.current)
   const currencyRates: CurrencyRate = useAppSelector(
     (state) => state.setting.currencyRates || DEFAULT_CURRENCY_RATE
   )
@@ -50,9 +51,6 @@ export default function Banner({ account }: { account: Account | null }) {
 
   const insets = useSafeAreaInsets()
 
-  if (!account) {
-    return null
-  }
   return (
     <ImageBackground
       source={icons.MINA_BANNER}
@@ -65,7 +63,7 @@ export default function Banner({ account }: { account: Account | null }) {
       >
         <View style={[styles.header, { top: insets.top }]}>
           <Icon
-            icon={<Wallet width={30} height={30} color={Colors.white} />}
+            icon={<WalletIcon width={30} height={30} color={Colors.white} />}
             isTransparent
             onPress={() => {
               accountsRef?.current?.open()
@@ -79,7 +77,7 @@ export default function Banner({ account }: { account: Account | null }) {
             <View
               style={[Styles.row, styles.button, { borderColor: Colors.white }]}
             >
-              <Text style={[styles.account, { fontSize: 14 }]}>
+              <Text style={[styles.wallet, { fontSize: 14 }]}>
                 {capitalizeFirstLetter(network)}
               </Text>
               <NavArrowDown color={Colors.white} width={20} height={20} />
@@ -97,7 +95,7 @@ export default function Banner({ account }: { account: Account | null }) {
           />
         </View>
         <Box direction="column" gap="medium" style={{ paddingTop: 10 }}>
-          <Text style={[styles.account, {}]}>{formatAccountId(account)}</Text>
+          <Text style={[styles.wallet, {}]}>{formatAccountId(wallet)}</Text>
           <Text style={styles.total}>
             {I18n.toCurrency(
               Number(calcTotal(tokens, currencyRates[currency])),
@@ -133,15 +131,19 @@ export default function Banner({ account }: { account: Account | null }) {
             onPress={() => receiveRef.current?.open()}
           />
         </View>
+
         <Portal>
           <Modalize ref={receiveRef} adjustToContentHeight closeOnOverlayTap>
-            <ReceiveModal onClose={() => receiveRef.current?.close()} />
+            <ReceiveModal
+              onClose={() => receiveRef.current?.close()}
+              onManage={() => navigation.navigate('WalletDetail', { wallet })}
+            />
           </Modalize>
           <Modalize ref={networksRef} adjustToContentHeight closeOnOverlayTap>
             <NetworksModal onClose={() => networksRef.current?.close()} />
           </Modalize>
           <Modalize ref={accountsRef} adjustToContentHeight>
-            <AccountsModal onClose={() => accountsRef.current?.close()} />
+            <WalletsModal onClose={() => accountsRef.current?.close()} />
           </Modalize>
         </Portal>
       </Box>
@@ -183,7 +185,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     marginTop: 20,
   },
-  account: {
+  wallet: {
     fontSize: 16,
     fontFamily: Fonts.variable,
     color: Colors.white,

@@ -1,22 +1,22 @@
-import { Account, Chain, Token } from 'types'
+import { Wallet, Chain, Token } from 'types'
 import { BN } from 'bn.js'
 
 export function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
-export function formatAccountId(account: Account | null) {
-  if (!account) {
+export function formatAccountId(wallet: Wallet | null) {
+  if (!wallet) {
     return ''
   }
-  if (account.chain === Chain.MINA) {
+  if (wallet.chain === Chain.MINA) {
     return (
-      account.publicKey.substring(0, 12) +
+      wallet.publicKey.substring(0, 12) +
       '...' +
-      account.publicKey.substring(account.publicKey.length - 8)
+      wallet.publicKey.substring(wallet.publicKey.length - 8)
     )
   }
-  return account.publicKey
+  return wallet.publicKey
 }
 
 export const formatBalance = (

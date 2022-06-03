@@ -1,5 +1,5 @@
 import * as FileSystem from 'expo-file-system'
-import { Account, Chain, KeyStoreFile } from 'types'
+import { Wallet, Chain, KeyStoreFile } from 'types'
 
 console.log(FileSystem.documentDirectory)
 
@@ -99,7 +99,7 @@ export default class WalletAPI {
     return result
   }
 
-  static async getAccounts(chain: Chain): Promise<Account[]> {
+  static async getAccounts(chain: Chain): Promise<Wallet[]> {
     if (!(await exists(`${KEYDIR}${chain}`))) {
       return []
     }

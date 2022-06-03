@@ -56,7 +56,7 @@ export default function SettingScreen() {
               title: 'Wallets',
               value: '',
               onPress: () => {
-                navigation.navigate('AccountManage')
+                navigation.navigate('WalletsManage')
               },
             },
             {

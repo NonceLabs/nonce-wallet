@@ -49,7 +49,9 @@ export default function Restore() {
                   createdAt: keyFile.createdAt,
                 },
               })
-              navigation.dispatch(StackActions.popToTop())
+              setTimeout(() => {
+                navigation.dispatch(StackActions.popToTop())
+              }, 500)
             } catch (error) {}
           }}
           type="restore"

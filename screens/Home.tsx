@@ -8,18 +8,20 @@ import Banner from 'components/Banner'
 import Assets from 'components/Assets'
 
 export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
-  const accountList = useAppSelector((state) => state.account.list)
-  const account = useAppSelector((state) => state.account.current)
+  const walletList = useAppSelector((state) => state.wallet.list)
+  const wallet = useAppSelector((state) => state.wallet.current)
 
   useEffect(() => {
-    if (accountList.length === 0 && !account) {
-      navigation.push('Start', { new: true })
-    }
-  }, [accountList, account])
+    // setTimeout(() => {
+    //   if (walletList.length === 0 && !wallet) {
+    //     navigation.push('Start', { new: true })
+    //   }
+    // }, 500)
+  }, [walletList, wallet])
 
   return (
     <View style={styles.container}>
-      <Banner account={account} />
+      <Banner />
       <Assets />
     </View>
   )

@@ -1,18 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { Account, Chain } from 'types'
+import { Wallet, Chain } from 'types'
 
-interface AccountSlice {
-  list: Account[]
-  current: Account | null
+interface WalletSlice {
+  list: Wallet[]
+  current: Wallet | undefined
 }
 
-const initialState: AccountSlice = {
+const initialState: WalletSlice = {
   list: [],
-  current: null,
+  current: undefined,
 }
 
-export const accountSlice = createSlice({
-  name: 'account',
+export const walletSlice = createSlice({
+  name: 'wallet',
   initialState,
   reducers: {
     addAccount: (state, action) => {
@@ -32,12 +32,12 @@ export const accountSlice = createSlice({
           state.current = state.list[0]
         }
       } else {
-        state.current = null
+        state.current = undefined
       }
     },
   },
 })
 
-export const {} = accountSlice.actions
+export const {} = walletSlice.actions
 
-export default accountSlice.reducer
+export default walletSlice.reducer

@@ -26,7 +26,8 @@ export type RootStackParamList = {
   Security: undefined
   Create: undefined
   About: undefined
-  AccountManage: undefined
+  WalletsManage: undefined
+  WalletDetail: { wallet?: Wallet }
   Modal: undefined
   NotFound: undefined
 }
@@ -106,7 +107,7 @@ export interface MinaSummary {
   totalCurrency: string
 }
 
-export interface Account {
+export interface Wallet {
   publicKey: string
   chain: Chain
 }
