@@ -18,6 +18,11 @@ const Styles = StyleSheet.create({
     flex: 1,
     padding: 20,
   },
+  center: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 })
 
 export default Styles

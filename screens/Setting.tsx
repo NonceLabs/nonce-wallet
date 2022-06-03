@@ -8,6 +8,7 @@ import {
   Translate,
   Tunnel,
   Twitter,
+  UserCircleAlt,
   Wallet,
 } from 'iconoir-react-native'
 import { useRef } from 'react'
@@ -65,6 +66,14 @@ export default function SettingScreen() {
               value: '',
               onPress: () => {
                 navigation.navigate('Security')
+              },
+            },
+            {
+              icon: UserCircleAlt,
+              title: 'Contacts',
+              value: '',
+              onPress: () => {
+                navigation.navigate('ContactsManage')
               },
             },
           ]}

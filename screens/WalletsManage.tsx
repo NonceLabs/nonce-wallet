@@ -12,6 +12,7 @@ import { useAppSelector } from 'store/hooks'
 import { ButtonType, RootStackScreenProps, Wallet } from 'types'
 import Fonts from 'theme/Fonts'
 import { formatAccountId } from 'utils/format'
+import Address from 'components/common/Address'
 
 export default function WalletsManage({
   navigation,
@@ -42,16 +43,7 @@ export default function WalletsManage({
                   { backgroundColor: Colors[theme].cardBackground },
                 ]}
               >
-                <Text
-                  style={[
-                    styles.itemText,
-                    {
-                      color: Colors[theme].link,
-                    },
-                  ]}
-                >
-                  {formatAccountId(item)}
-                </Text>
+                <Address wallet={item} />
                 {currentAccountId === item && (
                   <View
                     style={{ backgroundColor: Colors.green, borderRadius: 12 }}

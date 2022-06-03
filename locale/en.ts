@@ -181,6 +181,9 @@ const en = {
   Wallets: 'Wallets',
   'Wallet Address': 'Wallet Address',
   'Export Private Key': 'Export Private Key',
+  Contacts: 'Contacts',
+  'New Contact': 'New Contact',
+  'No contacts yet': 'No contacts yet',
 }
 
 export default en

@@ -12,10 +12,16 @@ import Styles from 'theme/Styles'
 import { Wallet } from 'types'
 import SettingBlock from 'components/Setting/SettingBlock'
 import { Archive, Trash } from 'iconoir-react-native'
+import { useRef, useState } from 'react'
+import { Portal } from 'react-native-portalize'
+import { Modalize } from 'react-native-modalize'
+import ConfirmModal from 'components/Modals/ConfirmModal'
 
 export default function WalletDetail() {
   const { params } = useRoute()
   const wallet = (params as any)?.wallet as Wallet
+  const confirmDeleteRef = useRef<Modalize>()
+  const exportKeyRef = useRef<Modalize>()
 
   const theme = useColorScheme()
   return (
@@ -47,11 +53,36 @@ export default function WalletDetail() {
               icon: Trash,
               title: 'Delete',
               value: '',
-              onPress: () => {},
+              onPress: async () => {
+                confirmDeleteRef?.current?.open()
+              },
             },
           ]}
         />
       </View>
+      <Portal>
+        <Modalize
+          ref={confirmDeleteRef}
+          adjustToContentHeight
+          closeOnOverlayTap
+        >
+          <ConfirmModal
+            title="Delete Wallet"
+            subtitle="Make sure you have a backup of your private key before you delete this wallet."
+            onCancel={() => confirmDeleteRef?.current?.close()}
+            onConfirm={async () => {}}
+          />
+        </Modalize>
+
+        <Modalize ref={exportKeyRef} adjustToContentHeight closeOnOverlayTap>
+          <ConfirmModal
+            title="Export Private Key"
+            subtitle="Make sure you keep your private key safe. You will not be able to recover your funds if you lose your private key."
+            onCancel={() => exportKeyRef?.current?.close()}
+            onConfirm={async () => {}}
+          />
+        </Modalize>
+      </Portal>
     </View>
   )
 }

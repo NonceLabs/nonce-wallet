@@ -5,7 +5,7 @@ export function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
-export function formatAccountId(wallet: Wallet | null) {
+export function formatAccountId(wallet: Wallet | undefined) {
   if (!wallet) {
     return ''
   }

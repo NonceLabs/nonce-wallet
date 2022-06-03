@@ -28,6 +28,9 @@ import Security from 'screens/Security'
 import About from 'screens/About'
 import WalletsManage from 'screens/WalletsManage'
 import WalletDetail from 'screens/WalletDetail'
+import ContactsManage from 'screens/ContactsManage'
+import ContactNew from 'screens/ContactNew'
+import PINCode from 'screens/PINCode'
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
@@ -74,8 +77,23 @@ export default function RootNavigator() {
         component={WalletDetail}
         options={{ header: () => null }}
       />
+      <Stack.Screen
+        name="ContactsManage"
+        component={ContactsManage}
+        options={{ header: () => null }}
+      />
+      <Stack.Screen
+        name="ContactNew"
+        component={ContactNew}
+        options={{ header: () => null }}
+      />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
+        <Stack.Screen
+          name="PINCode"
+          component={PINCode}
+          options={{ header: () => null }}
+        />
       </Stack.Group>
       <Stack.Group screenOptions={{ presentation: 'fullScreenModal' }}>
         <Stack.Screen

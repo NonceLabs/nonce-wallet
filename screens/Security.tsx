@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native'
 import ScreenHeader from 'components/common/ScreenHeader'
 import BioAuthModal from 'components/Modals/BioAuthModal'
 import SettingBlock from 'components/Setting/SettingBlock'
@@ -13,6 +14,8 @@ export default function Security() {
   const isAuthEnabled = useAppSelector((state) => state.setting.bioAuthEnabled)
   const bioAuthRef = useRef<Modalize>()
 
+  const navigation = useNavigation()
+
   return (
     <View style={{ flex: 1 }}>
       <ScreenHeader title="Security" />
@@ -25,7 +28,9 @@ export default function Security() {
               icon: KeyAlt,
               title: 'Update PIN Code',
               value: '',
-              onPress: () => {},
+              onPress: () => {
+                navigation.navigate('PINCode')
+              },
             },
             {
               icon: FingerprintScan,

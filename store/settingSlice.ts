@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { Currency, CurrencyRate, NetworkType } from 'types'
+import { Chain, Contact, Currency, CurrencyRate, NetworkType } from 'types'
 
 interface SettingSlice {
   theme: string
@@ -10,6 +10,7 @@ interface SettingSlice {
   bioAuthEnabled: boolean
   pushToken: string
   isDevMode: boolean
+  contacts: Contact[]
 }
 
 const initialState: SettingSlice = {
@@ -23,6 +24,7 @@ const initialState: SettingSlice = {
   bioAuthEnabled: false,
   pushToken: '',
   isDevMode: false,
+  contacts: [],
 }
 
 export const settingSlice = createSlice({
@@ -40,6 +42,9 @@ export const settingSlice = createSlice({
     },
     updateCurrentCurrency: (state, action) => {
       state.currentCurrency = action.payload
+    },
+    addContact: (state, action) => {
+      state.contacts.push(action.payload)
     },
   },
 })

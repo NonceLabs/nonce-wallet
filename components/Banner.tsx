@@ -30,6 +30,7 @@ import Styles from 'theme/Styles'
 import Box from './common/Box'
 import icons from 'utils/icons'
 import NetworksModal from './Modals/NetworksModal'
+import Address from './common/Address'
 
 export default function Banner() {
   const wallet = useAppSelector((state) => state.wallet.current)
@@ -95,7 +96,7 @@ export default function Banner() {
           />
         </View>
         <Box direction="column" gap="medium" style={{ paddingTop: 10 }}>
-          <Text style={[styles.wallet, {}]}>{formatAccountId(wallet)}</Text>
+          <Address wallet={wallet} color={Colors.white} fontSize={16} />
           <Text style={styles.total}>
             {I18n.toCurrency(
               Number(calcTotal(tokens, currencyRates[currency])),

@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     height: 36,
   },
   backTitle: {
-    fontFamily: Fonts.common,
+    fontFamily: Fonts.heading,
     fontSize: 20,
   },
 })

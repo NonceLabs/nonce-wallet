@@ -9,19 +9,25 @@ import Colors from 'theme/Colors'
 export default function Address({
   wallet,
   color,
+  fontSize = 18,
   ecllipsis = true,
 }: {
-  wallet: Wallet
+  wallet: Wallet | undefined
+  fontSize?: number
   ecllipsis?: boolean
   color?: string
 }) {
   const theme = useColorScheme()
+  if (!wallet) {
+    return null
+  }
   return (
     <Text
       style={[
         styles.address,
         {
           color: color ?? Colors[theme].link,
+          fontSize,
         },
       ]}
     >
@@ -32,7 +38,6 @@ export default function Address({
 
 const styles = StyleSheet.create({
   address: {
-    fontSize: 18,
     fontFamily: Fonts.variable,
   },
 })

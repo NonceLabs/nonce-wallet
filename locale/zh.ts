@@ -175,6 +175,9 @@ const zh = {
   Wallets: '钱包',
   'Wallet Address': '钱包地址',
   'Export Private Key': '导出私钥',
+  Contacts: '地址本',
+  'New Contact': '新增地址',
+  'No contacts yet': '地址本是空的',
 }
 
 export default zh

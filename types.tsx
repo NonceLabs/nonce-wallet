@@ -28,6 +28,9 @@ export type RootStackParamList = {
   About: undefined
   WalletsManage: undefined
   WalletDetail: { wallet?: Wallet }
+  ContactsManage: undefined
+  ContactNew: undefined
+  PINCode: undefined
   Modal: undefined
   NotFound: undefined
 }
@@ -119,4 +122,8 @@ export interface KeyStoreFile {
   mnemonic: string
   chain: Chain
   createdAt: string
+}
+
+export interface Contact extends Wallet {
+  name: string
 }
