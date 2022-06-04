@@ -42,7 +42,7 @@ export default function ContactsManage() {
         }
       />
       {contacts.length === 0 ? (
-        <Empty title={I18n.t('No contacts yet')} />
+        <Empty title="No contacts yet" />
       ) : (
         <FlatList
           data={contacts}

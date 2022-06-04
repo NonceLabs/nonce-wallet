@@ -209,6 +209,8 @@ const zh = {
   Kind: '类型',
   'Block Height': '区块高度',
   Time: '时间',
+  'Not stake yet': '暂无质押',
+  'Stake Now': '立即质押',
 }
 
 export default zh

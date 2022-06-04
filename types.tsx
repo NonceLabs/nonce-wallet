@@ -34,6 +34,7 @@ export type RootStackParamList = {
   PINCode: { onConfirmed: () => void }
   PrivateKey: { wallet?: Wallet }
   TxDetail: { tx: MinaTransaction }
+  Validators: undefined
   Modal: undefined
   NotFound: undefined
 }
@@ -54,6 +55,8 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
   >
 
 export type ToastType = 'success' | 'error' | 'info' | 'warning'
+
+export type PublicKey = string
 
 export enum NetworkType {
   MAINNET = 'mainnet',
@@ -163,7 +166,7 @@ export interface MinaAccountDetail {
 export interface MinaTransaction {
   id: string
   token: number
-  to: string
+  to: PublicKey
   amount: number
   blockHeight: number
   blockStateHash: string
@@ -171,7 +174,7 @@ export interface MinaTransaction {
   failureReason: string
   fee: number
   feeToken: number
-  from: string
+  from: PublicKey
   hash: string
   isDelegation: boolean
   kind: string
@@ -188,4 +191,20 @@ export interface MinaSignature {
   readonly field: string
   readonly scalar: string
   readonly rawSignature?: string
+}
+
+export interface Validator {
+  public_key: PublicKey
+  identity_name: string
+  start_height: number
+  start_time: string
+  last_height: number
+  last_time: string
+  blocks_created: number
+  blocks_proposed: number
+  delegations: number
+  stake: string
+  account_balance: string
+  account_balance_unknown: string
+  fee: number
 }

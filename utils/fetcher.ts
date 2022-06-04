@@ -1,5 +1,10 @@
 import { request } from 'graphql-request'
-import { Payment, Signature, Signed } from 'mina-signer/dist/src/TSTypes'
+import {
+  Payment,
+  Signature,
+  Signed,
+  StakeDelegation,
+} from 'mina-signer/dist/src/TSTypes'
 
 export const graphFetcher = (query: string) => {
   return request('https://graphql.minaexplorer.com/', query)
@@ -40,6 +45,14 @@ export const fetchFixer = async () => {
 
 export async function sendTx(signed: Signed<Payment>) {
   return await post(`https://api.minaexplorer.com/broadcast/transaction`, {
+    publicKey: signed.data.from,
+    signature: signed.signature,
+    payload: signed.data,
+  })
+}
+
+export async function stakeTx(signed: Signed<StakeDelegation>) {
+  return await post(`https://api.minaexplorer.com/broadcast/delegation`, {
     publicKey: signed.data.from,
     signature: signed.signature,
     payload: signed.data,

@@ -1,8 +1,12 @@
+import { useNavigation } from '@react-navigation/native'
 import Box from 'components/common/Box'
+import Button from 'components/common/Button'
 import Heading from 'components/common/Heading'
+import { Empty } from 'components/common/Placeholder'
 import ScreenHeader from 'components/common/ScreenHeader'
 import { Text, View } from 'components/Themed'
 import useColorScheme from 'hooks/useColorScheme'
+import I18n from 'i18n-js'
 import { ScrollView, StyleSheet } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import useSWR from 'swr'
@@ -20,8 +24,8 @@ export default function Staking() {
       refreshInterval: 30000,
     }
   )
-  const insets = useSafeAreaInsets()
   const theme = useColorScheme()
+  const navigation = useNavigation()
 
   return (
     <View style={{ flex: 1 }}>
@@ -69,6 +73,36 @@ export default function Staking() {
               />
             </View>
           </Box>
+        </Box>
+
+        <Box
+          justify="space-between"
+          style={{ marginTop: 20, marginBottom: 10 }}
+        >
+          <Heading level={2}>{I18n.t('My staking')}</Heading>
+        </Box>
+        <Box
+          direction="column"
+          align="center"
+          style={{
+            backgroundColor: Colors[theme].cardBackground,
+            borderRadius: 6,
+          }}
+          pad="large"
+        >
+          <Empty
+            title="Not stake yet"
+            style={{ width: '100%', paddingTop: 30 }}
+          />
+          <Button
+            label={I18n.t('Stake Now')}
+            primary
+            style={{ width: 200, marginVertical: 30 }}
+            size="medium"
+            onPress={() => {
+              navigation.navigate('Validators')
+            }}
+          />
         </Box>
       </ScrollView>
     </View>

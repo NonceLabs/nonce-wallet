@@ -1,18 +1,21 @@
-import { ImageSourcePropType, StyleSheet } from 'react-native'
+import { ImageSourcePropType, StyleSheet, ViewStyle } from 'react-native'
 import { Text, View } from 'components/Themed'
 import Fonts from 'theme/Fonts'
 import { EmojiLookBottom, EmojiLookTop } from 'iconoir-react-native'
 import Colors from 'theme/Colors'
+import I18n from 'i18n-js'
 
 export function Empty({
   title,
   icon,
+  style,
 }: {
   title: string
   icon?: ImageSourcePropType
+  style?: ViewStyle
 }) {
   return (
-    <View style={styles.content}>
+    <View style={[styles.content, style]}>
       {icon ? null : (
         <EmojiLookBottom
           width={100}
@@ -21,7 +24,7 @@ export function Empty({
           strokeWidth={1}
         />
       )}
-      <Text style={styles.placeholder}>{title}</Text>
+      <Text style={styles.placeholder}>{I18n.t(title)}</Text>
     </View>
   )
 }
@@ -46,7 +49,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: 100,
   },
   image: {
     width: 100,

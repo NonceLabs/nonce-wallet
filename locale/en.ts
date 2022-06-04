@@ -213,6 +213,8 @@ const en = {
   Kind: 'Kind',
   'Block Height': 'Block Height',
   Time: 'Time',
+  'Not stake yet': 'Not stake yet',
+  'Stake Now': 'Stake Now',
 }
 
 export default en

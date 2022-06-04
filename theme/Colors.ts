@@ -23,6 +23,7 @@ export default {
     modalBackground: '#f6eee3',
     borderColor: '#e3e3e3',
     iconButtonBg: '#FFCA58',
+    inputBackground: '#e3e3e3',
   },
   dark: {
     text: '#fff',
@@ -37,5 +38,6 @@ export default {
     modalBackground: 'rgb(36,35,37)',
     borderColor: '#999',
     iconButtonBg: '#008cd5',
+    inputBackground: '#222',
   },
 }

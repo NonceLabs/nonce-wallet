@@ -33,6 +33,7 @@ import ContactNew from 'screens/ContactNew'
 import PINCode from 'screens/PINCode'
 import PrivateKey from 'screens/PrivateKey'
 import TxDetail from 'screens/TxDetail'
+import Validators from 'screens/Validators'
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
@@ -112,6 +113,11 @@ export default function RootNavigator() {
       <Stack.Screen
         name="TxDetail"
         component={TxDetail}
+        options={{ header: () => null }}
+      />
+      <Stack.Screen
+        name="Validators"
+        component={Validators}
         options={{ header: () => null }}
       />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>

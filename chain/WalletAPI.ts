@@ -1,7 +1,7 @@
 import * as FileSystem from 'expo-file-system'
 import I18n from 'i18n-js'
 import Client from 'mina-signer'
-import { Payment, Signed } from 'mina-signer/dist/src/TSTypes'
+import { Payment, Signed, StakeDelegation } from 'mina-signer/dist/src/TSTypes'
 import { Wallet, Chain, KeyStoreFile } from 'types'
 
 console.log(FileSystem.documentDirectory)
@@ -135,6 +135,31 @@ export default class WalletAPI {
       }
 
       return signedPayment
+    }
+    return null
+  }
+
+  static async stake(
+    chain: Chain,
+    publicKey: string,
+    delegation: StakeDelegation
+  ): Promise<Signed<StakeDelegation> | null> {
+    if (chain === Chain.MINA) {
+      const keyFile = await this.getKey(chain, publicKey)
+      if (!keyFile) {
+        throw new Error('Invalid keystore')
+      }
+      const { privateKey } = keyFile
+      const client = new Client({ network: 'mainnet' })
+      const signedDelegation = client.signStakeDelegation(
+        delegation,
+        privateKey
+      )
+      if (!client.verifyStakeDelegation(signedDelegation)) {
+        throw new Error('Invalid payment')
+      }
+
+      return signedDelegation
     }
     return null
   }
