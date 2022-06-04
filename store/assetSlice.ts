@@ -1,23 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { Token } from 'types'
-import icons from 'utils/icons'
+import { MINA_TOKEN } from 'utils/configure'
 
 interface AssetSlice {
   tokens: Token[]
 }
 
 const initialState: AssetSlice = {
-  tokens: [
-    {
-      name: 'MINA',
-      balance: '0',
-      icon: icons.MINA_TOKEN,
-      price: 0,
-      symbol: 'MINA',
-      isNative: true,
-      decimals: 24,
-    },
-  ],
+  tokens: [MINA_TOKEN],
 }
 
 export const assetSlice = createSlice({

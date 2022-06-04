@@ -1,14 +1,12 @@
 import { useNavigation } from '@react-navigation/native'
-import Address from 'components/common/Address'
-import Box from 'components/common/Box'
 import { Empty } from 'components/common/Placeholder'
 import ScreenHeader from 'components/common/ScreenHeader'
-import ReceiveModal from 'components/Modals/ReceiveModal'
+import AddressQRModal from 'components/Modals/AddressQRModal'
 import ContactItem from 'components/Setting/ContactItem'
-import { Text, View } from 'components/Themed'
+import { View } from 'components/Themed'
 import useColorScheme from 'hooks/useColorScheme'
 import I18n from 'i18n-js'
-import { AddCircledOutline, QrCode } from 'iconoir-react-native'
+import { AddCircledOutline } from 'iconoir-react-native'
 import { useRef, useState } from 'react'
 import { FlatList, Pressable, StyleSheet } from 'react-native'
 import { Modalize } from 'react-native-modalize'
@@ -77,7 +75,7 @@ export default function ContactsManage() {
           handlePosition="inside"
           handleStyle={{ backgroundColor: Colors.gray9 }}
         >
-          <ReceiveModal
+          <AddressQRModal
             wallet={contact}
             onClose={() => {
               setContact(undefined)

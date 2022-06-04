@@ -203,6 +203,9 @@ const en = {
   USD: 'USD',
   CNY: 'CNY',
   EUR: 'EUR',
+  Memo: 'Memo',
+  Optional: 'Optional',
+  'Transfer Preview': 'Transfer Preview',
 }
 
 export default en

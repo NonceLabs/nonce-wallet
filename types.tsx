@@ -9,6 +9,7 @@ import {
   NavigatorScreenParams,
 } from '@react-navigation/native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { PublicKey } from 'mina-signer/dist/src/TSTypes'
 import { ImageSourcePropType } from 'react-native'
 
 declare global {
@@ -128,3 +129,12 @@ export interface KeyStoreFile {
 }
 
 export interface Contact extends Wallet {}
+
+export interface PaymentPreview {
+  to: PublicKey
+  from: PublicKey
+  fee: string
+  amount: string
+  nonce: number
+  memo?: string
+}

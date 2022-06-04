@@ -16,7 +16,7 @@ import { useState } from 'react'
 import { Wallet } from 'types'
 import Heading from 'components/common/Heading'
 
-export default function ReceiveModal({
+export default function AddressQRModal({
   wallet,
   onClose,
   onManage,
@@ -57,7 +57,7 @@ export default function ReceiveModal({
       ]}
     >
       <View style={styles.content}>
-        <Heading>{wallet?.name}</Heading>
+        {!!wallet?.name && <Heading>{wallet?.name}</Heading>}
         <Text style={styles.title}>{wallet?.publicKey}</Text>
         <View style={styles.qrcodeWrap}>
           <QRCode

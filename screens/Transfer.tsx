@@ -21,12 +21,27 @@ import { useAppSelector } from 'store/hooks'
 import { formatBalance } from 'utils/format'
 import Fonts from 'theme/Fonts'
 import I18n from 'i18n-js'
-import { ButtonType, Contact, Currency, CurrencyRate, Token } from 'types'
-import { CURRENCY_SYMBOL, DEFAULT_CURRENCY_RATE } from 'utils/configure'
+import {
+  ButtonType,
+  Contact,
+  Currency,
+  CurrencyRate,
+  PaymentPreview,
+  Token,
+} from 'types'
+import {
+  CURRENCY_SYMBOL,
+  DEFAULT_CURRENCY_RATE,
+  MINA_TOKEN,
+} from 'utils/configure'
 import TokenItem from 'components/Assets/TokenItem'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import Box from 'components/common/Box'
 import ContactItem from 'components/Setting/ContactItem'
+import { Modalize } from 'react-native-modalize'
+import TxPreviewModal from 'components/Modals/TxPreviewModal'
+import { isAddressValid, isValidAmount } from 'chain/crypto'
+import Toast from 'utils/toast'
 
 export default function Transfer() {
   const currencyRates: CurrencyRate = useAppSelector(
@@ -36,21 +51,27 @@ export default function Transfer() {
     (state) => state.setting.currentCurrency || Currency.USD
   )
 
+  const wallet = useAppSelector((state) => state.wallet.current)
   const tokens: Token[] = useAppSelector((state) => state.asset.tokens)
   const contacts = useAppSelector((state) => state.setting.contacts)
 
   const tokenListRef = useRef<BottomSheet>(null)
   const contactListRef = useRef<BottomSheet>(null)
+  const confirmTxRef = useRef<Modalize>(null)
 
   const navigation = useNavigation()
   const { params } = useRoute()
-  const _receiver = (params as any)?.receiver || ''
+  const _receiver = (params as any)?.receiver || ('' as string)
   const _token = (params as any)?.token
-  const [receiver, setReceiver] = useState(_receiver)
+  const [receiver, setReceiver] = useState<string>(_receiver)
   const [amount, setAmount] = useState('')
+  const [memo, setMemo] = useState('')
   const [selectedToken, setSelectedToken] = useState(_token || tokens[0])
   const [addressFocus, setAddressFocus] = useState(false)
   const [amountFocus, setAmountFocus] = useState(false)
+  const [memoFocus, setMemoFocus] = useState(false)
+
+  const [payment, setPayment] = useState<PaymentPreview>()
 
   const theme = useColorScheme()
   const insets = useSafeAreaInsets()
@@ -59,6 +80,30 @@ export default function Transfer() {
     setSelectedToken(item)
     setAmount('')
     tokenListRef.current?.close()
+  }
+
+  const onPreviewTx = () => {
+    console.log('onPreviewTx')
+    if (!isAddressValid(receiver)) {
+      return Toast.error('Invalid address')
+    }
+    if (!isValidAmount(amount, selectedToken)) {
+      return Toast.error('Invalid amount')
+    }
+    setPayment({
+      to: receiver,
+      amount,
+      memo,
+      from: wallet!.publicKey,
+      nonce: 1,
+      fee: '0.01',
+    })
+    confirmTxRef.current?.open()
+  }
+
+  const onConfirmTx = () => {
+    confirmTxRef.current?.close()
+    //
   }
 
   const contact = contacts.find((c) => c.publicKey === receiver)
@@ -194,13 +239,40 @@ export default function Transfer() {
               </Pressable>
             </Box>
           </Box>
+
+          <Box
+            full
+            align="center"
+            style={{
+              paddingVertical: 4,
+              borderBottomWidth: 1,
+              borderBottomColor: memoFocus
+                ? Colors[theme].text
+                : Colors[theme].borderColor,
+            }}
+          >
+            <TextInput
+              placeholder={`${I18n.t('Memo')}(${I18n.t('Optional')})`}
+              autoCapitalize="none"
+              style={[styles.input, { color: Colors[theme].text }]}
+              value={memo}
+              onChangeText={(_text) => setMemo(_text)}
+              onFocus={() => {
+                setMemoFocus(true)
+                tokenListRef.current?.close()
+                contactListRef.current?.close()
+              }}
+              onBlur={() => setMemoFocus(false)}
+              placeholderTextColor={Colors.gray9}
+            />
+          </Box>
         </Box>
 
         <Button
           label={I18n.t('Next')}
           type={ButtonType.PRIMARY}
           style={{ marginTop: 20 }}
-          onPress={() => {}}
+          onPress={onPreviewTx}
         />
       </ScrollView>
 
@@ -260,6 +332,20 @@ export default function Transfer() {
             }}
           />
         </BottomSheet>
+        <Modalize
+          ref={confirmTxRef}
+          adjustToContentHeight
+          closeOnOverlayTap
+          withHandle={false}
+        >
+          <TxPreviewModal
+            payment={payment}
+            onCancel={() => {
+              confirmTxRef.current?.close()
+            }}
+            onConfirm={onConfirmTx}
+          />
+        </Modalize>
       </Portal>
     </View>
   )

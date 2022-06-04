@@ -14,7 +14,7 @@ import { formatBalance } from 'utils/format'
 import Fonts from 'theme/Fonts'
 import { Portal } from 'react-native-portalize'
 import { Modalize } from 'react-native-modalize'
-import ReceiveModal from 'components/Modals/ReceiveModal'
+import AddressQRModal from 'components/Modals/AddressQRModal'
 import { useRef } from 'react'
 import Box from 'components/common/Box'
 
@@ -101,7 +101,7 @@ export default function TokenScreen({
           handlePosition="inside"
           handleStyle={{ backgroundColor: Colors.gray9 }}
         >
-          <ReceiveModal
+          <AddressQRModal
             wallet={wallet}
             onClose={() => receiveRef.current?.close()}
             onManage={() => navigation.navigate('WalletDetail', { wallet })}

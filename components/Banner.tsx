@@ -19,7 +19,7 @@ import Icon from './common/Icon'
 import Fonts from 'theme/Fonts'
 import useColorScheme from 'hooks/useColorScheme'
 import Colors from 'theme/Colors'
-import ReceiveModal from 'components/Modals/ReceiveModal'
+import AddressQRModal from 'components/Modals/AddressQRModal'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import WalletsModal from 'components/Modals/WalletsModal'
 import { calcTotal } from 'utils/helper'
@@ -139,7 +139,7 @@ export default function Banner() {
             handlePosition="inside"
             handleStyle={{ backgroundColor: Colors.gray9 }}
           >
-            <ReceiveModal
+            <AddressQRModal
               wallet={wallet}
               onClose={() => receiveRef.current?.close()}
               onManage={() => navigation.navigate('WalletDetail', { wallet })}

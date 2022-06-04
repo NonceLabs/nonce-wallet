@@ -4,8 +4,9 @@ import * as bip39 from 'bip39'
 import * as Random from 'expo-random'
 import Client from 'mina-signer'
 import { MNEMONIC_STRENGTH } from '../utils/configure'
-import { Chain, KeyStoreFile } from 'types'
-import I18n from 'i18n-js'
+import { Chain, KeyStoreFile, Token } from 'types'
+import { formatTokenBalance } from 'utils/format'
+import { BN } from 'bn.js'
 
 const getDerivedPath = (index: number) => `m/44'/12586'/${index}'/0/0`
 
@@ -80,4 +81,24 @@ export function isAddressValid(address: string) {
   } catch (ex) {
     return false
   }
+}
+
+export const isValidAmount = (amount: string, token?: Token) => {
+  if (!amount || !amount.trim()) {
+    return false
+  }
+  const amountNumber = Number(amount)
+  if (isNaN(amountNumber)) {
+    return false
+  }
+  if (amountNumber <= 0) {
+    return false
+  }
+  if (token) {
+    const _amount = formatTokenBalance(amount, token)
+    if (_amount.gte(new BN(token.balance))) {
+      return false
+    }
+  }
+  return true
 }

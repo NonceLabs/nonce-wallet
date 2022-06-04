@@ -199,6 +199,9 @@ const zh = {
   USD: '美元',
   CNY: '人民币',
   EUR: '欧元',
+  Memo: '备注',
+  Optional: '可选',
+  'Transfer Preview': '转账预览',
 }
 
 export default zh

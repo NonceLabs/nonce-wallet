@@ -1,3 +1,4 @@
+import Decimal from 'decimal.js'
 import { Wallet, Chain, Token } from 'types'
 import { BN } from 'bn.js'
 
@@ -36,4 +37,17 @@ export const formatTokenBalance = (
   token: Token | undefined
 ) => {
   return new BN(balance).div(new BN(10).mul(new BN(token?.decimals || 9)))
+}
+
+export const parseAmount = (amount: string, token: Token) => {
+  console.log(
+    new Decimal(amount)
+      .mul(new Decimal(10).pow(new Decimal(token.decimals)))
+      .toString()
+  )
+  return new BN(
+    new Decimal(amount)
+      .mul(new Decimal(10).pow(new Decimal(token.decimals)))
+      .toString()
+  )
 }
