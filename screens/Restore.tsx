@@ -1,4 +1,3 @@
-import * as LocalAuthentication from 'expo-local-authentication'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import WalletAPI from 'chain/WalletAPI'
 import ScreenHeader from 'components/common/ScreenHeader'
@@ -9,7 +8,7 @@ import I18n from 'i18n-js'
 import { useState } from 'react'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 import { KeyStoreFile } from 'types'
-import Toast from 'utils/toast'
+import useAuth from 'hooks/useAuth'
 
 enum RESTORE_STEP {
   RESTORE = 'RESTORE',
@@ -21,8 +20,6 @@ export default function Restore() {
   const [keyFile, setKeyFile] = useState<KeyStoreFile | null>(null)
 
   const walletList = useAppSelector((state) => state.wallet.list)
-  const pincode = useAppSelector((state) => state.setting.pincode)
-  const bioAuthEnabled = useAppSelector((state) => state.setting.bioAuthEnabled)
   const dispatch = useAppDispatch()
   const navigation = useNavigation()
 
@@ -46,6 +43,8 @@ export default function Restore() {
     }, 100)
   }
 
+  const auth = useAuth()
+
   return (
     <View style={{ flex: 1 }}>
       <ScreenHeader title="Start" />
@@ -53,24 +52,13 @@ export default function Restore() {
       {step === RESTORE_STEP.RESTORE && (
         <RestoreForm
           onNext={async (_keyFile) => {
-            if (bioAuthEnabled) {
-              try {
-                const result = await LocalAuthentication.authenticateAsync()
-                if (!result.success) {
-                  throw new Error(I18n.t('Authentication failed'))
-                }
-                await onConfirmed(_keyFile)
-              } catch (error) {
-                Toast.error(error)
+            setKeyFile(_keyFile)
+            await auth(
+              () => onConfirmed(_keyFile),
+              () => {
+                setStep(RESTORE_STEP.SETUP_PIN)
               }
-            } else if (pincode) {
-              navigation.navigate('PINCode', {
-                onConfirmed: () => onConfirmed(_keyFile),
-              })
-            } else {
-              setKeyFile(_keyFile)
-              setStep(RESTORE_STEP.SETUP_PIN)
-            }
+            )
           }}
         />
       )}

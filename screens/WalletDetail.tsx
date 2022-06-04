@@ -1,4 +1,3 @@
-import * as LocalAuthentication from 'expo-local-authentication'
 import { useNavigation, useRoute, StackActions } from '@react-navigation/native'
 import Address from 'components/common/Address'
 import Box from 'components/common/Box'
@@ -18,8 +17,8 @@ import { Portal } from 'react-native-portalize'
 import { Modalize } from 'react-native-modalize'
 import ConfirmModal from 'components/Modals/ConfirmModal'
 import WalletAPI from 'chain/WalletAPI'
-import Toast from 'utils/toast'
-import { useAppDispatch, useAppSelector } from 'store/hooks'
+import { useAppDispatch } from 'store/hooks'
+import useAuth from 'hooks/useAuth'
 
 export default function WalletDetail() {
   const { params } = useRoute()
@@ -30,7 +29,6 @@ export default function WalletDetail() {
   const theme = useColorScheme()
   const dispatch = useAppDispatch()
   const navigation = useNavigation()
-  const bioAuthEnabled = useAppSelector((state) => state.setting.bioAuthEnabled)
 
   const onConfirmDelete = async () => {
     await WalletAPI.removeKey(Chain.MINA, wallet.publicKey)
@@ -40,6 +38,8 @@ export default function WalletDetail() {
     })
     navigation.dispatch(StackActions.popToTop())
   }
+
+  const auth = useAuth()
 
   const onConfirmExport = async () => {
     navigation.goBack()
@@ -88,39 +88,6 @@ export default function WalletDetail() {
       </View>
       <Portal>
         <Modalize
-          ref={confirmDeleteRef}
-          adjustToContentHeight
-          closeOnOverlayTap
-          withHandle={false}
-        >
-          <ConfirmModal
-            title="Delete"
-            icon={<Trash width={40} height={40} color={Colors.black} />}
-            iconWrapColor={Colors.red}
-            subtitle="Make sure you have a backup of your private key before you delete this wallet"
-            onCancel={() => confirmDeleteRef?.current?.close()}
-            onConfirm={async () => {
-              confirmDeleteRef.current?.close()
-              if (bioAuthEnabled) {
-                try {
-                  const result = await LocalAuthentication.authenticateAsync()
-                  if (!result.success) {
-                    throw new Error(I18n.t('Authentication failed'))
-                  }
-                  await onConfirmDelete()
-                } catch (error) {
-                  Toast.error(error)
-                }
-              } else {
-                navigation.navigate('PINCode', {
-                  onConfirmed: onConfirmDelete,
-                })
-              }
-            }}
-          />
-        </Modalize>
-
-        <Modalize
           ref={exportKeyRef}
           adjustToContentHeight
           closeOnOverlayTap
@@ -134,21 +101,25 @@ export default function WalletDetail() {
             onCancel={() => exportKeyRef?.current?.close()}
             onConfirm={async () => {
               exportKeyRef?.current?.close()
-              if (bioAuthEnabled) {
-                try {
-                  const result = await LocalAuthentication.authenticateAsync()
-                  if (!result.success) {
-                    throw new Error(I18n.t('Authentication failed'))
-                  }
-                  await onConfirmExport()
-                } catch (error) {
-                  Toast.error(error)
-                }
-              } else {
-                navigation.navigate('PINCode', {
-                  onConfirmed: onConfirmExport,
-                })
-              }
+              auth(onConfirmExport)
+            }}
+          />
+        </Modalize>
+        <Modalize
+          ref={confirmDeleteRef}
+          adjustToContentHeight
+          closeOnOverlayTap
+          withHandle={false}
+        >
+          <ConfirmModal
+            title="Delete"
+            icon={<Trash width={40} height={40} color={Colors.black} />}
+            iconWrapColor={Colors.red}
+            subtitle="Make sure you have a backup of your private key before you delete this wallet"
+            onCancel={() => confirmDeleteRef?.current?.close()}
+            onConfirm={async () => {
+              confirmDeleteRef.current?.close()
+              auth(onConfirmDelete)
             }}
           />
         </Modalize>

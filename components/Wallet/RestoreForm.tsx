@@ -20,7 +20,9 @@ export default function RestoreForm({
   onNext: (keyFile: KeyStoreFile) => void
 }) {
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState(
+    'toss usual practice legend stereo review ghost access custom law enter gossip'
+  )
 
   const theme = useColorScheme()
 

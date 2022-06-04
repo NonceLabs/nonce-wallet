@@ -1,4 +1,3 @@
-import * as LocalAuthentication from 'expo-local-authentication'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import { parseMnemonic } from 'chain/crypto'
 import WalletAPI from 'chain/WalletAPI'
@@ -9,9 +8,8 @@ import SetupPIN from 'components/Wallet/SetupPIN'
 import VerifyMnemonic from 'components/Wallet/VerifyMnemonic'
 import { useState } from 'react'
 import { StyleSheet } from 'react-native'
-import { useAppDispatch, useAppSelector } from 'store/hooks'
-import Toast from 'utils/toast'
-import I18n from 'i18n-js'
+import { useAppDispatch } from 'store/hooks'
+import useAuth from 'hooks/useAuth'
 
 enum CREATE_STEP {
   GEN_MNEMONIC = 'GEN_MNEMONIC',
@@ -23,8 +21,6 @@ export default function Create() {
   const [step, setStep] = useState(CREATE_STEP.GEN_MNEMONIC)
   const [mnemonic, setMnemonic] = useState('')
 
-  const pincode = useAppSelector((state) => state.setting.pincode)
-  const bioAuthEnabled = useAppSelector((state) => state.setting.bioAuthEnabled)
   const navigation = useNavigation()
   const dispatch = useAppDispatch()
 
@@ -45,6 +41,8 @@ export default function Create() {
     }, 100)
   }
 
+  const auth = useAuth()
+
   return (
     <View style={{ flex: 1 }}>
       <ScreenHeader title="Start" />
@@ -58,24 +56,8 @@ export default function Create() {
       )}
       {step === CREATE_STEP.VERIFY_MNEMONIC && (
         <VerifyMnemonic
-          onNext={async () => {
-            if (bioAuthEnabled) {
-              try {
-                const result = await LocalAuthentication.authenticateAsync()
-                if (!result.success) {
-                  throw new Error(I18n.t('Authentication failed'))
-                }
-                await onConfirmed()
-              } catch (error) {
-                Toast.error(error)
-              }
-            } else if (pincode) {
-              navigation.navigate('PINCode', {
-                onConfirmed,
-              })
-            } else {
-              setStep(CREATE_STEP.SETUP_PIN)
-            }
+          onNext={() => {
+            auth(onConfirmed, () => setStep(CREATE_STEP.SETUP_PIN))
           }}
           onBack={() => setStep(CREATE_STEP.GEN_MNEMONIC)}
           mnemonic={mnemonic}
