@@ -9,7 +9,7 @@ import I18n from 'i18n-js'
 import { Scanning } from 'iconoir-react-native'
 import _ from 'lodash'
 import { useState } from 'react'
-import { Pressable, StyleSheet, TextInput } from 'react-native'
+import { Pressable, ScrollView, StyleSheet, TextInput } from 'react-native'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 import Colors from 'theme/Colors'
 import Fonts from 'theme/Fonts'
@@ -85,7 +85,10 @@ export default function ContactNew() {
     <View style={{ flex: 1 }}>
       <ScreenHeader title={isEdit ? 'Edit Contact' : 'New Contact'} />
 
-      <View style={Styles.page}>
+      <ScrollView
+        style={Styles.page}
+        contentContainerStyle={[Styles.center, { flex: 1, paddingBottom: 200 }]}
+      >
         <Box direction="column" gap="xlarge" full>
           <Box
             full
@@ -154,7 +157,7 @@ export default function ContactNew() {
             />
           </Box>
         </Box>
-      </View>
+      </ScrollView>
     </View>
   )
 }

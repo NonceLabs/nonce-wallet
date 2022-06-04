@@ -9,13 +9,7 @@ export default function LottieAnim({
   style: ViewStyle
   source: string
 }) {
-  const lottieRef = useRef<LottieView>(null)
-
-  useEffect(() => {
-    if (lottieRef) {
-      lottieRef?.current?.play()
-    }
-  }, [lottieRef])
-
-  return <LottieView ref={lottieRef} style={style} source={source} />
+  return (
+    <LottieView style={style} source={source} autoPlay loop duration={2000} />
+  )
 }

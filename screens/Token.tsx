@@ -22,6 +22,7 @@ import { txGraphQL } from 'utils/graphqls'
 import { graphFetcher } from 'utils/fetcher'
 import { Empty } from 'components/common/Placeholder'
 import TxList from 'components/Assets/TxList'
+import LottieAnim from 'components/common/LottieAnim'
 
 export default function TokenScreen({
   navigation,
@@ -105,6 +106,18 @@ export default function TokenScreen({
 
           {!isLoading && (data?.transactions ?? []).length === 0 && (
             <Empty title="No transactions" />
+          )}
+
+          {isLoading && (
+            <Box align="center" justify="center" pad="large">
+              <LottieAnim
+                style={{
+                  width: 200,
+                  height: 200,
+                }}
+                source={require('assets/lottie/loading.json')}
+              />
+            </Box>
           )}
 
           <TxList txs={data?.transactions ?? []} />

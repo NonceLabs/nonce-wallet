@@ -5,7 +5,7 @@ import InfoItem from 'components/common/InfoItem'
 import ScreenHeader from 'components/common/ScreenHeader'
 import { View } from 'components/Themed'
 import dayjs from 'dayjs'
-import I18n from 'i18n-js'
+import { ScrollView } from 'react-native'
 import { useAppSelector } from 'store/hooks'
 import Styles from 'theme/Styles'
 import { MinaTransaction } from 'types'
@@ -22,8 +22,8 @@ export default function TxDetail() {
     <View style={{ flex: 1 }}>
       <ScreenHeader title="Tx Detail" />
 
-      <View style={Styles.page}>
-        <Box justify="center">
+      <ScrollView style={Styles.page}>
+        <Box justify="center" pad="medium">
           <Heading>
             {isSend ? '-' : '+'}
             {formatBalance(tx.amount, MINA_TOKEN.decimals, MINA_TOKEN.decimals)}
@@ -50,7 +50,7 @@ export default function TxDetail() {
             value={dayjs(tx.dateTime).format('MMM D, YYYY HH:mm:ss')}
           />
         </Box>
-      </View>
+      </ScrollView>
     </View>
   )
 }

@@ -4,8 +4,8 @@ import { Modalize } from 'react-native-modalize'
 import I18n from 'i18n-js'
 import { ImageBackground, StyleSheet, TouchableOpacity } from 'react-native'
 import {
+  ArrowUp,
   Bell,
-  Dollar,
   NavArrowDown,
   QrCode,
   Wallet as WalletIcon,
@@ -13,7 +13,7 @@ import {
 import { Text, View } from './Themed'
 import { capitalizeFirstLetter } from 'utils/format'
 import { useAppSelector } from 'store/hooks'
-import { Wallet, Currency, CurrencyRate } from 'types'
+import { Currency, CurrencyRate } from 'types'
 import { useNavigation } from '@react-navigation/native'
 import Icon from './common/Icon'
 import Fonts from 'theme/Fonts'
@@ -107,7 +107,7 @@ export default function Banner() {
         <View style={styles.buttonGroup}>
           <Icon
             icon={
-              <Dollar
+              <ArrowUp
                 width={24}
                 height={24}
                 color={Colors[theme].screenBackground}
