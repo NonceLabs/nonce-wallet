@@ -10,12 +10,14 @@ export default function Address({
   wallet,
   color,
   fontSize = 18,
-  ecllipsis = true,
+  ellipsis = true,
+  numberOfLines = 1,
 }: {
   wallet: Wallet | undefined
   fontSize?: number
-  ecllipsis?: boolean
+  ellipsis?: boolean
   color?: string
+  numberOfLines?: number
 }) {
   const theme = useColorScheme()
   if (!wallet) {
@@ -30,8 +32,9 @@ export default function Address({
           fontSize,
         },
       ]}
+      numberOfLines={numberOfLines}
     >
-      {ecllipsis ? formatAccountId(wallet) : wallet.publicKey}
+      {ellipsis ? formatAccountId(wallet) : wallet.publicKey}
     </Text>
   )
 }

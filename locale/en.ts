@@ -206,6 +206,7 @@ const en = {
   Memo: 'Memo',
   Optional: 'Optional',
   'Transfer Preview': 'Transfer Preview',
+  Hash: 'Hash',
 }
 
 export default en

@@ -61,7 +61,7 @@ export default function WalletDetail() {
           style={{ borderRadius: 4, marginBottom: 20 }}
         >
           <Heading level={3}>{I18n.t('Wallet Address')}</Heading>
-          <Address wallet={wallet} ecllipsis={false} fontSize={16} />
+          <Address wallet={wallet} ellipsis={false} fontSize={16} />
         </Box>
 
         <SettingBlock

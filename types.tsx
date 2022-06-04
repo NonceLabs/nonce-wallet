@@ -138,3 +138,46 @@ export interface PaymentPreview {
   nonce: number
   memo?: string
 }
+
+export interface MinaAccountDetail {
+  publicKey: string
+  countPendingTransactions: number
+  balance: {
+    blockHeight: number
+    lockedBalance: string
+    total: string
+    unknown: string
+  }
+  epochTotalStakingBalance: string
+  nonce: number
+  receiptChainHash: string
+  totalBlocks: number
+  totalSnarks: number
+  totalTx: number
+  username: string
+  votingFor: string
+}
+
+export interface MinaTransaction {
+  id: string
+  token: number
+  to: string
+  amount: number
+  blockHeight: number
+  blockStateHash: string
+  dateTime: string
+  failureReason: string
+  fee: number
+  feeToken: number
+  from: string
+  hash: string
+  isDelegation: boolean
+  kind: string
+  memo: string
+  nonce: number
+  canonical: boolean
+  block: {
+    canonical: boolean
+    stateHash: string
+  }
+}

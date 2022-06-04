@@ -14,7 +14,7 @@ export const assetSlice = createSlice({
   name: 'asset',
   initialState,
   reducers: {
-    updateBalance: (state, action) => {
+    updateNativeTokenBalance: (state, action) => {
       state.tokens = state.tokens.map((t) => {
         if (t.isNative) {
           return { ...t, balance: action.payload }

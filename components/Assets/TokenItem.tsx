@@ -22,6 +22,7 @@ export default function TokenItem({
   unit?: string
 }) {
   const theme = useColorScheme()
+
   return (
     <TouchableOpacity
       key={item.symbol}

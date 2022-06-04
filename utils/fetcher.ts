@@ -1,3 +1,9 @@
+import { request } from 'graphql-request'
+
+export const graphFetcher = (query: string) => {
+  return request('https://graphql.minaexplorer.com/', query)
+}
+
 export const post = async (url: string, json: object) => {
   const body = JSON.stringify(json)
   console.log('###POST', url, json)

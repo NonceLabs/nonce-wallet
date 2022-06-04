@@ -9,7 +9,7 @@ import { Text, View } from 'components/Themed'
 import Colors from 'theme/Colors'
 import useColorScheme from 'hooks/useColorScheme'
 import { useAppSelector } from 'store/hooks'
-import { RootStackScreenProps, Token } from 'types'
+import { MinaTransaction, RootStackScreenProps, Token } from 'types'
 import { formatBalance } from 'utils/format'
 import Fonts from 'theme/Fonts'
 import { Portal } from 'react-native-portalize'
@@ -17,6 +17,11 @@ import { Modalize } from 'react-native-modalize'
 import AddressQRModal from 'components/Modals/AddressQRModal'
 import { useRef } from 'react'
 import Box from 'components/common/Box'
+import useSWR from 'swr'
+import { txGraphQL } from 'utils/graqhqls'
+import { graphFetcher } from 'utils/fetcher'
+import { Empty } from 'components/common/Placeholder'
+import TxList from 'components/Assets/TxList'
 
 export default function TokenScreen({
   navigation,
@@ -29,7 +34,11 @@ export default function TokenScreen({
 
   const theme = useColorScheme()
 
-  let txs = []
+  const { data, error } = useSWR<{
+    transactions: MinaTransaction[]
+  }>(txGraphQL(wallet?.publicKey), graphFetcher)
+
+  const isLoading = !error && !data
 
   return (
     <View style={styles.container}>
@@ -91,6 +100,12 @@ export default function TokenScreen({
               />
             </View>
           </Box>
+
+          {!isLoading && (data?.transactions ?? []).length === 0 && (
+            <Empty title="No transactions" />
+          )}
+
+          <TxList txs={data?.transactions ?? []} />
         </ScrollView>
       </View>
       <Portal>

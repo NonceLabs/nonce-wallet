@@ -202,6 +202,7 @@ const zh = {
   Memo: '备注',
   Optional: '可选',
   'Transfer Preview': '转账预览',
+  Hash: '哈希',
 }
 
 export default zh

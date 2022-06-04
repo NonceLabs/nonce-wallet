@@ -3,13 +3,18 @@ import { StyleSheet } from 'react-native'
 import { Text, View } from 'components/Themed'
 import { RootTabScreenProps } from 'types'
 import { useEffect } from 'react'
-import { useAppSelector } from 'store/hooks'
+import { useAppDispatch, useAppSelector } from 'store/hooks'
 import Banner from 'components/Banner'
 import Assets from 'components/Assets'
+import { fetcher } from 'utils/fetcher'
+import { parseAmount } from 'utils/format'
+import { MINA_TOKEN } from 'utils/configure'
 
 export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
   const walletList = useAppSelector((state) => state.wallet.list)
   const wallet = useAppSelector((state) => state.wallet.current)
+
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     // setTimeout(() => {
@@ -17,6 +22,26 @@ export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
     //     navigation.push('Start', { new: true })
     //   }
     // }, 500)
+    if (wallet) {
+      fetcher(`https://api.minaexplorer.com/accounts/${wallet.publicKey}`)
+        .then((result) => {
+          if (result.account) {
+            dispatch({
+              type: 'wallet/setDetail',
+              payload: result.account,
+            })
+            const balance = parseAmount(
+              result.account.balance.total,
+              MINA_TOKEN
+            ).toString()
+            dispatch({
+              type: 'asset/updateNativeTokenBalance',
+              payload: balance,
+            })
+          }
+        })
+        .catch(console.error)
+    }
   }, [walletList, wallet])
 
   return (

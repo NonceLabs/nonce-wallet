@@ -1,14 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { Wallet } from 'types'
+import { Wallet, MinaAccountDetail } from 'types'
 
 interface WalletSlice {
   list: Wallet[]
   current: Wallet | undefined
+  detail: MinaAccountDetail | undefined
 }
 
 const initialState: WalletSlice = {
   list: [],
   current: undefined,
+  detail: undefined,
 }
 
 export const walletSlice = createSlice({
@@ -44,6 +46,9 @@ export const walletSlice = createSlice({
       } else {
         state.current = undefined
       }
+    },
+    setDetail: (state, action) => {
+      state.detail = action.payload
     },
   },
 })
