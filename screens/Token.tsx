@@ -41,8 +41,6 @@ export default function TokenScreen({
 
   const isLoading = !error && !data
 
-  console.log(data)
-
   return (
     <View style={styles.container}>
       <ScreenHeader
@@ -115,7 +113,7 @@ export default function TokenScreen({
                   width: 200,
                   height: 200,
                 }}
-                source={require('assets/lottie/loading.json')}
+                source={require('assets/lottie/loading-circle.json')}
               />
             </Box>
           )}

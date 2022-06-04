@@ -215,6 +215,7 @@ const en = {
   Time: 'Time',
   'Not stake yet': 'Not stake yet',
   'Stake Now': 'Stake Now',
+  SNARKs: 'SNARKs',
 }
 
 export default en

@@ -10,6 +10,7 @@ export default {
   link: '#008cd5',
   black: 'black',
   purple: '#3D138D',
+  yellow: '#FFCA58',
   light: {
     text: '#000',
     background: '#fff',

@@ -211,6 +211,7 @@ const zh = {
   Time: '时间',
   'Not stake yet': '暂无质押',
   'Stake Now': '立即质押',
+  SNARKs: 'SNARKs',
 }
 
 export default zh

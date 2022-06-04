@@ -31,8 +31,8 @@ export default function Button({
         borderColor: Colors[theme].borderColor,
       },
       primary: {
-        backgroundColor: '#333',
-        borderColor: '#333',
+        backgroundColor: theme === 'dark' ? Colors.yellow : '#333',
+        borderColor: theme === 'dark' ? Colors.yellow : '#333',
       },
       danger: {
         backgroundColor: '#FF4040',
@@ -41,7 +41,7 @@ export default function Button({
     },
     text: {
       default: Colors[theme].text,
-      primary: 'white',
+      primary: theme === 'dark' ? Colors.black : 'white',
       danger: 'white',
     },
   }
