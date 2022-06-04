@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native'
+import PubSub from 'pubsub-js'
 
-import { Text, View } from 'components/Themed'
-import { RootTabScreenProps } from 'types'
+import { View } from 'components/Themed'
+import { PUB, RootTabScreenProps } from 'types'
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 import Banner from 'components/Banner'
@@ -22,25 +23,35 @@ export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
     //     navigation.push('Start', { new: true })
     //   }
     // }, 500)
-    if (wallet) {
-      fetcher(`https://api.minaexplorer.com/accounts/${wallet.publicKey}`)
-        .then((result) => {
-          if (result.account) {
-            dispatch({
-              type: 'wallet/setDetail',
-              payload: result.account,
-            })
-            const balance = parseAmount(
-              result.account.balance.total,
-              MINA_TOKEN
-            ).toString()
-            dispatch({
-              type: 'asset/updateNativeTokenBalance',
-              payload: balance,
-            })
-          }
-        })
-        .catch(console.error)
+    async function syncWalletInfo() {
+      if (wallet) {
+        fetcher(`https://api.minaexplorer.com/accounts/${wallet.publicKey}`)
+          .then((result) => {
+            if (result.account) {
+              dispatch({
+                type: 'wallet/setDetail',
+                payload: result.account,
+              })
+              const balance = parseAmount(
+                result.account.balance.total,
+                MINA_TOKEN
+              ).toString()
+              dispatch({
+                type: 'asset/updateNativeTokenBalance',
+                payload: balance,
+              })
+            }
+          })
+          .catch(console.error)
+      }
+    }
+
+    syncWalletInfo()
+
+    const token = PubSub.subscribe(PUB.SYNC_WALLET_INFO, syncWalletInfo)
+
+    return () => {
+      token && PubSub.unsubscribe(token)
     }
   }, [walletList, wallet])
 

@@ -32,6 +32,7 @@ import ContactsManage from 'screens/ContactsManage'
 import ContactNew from 'screens/ContactNew'
 import PINCode from 'screens/PINCode'
 import PrivateKey from 'screens/PrivateKey'
+import TxDetail from 'screens/TxDetail'
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
@@ -106,6 +107,11 @@ export default function RootNavigator() {
       <Stack.Screen
         name="Create"
         component={Create}
+        options={{ header: () => null }}
+      />
+      <Stack.Screen
+        name="TxDetail"
+        component={TxDetail}
         options={{ header: () => null }}
       />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>

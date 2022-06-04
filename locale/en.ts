@@ -207,6 +207,12 @@ const en = {
   Optional: 'Optional',
   'Transfer Preview': 'Transfer Preview',
   Hash: 'Hash',
+  'Transaction broadcast sucessfully': 'Transaction broadcast sucessfully',
+  'Error in sending transaction': 'Error in sending transaction',
+  'Tx Detail': 'Tx Detail',
+  Kind: 'Kind',
+  'Block Height': 'Block Height',
+  Time: 'Time',
 }
 
 export default en

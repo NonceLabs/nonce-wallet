@@ -62,7 +62,7 @@ export default function TokenList({ isLoading }: { isLoading: boolean }) {
             refreshing={isLoading}
             onRefresh={() => {
               if (!isLoading) {
-                PubSub.publish(PUB.REFRESH_TOKENLIST)
+                PubSub.publish(PUB.SYNC_WALLET_INFO)
               }
             }}
           />

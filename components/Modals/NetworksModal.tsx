@@ -20,7 +20,7 @@ export default function NetworksModal({ onClose }: { onClose: () => void }) {
           type: 'network/setCurrent',
           payload: item,
         })
-        PubSub.publish(PUB.REFRESH_TOKENLIST)
+        PubSub.publish(PUB.SYNC_WALLET_INFO)
         setTimeout(() => {
           onClose()
         }, 300)

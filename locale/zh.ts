@@ -203,6 +203,12 @@ const zh = {
   Optional: '可选',
   'Transfer Preview': '转账预览',
   Hash: '哈希',
+  'Transaction broadcast sucessfully': '交易已成功广播',
+  'Error in sending transaction': '交易发送失败',
+  'Tx Detail': '交易详情',
+  Kind: '类型',
+  'Block Height': '区块高度',
+  Time: '时间',
 }
 
 export default zh

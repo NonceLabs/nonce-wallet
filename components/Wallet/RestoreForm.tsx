@@ -21,7 +21,7 @@ export default function RestoreForm({
 }) {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [value, setValue] = useState(
-    'toss usual practice legend stereo review ghost access custom law enter gossip'
+    'project forest obtain curtain enough mutual pluck focus impulse cake lake frozen'
   )
 
   const theme = useColorScheme()

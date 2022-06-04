@@ -1,6 +1,7 @@
 import Decimal from 'decimal.js'
 import { Wallet, Chain, Token } from 'types'
 import { BN } from 'bn.js'
+import _ from 'lodash'
 
 export const ellipsis = (str: string, maxLength: number) => {
   if (str.length <= maxLength) {
@@ -33,7 +34,7 @@ export const formatBalance = (
   tail = 2
 ): string => {
   const v = new Decimal(balance).div(10 ** (decimals || 24)).toNumber()
-  const result = Number(v).toFixed(tail)
+  const result = _.trimEnd(Number(v).toFixed(tail), '0')
   const resultStr = result.split('.')
   return Number(resultStr[1]) === 0 ? resultStr[0] : result
 }

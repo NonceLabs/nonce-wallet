@@ -22,7 +22,7 @@ export default function WalletsModal({ onClose }: { onClose: () => void }) {
           type: 'wallet/setCurrent',
           payload: wallet,
         })
-        PubSub.publish(PUB.REFRESH_TOKENLIST)
+        PubSub.publish(PUB.SYNC_WALLET_INFO)
         onClose()
       }}
     />

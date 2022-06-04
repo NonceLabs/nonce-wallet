@@ -5,7 +5,7 @@ import * as Random from 'expo-random'
 import Client from 'mina-signer'
 import { MNEMONIC_STRENGTH } from '../utils/configure'
 import { Chain, KeyStoreFile, Token } from 'types'
-import { formatTokenBalance } from 'utils/format'
+import { formatTokenBalance, parseAmount } from 'utils/format'
 import { BN } from 'bn.js'
 
 const getDerivedPath = (index: number) => `m/44'/12586'/${index}'/0/0`
@@ -95,7 +95,7 @@ export const isValidAmount = (amount: string, token?: Token) => {
     return false
   }
   if (token) {
-    const _amount = formatTokenBalance(amount, token)
+    const _amount = parseAmount(amount, token)
     if (_amount.gte(new BN(token.balance))) {
       return false
     }

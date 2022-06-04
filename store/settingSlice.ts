@@ -26,7 +26,7 @@ const initialState: SettingSlice = {
   isDevMode: false,
   contacts: [
     {
-      publicKey: 'B62qre3erTHfzQckNuibViWQGyyKwZseztqrjPZBv6SQF384Rg6ESAy',
+      publicKey: 'B62qnkfJEc2Q1ZPpFCnxX62ahJLvSuPbTUDuxwVhtk1rsHfrSLe3Fhq',
       name: 'Jack',
       chain: Chain.MINA,
     },

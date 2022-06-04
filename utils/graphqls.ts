@@ -5,7 +5,7 @@ export const txGraphQL = (address: string | undefined) => {
 
   return `
     {
-      transactions(limit: 30, query: {to: "${address}"}, sortBy: BLOCKHEIGHT_DESC) {
+      transactions(limit: 30, query: {canonical: true, OR: [{from: "${address}"}, {to: "${address}"}]}, sortBy: BLOCKHEIGHT_DESC) {
         amount
         blockHeight
         canonical

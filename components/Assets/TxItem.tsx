@@ -39,9 +39,10 @@ export default function TxItem({
 
         <View style={styles.detail}>
           <Box direction="column" align="flex-start">
-            <Box gap="small" justify="flex-start">
+            <Box gap="small" justify="flex-start" align="flex-end">
               <Text style={styles.label}>{I18n.t('Amount')}</Text>
               <Text style={[styles.amount]}>
+                {isSend ? '-' : '+'}
                 {formatBalance(item.amount, MINA_TOKEN.decimals)}
               </Text>
             </Box>
@@ -77,14 +78,6 @@ export default function TxItem({
 }
 
 const styles = StyleSheet.create({
-  item: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 10,
-    marginBottom: 4,
-    borderRadius: 4,
-  },
   detail: {
     flex: 1,
     paddingLeft: 10,
@@ -95,25 +88,13 @@ const styles = StyleSheet.create({
   },
   time: {
     fontSize: 12,
-    textAlign: 'right',
     color: Colors.gray9,
     fontFamily: Fonts.variable,
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    justifyContent: 'space-between',
   },
   title: {
     fontSize: 16,
     fontFamily: Fonts.heading,
     opacity: 0.7,
-  },
-  receiverId: {
-    fontSize: 14,
-    color: Colors.gray9,
-    fontFamily: Fonts.variable,
-    lineHeight: 24,
   },
   label: {
     fontFamily: Fonts.heading,

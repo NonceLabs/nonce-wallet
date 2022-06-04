@@ -33,6 +33,7 @@ export type RootStackParamList = {
   ContactNew: { contact?: Contact }
   PINCode: { onConfirmed: () => void }
   PrivateKey: { wallet?: Wallet }
+  TxDetail: { tx: MinaTransaction }
   Modal: undefined
   NotFound: undefined
 }
@@ -91,6 +92,7 @@ export type Token = {
 
 export enum PUB {
   REFRESH_TOKENLIST = 'REFRESH_TOKENLIST',
+  SYNC_WALLET_INFO = 'SYNC_WALLET_INFO',
 }
 
 export interface MinaSummary {
@@ -180,4 +182,10 @@ export interface MinaTransaction {
     canonical: boolean
     stateHash: string
   }
+}
+
+export interface MinaSignature {
+  readonly field: string
+  readonly scalar: string
+  readonly rawSignature?: string
 }

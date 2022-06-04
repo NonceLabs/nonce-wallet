@@ -18,11 +18,12 @@ import { Text, View } from 'components/Themed'
 import Colors from 'theme/Colors'
 import useColorScheme from 'hooks/useColorScheme'
 import { useAppSelector } from 'store/hooks'
-import { formatBalance } from 'utils/format'
+import { formatBalance, parseAmount } from 'utils/format'
 import Fonts from 'theme/Fonts'
 import I18n from 'i18n-js'
 import {
   ButtonType,
+  Chain,
   Contact,
   Currency,
   CurrencyRate,
@@ -42,6 +43,9 @@ import { Modalize } from 'react-native-modalize'
 import TxPreviewModal from 'components/Modals/TxPreviewModal'
 import { isAddressValid, isValidAmount } from 'chain/crypto'
 import Toast from 'utils/toast'
+import useAuth from 'hooks/useAuth'
+import WalletAPI from 'chain/WalletAPI'
+import { sendTx } from 'utils/fetcher'
 
 export default function Transfer() {
   const currencyRates: CurrencyRate = useAppSelector(
@@ -52,6 +56,7 @@ export default function Transfer() {
   )
 
   const wallet = useAppSelector((state) => state.wallet.current)
+  const walletDetail = useAppSelector((state) => state.wallet.detail)
   const tokens: Token[] = useAppSelector((state) => state.asset.tokens)
   const contacts = useAppSelector((state) => state.setting.contacts)
 
@@ -83,7 +88,6 @@ export default function Transfer() {
   }
 
   const onPreviewTx = () => {
-    console.log('onPreviewTx')
     if (!isAddressValid(receiver)) {
       return Toast.error('Invalid address')
     }
@@ -95,15 +99,41 @@ export default function Transfer() {
       amount,
       memo,
       from: wallet!.publicKey,
-      nonce: 1,
-      fee: '0.01',
+      nonce: walletDetail!.nonce || 0,
+      fee: '0.001',
     })
     confirmTxRef.current?.open()
   }
 
+  const auth = useAuth()
+
   const onConfirmTx = () => {
     confirmTxRef.current?.close()
-    //
+    auth(async () => {
+      if (payment) {
+        try {
+          navigation.goBack()
+          const _payment = {
+            ...payment,
+            amount: parseAmount(payment.amount, selectedToken).toString(),
+            fee: parseAmount(payment.fee, selectedToken).toString(),
+          }
+          const result = await WalletAPI.transfer(
+            Chain.MINA,
+            wallet!.publicKey,
+            _payment
+          )
+          const response = await sendTx(result!)
+          console.log(response)
+          if (!response.error) {
+            navigation.goBack()
+          }
+          Toast.success(response.message)
+        } catch (error) {
+          Toast.error(error)
+        }
+      }
+    })
   }
 
   const contact = contacts.find((c) => c.publicKey === receiver)
