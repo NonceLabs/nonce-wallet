@@ -216,6 +216,8 @@ const en = {
   'Not stake yet': 'Not stake yet',
   'Stake Now': 'Stake Now',
   SNARKs: 'SNARKs',
+  Help: 'Help',
+  'More detail': 'More detail',
 }
 
 export default en

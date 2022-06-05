@@ -11,8 +11,8 @@ import {
   UserCircleAlt,
   Wallet,
 } from 'iconoir-react-native'
-import { useRef } from 'react'
-import { StyleSheet, ScrollView, Linking, Image } from 'react-native'
+import { useRef, useState } from 'react'
+import { StyleSheet, ScrollView, Linking, Image, Pressable } from 'react-native'
 import { Modalize } from 'react-native-modalize'
 import { Portal } from 'react-native-portalize'
 import ScreenHeader from 'components/common/ScreenHeader'
@@ -22,18 +22,21 @@ import ThemeModal from 'components/Setting/ThemeModal'
 import { Text, View } from 'components/Themed'
 import Colors from 'theme/Colors'
 import useColorScheme from 'hooks/useColorScheme'
-import { useAppSelector } from 'store/hooks'
+import { useAppDispatch, useAppSelector } from 'store/hooks'
 import Fonts from 'theme/Fonts'
 import { capitalizeFirstLetter } from 'utils/format'
 import { useNavigation } from '@react-navigation/native'
 import Box from 'components/common/Box'
 import icons from 'utils/icons'
 import CurrencyModal from 'components/Modals/CurrencyModal'
+import Toast from 'utils/toast'
 
 export default function SettingScreen() {
   const languageRef = useRef<Modalize>(null)
   const themeRef = useRef<Modalize>(null)
   const currencyRef = useRef<Modalize>(null)
+  const [clickCount, setClickCount] = useState(0)
+  const isDevMode = useAppSelector((state) => state.setting.isDevMode)
 
   const { theme: _theme, currentCurrency } = useAppSelector(
     (state) => state.setting
@@ -41,6 +44,7 @@ export default function SettingScreen() {
 
   const navigation = useNavigation()
   const theme = useColorScheme()
+  const dispatch = useAppDispatch()
 
   return (
     <View style={{ flex: 1, backgroundColor: Colors[theme].screenBackground }}>
@@ -140,14 +144,32 @@ export default function SettingScreen() {
         />
 
         <Box align="center" justify="center" pad="large">
-          <Image source={icons.LOGO} style={styles.logo} />
-          <Text></Text>
+          <Pressable
+            onPress={() => {
+              if (clickCount < 7) {
+                setClickCount(clickCount + 1)
+              }
+              if (clickCount === 7) {
+                Toast.success(
+                  I18n.t(!isDevMode ? 'Dev mode enabled' : 'Dev mode disabled')
+                )
+                setClickCount(0)
+                dispatch({
+                  type: 'setting/updateDevMode',
+                  payload: !isDevMode,
+                })
+              }
+            }}
+          >
+            <Image source={icons.LOGO} style={styles.logo} />
+          </Pressable>
         </Box>
       </ScrollView>
       <Portal>
         <Modalize ref={languageRef} adjustToContentHeight>
           <LanguageModal
             onClose={() => {
+              setClickCount(1)
               languageRef.current?.close()
               navigation.goBack()
             }}

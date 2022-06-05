@@ -212,6 +212,8 @@ const zh = {
   'Not stake yet': '暂无质押',
   'Stake Now': '立即质押',
   SNARKs: 'SNARKs',
+  Help: '帮助',
+  'More detail': '更多详情',
 }
 
 export default zh

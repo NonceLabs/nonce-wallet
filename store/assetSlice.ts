@@ -22,7 +22,7 @@ export const assetSlice = createSlice({
         return t
       })
     },
-    updatePrice: (state, action) => {
+    updateNativeTokenPrice: (state, action) => {
       state.tokens = state.tokens.map((t) => {
         if (t.isNative) {
           return { ...t, price: action.payload }

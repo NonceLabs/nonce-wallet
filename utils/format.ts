@@ -43,7 +43,7 @@ export const formatTokenBalance = (
   balance: string | number,
   token: Token | undefined
 ) => {
-  return new BN(balance).div(new BN(10).mul(new BN(token?.decimals || 9)))
+  return new BN(balance).div(new BN(10).pow(new BN(token?.decimals || 9)))
 }
 
 export const parseAmount = (amount: string, token: Token) => {

@@ -17,6 +17,7 @@ import {
   Copy,
   Glasses,
   Keyframes,
+  Lifebelt,
   StarOutline,
   UploadSquareOutline,
 } from 'iconoir-react-native'
@@ -143,8 +144,8 @@ export default function About({ navigation }: RootStackScreenProps<'About'>) {
               onPress: () => Linking.openURL('#'),
             },
             {
-              icon: ChatBubble,
-              title: 'Feedback',
+              icon: Lifebelt,
+              title: 'Help',
               value: '',
               onPress: () => Linking.openURL('#'),
             },

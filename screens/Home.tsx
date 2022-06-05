@@ -7,7 +7,7 @@ import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 import Banner from 'components/Banner'
 import Assets from 'components/Assets'
-import { fetcher } from 'utils/fetcher'
+import { fetcher, fetchFixer, fetchPrice } from 'utils/fetcher'
 import { parseAmount } from 'utils/format'
 import { MINA_TOKEN } from 'utils/configure'
 
@@ -16,6 +16,24 @@ export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
   const wallet = useAppSelector((state) => state.wallet.current)
 
   const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    fetchPrice().then((res) => {
+      if (res && typeof res.usd !== 'undefined') {
+        dispatch({
+          type: 'asset/updateNativeTokenPrice',
+          payload: res.usd,
+        })
+      }
+    })
+
+    fetchFixer().then((rates) => {
+      dispatch({
+        type: 'setting/updateCurrencyRate',
+        payload: { ...rates, USD: 1 },
+      })
+    })
+  }, [])
 
   useEffect(() => {
     // setTimeout(() => {

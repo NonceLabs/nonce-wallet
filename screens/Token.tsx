@@ -113,7 +113,7 @@ export default function TokenScreen({
                   width: 200,
                   height: 200,
                 }}
-                source={require('assets/lottie/loading-circle.json')}
+                source={require('assets/lottie/pacman.json')}
               />
             </Box>
           )}

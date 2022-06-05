@@ -78,7 +78,7 @@ export default function Validators() {
               width: 200,
               height: 200,
             }}
-            source={require('assets/lottie/loading.json')}
+            source={require('assets/lottie/pacman.json')}
           />
         </Box>
       )}

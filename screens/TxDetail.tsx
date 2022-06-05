@@ -1,12 +1,17 @@
+import * as WebBrowser from 'expo-web-browser'
 import { useRoute } from '@react-navigation/native'
 import Box from 'components/common/Box'
 import Heading from 'components/common/Heading'
 import InfoItem from 'components/common/InfoItem'
 import ScreenHeader from 'components/common/ScreenHeader'
-import { View } from 'components/Themed'
+import { Text, View } from 'components/Themed'
 import dayjs from 'dayjs'
-import { ScrollView } from 'react-native'
+import useColorScheme from 'hooks/useColorScheme'
+import I18n from 'i18n-js'
+import { Compass } from 'iconoir-react-native'
+import { Pressable, ScrollView } from 'react-native'
 import { useAppSelector } from 'store/hooks'
+import Colors from 'theme/Colors'
 import Styles from 'theme/Styles'
 import { MinaTransaction } from 'types'
 import { MINA_TOKEN } from 'utils/configure'
@@ -17,6 +22,8 @@ export default function TxDetail() {
   const tx = (params as any)?.tx as MinaTransaction
   const wallet = useAppSelector((state) => state.wallet.current)
   const isSend = tx.from === wallet?.publicKey
+
+  const theme = useColorScheme()
 
   return (
     <View style={{ flex: 1 }}>
@@ -49,6 +56,19 @@ export default function TxDetail() {
             title="Time"
             value={dayjs(tx.dateTime).format('MMM D, YYYY HH:mm:ss')}
           />
+        </Box>
+        <Box justify="flex-end" pad="medium" style={{ marginTop: 20 }}>
+          <Pressable
+            onPress={() => {
+              WebBrowser.openBrowserAsync(`https://minablock.xyz/tx/${tx.hash}`)
+            }}
+            style={Styles.row}
+          >
+            <Compass width={20} height={20} color={Colors.purple} />
+            <Text style={{ color: Colors.purple, marginLeft: 6 }}>
+              {I18n.t('More detail')}
+            </Text>
+          </Pressable>
         </Box>
       </ScrollView>
     </View>

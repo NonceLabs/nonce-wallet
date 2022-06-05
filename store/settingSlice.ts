@@ -66,6 +66,12 @@ export const settingSlice = createSlice({
         return t
       })
     },
+    updateDevMode: (state, action) => {
+      state.isDevMode = action.payload
+    },
+    updateCurrencyRate: (state, action) => {
+      state.currencyRates = { ...state.currencyRates, ...action.payload }
+    },
   },
 })
 

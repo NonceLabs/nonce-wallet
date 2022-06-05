@@ -58,3 +58,11 @@ export async function stakeTx(signed: Signed<StakeDelegation>) {
     payload: signed.data,
   })
 }
+
+export const fetchPrice = async () => {
+  return fetcher(
+    `https://api.coingecko.com/api/v3/simple/price?ids=mina-protocol&vs_currencies=usd`
+  )
+    .then((data) => data['mina-protocol'])
+    .catch(() => ({}))
+}
