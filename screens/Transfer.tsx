@@ -33,6 +33,7 @@ import {
 import {
   CURRENCY_SYMBOL,
   DEFAULT_CURRENCY_RATE,
+  GAS_FEE_LEVELS,
   MINA_TOKEN,
 } from 'utils/configure'
 import TokenItem from 'components/Assets/TokenItem'
@@ -46,6 +47,8 @@ import Toast from 'utils/toast'
 import useAuth from 'hooks/useAuth'
 import WalletAPI from 'chain/WalletAPI'
 import { sendTx } from 'utils/fetcher'
+import Heading from 'components/common/Heading'
+import Radio from 'components/common/Radio'
 
 export default function Transfer() {
   const currencyRates: CurrencyRate = useAppSelector(
@@ -75,6 +78,7 @@ export default function Transfer() {
   const [addressFocus, setAddressFocus] = useState(false)
   const [amountFocus, setAmountFocus] = useState(false)
   const [memoFocus, setMemoFocus] = useState(false)
+  const [gasFeeLv, setGasFeeLv] = useState(1)
 
   const [payment, setPayment] = useState<PaymentPreview>()
 
@@ -100,7 +104,7 @@ export default function Transfer() {
       memo,
       from: wallet!.publicKey,
       nonce: walletDetail!.nonce || 0,
-      fee: '0.001',
+      fee: GAS_FEE_LEVELS[gasFeeLv].value,
     })
     confirmTxRef.current?.open()
   }
@@ -297,6 +301,31 @@ export default function Transfer() {
               placeholderTextColor={Colors.gray9}
             />
           </Box>
+
+          <Box direction="column" gap="small" align="flex-start" full>
+            <Box justify="space-between" full>
+              <Heading level={3}>{I18n.t('Gas Fee')}</Heading>
+              <Text
+                style={{
+                  fontFamily: Fonts.variable,
+                  color: Colors[theme].link,
+                  fontSize: 16,
+                }}
+              >
+                {GAS_FEE_LEVELS[gasFeeLv].value} MINA
+              </Text>
+            </Box>
+            <Box full align="flex-start" justify="space-between">
+              {GAS_FEE_LEVELS.map((t, idx) => (
+                <Pressable key={t.level} onPress={() => setGasFeeLv(idx)}>
+                  <Box gap="small">
+                    <Radio checked={gasFeeLv === idx} />
+                    <Text style={styles.title}>{I18n.t(t.level)}</Text>
+                  </Box>
+                </Pressable>
+              ))}
+            </Box>
+          </Box>
         </Box>
 
         <Button
@@ -406,4 +435,5 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     width: '100%',
   },
+  title: {},
 })

@@ -1,12 +1,11 @@
 import Address from 'components/common/Address'
 import Box from 'components/common/Box'
 import Heading from 'components/common/Heading'
-import { Text, View } from 'components/Themed'
+import Radio from 'components/common/Radio'
+import { Text } from 'components/Themed'
 import useColorScheme from 'hooks/useColorScheme'
 import I18n from 'i18n-js'
-import { CheckCircledOutline, Circle } from 'iconoir-react-native'
 import { Pressable, StyleSheet } from 'react-native'
-import Colors from 'theme/Colors'
 import Fonts from 'theme/Fonts'
 import { Chain, Validator } from 'types'
 import { MINA_TOKEN } from 'utils/configure'
@@ -55,13 +54,7 @@ export default function ValidatorItem({
           </Box>
         </Box>
 
-        {selected ? (
-          <View style={{ backgroundColor: Colors.green, borderRadius: 12 }}>
-            <CheckCircledOutline width={24} height={24} color={Colors.white} />
-          </View>
-        ) : (
-          <Circle width={24} height={24} color={Colors[theme].tint} />
-        )}
+        <Radio checked={selected} />
       </Box>
     </Pressable>
   )

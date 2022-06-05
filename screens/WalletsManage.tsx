@@ -1,18 +1,17 @@
 import I18n from 'i18n-js'
-import { CheckCircledOutline, Circle } from 'iconoir-react-native'
 import { FlatList, StyleSheet, TouchableOpacity } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import Button from 'components/common/Button'
 import ScreenHeader from 'components/common/ScreenHeader'
 
-import { Text, View } from 'components/Themed'
+import { View } from 'components/Themed'
 import Colors from 'theme/Colors'
 import useColorScheme from 'hooks/useColorScheme'
 import { useAppSelector } from 'store/hooks'
 import { ButtonType, RootStackScreenProps, Wallet } from 'types'
 import Fonts from 'theme/Fonts'
-import { formatAccountId } from 'utils/format'
 import Address from 'components/common/Address'
+import Radio from 'components/common/Radio'
 
 export default function WalletsManage({
   navigation,
@@ -44,17 +43,7 @@ export default function WalletsManage({
                 ]}
               >
                 <Address wallet={item} />
-                {currentAccountId === item && (
-                  <View
-                    style={{ backgroundColor: Colors.green, borderRadius: 12 }}
-                  >
-                    <CheckCircledOutline
-                      width={24}
-                      height={24}
-                      color={Colors.white}
-                    />
-                  </View>
-                )}
+                <Radio checked={currentAccountId === item} disabled />
               </View>
             </TouchableOpacity>
           )

@@ -27,3 +27,18 @@ export const MINA_TOKEN = {
   isNative: true,
   decimals: 9,
 }
+
+export const GAS_FEE_LEVELS = [
+  {
+    level: 'Slow',
+    value: '0.001',
+  },
+  {
+    level: 'Default',
+    value: '0.01',
+  },
+  {
+    level: 'Fast',
+    value: '0.2',
+  },
+]

@@ -1,18 +1,19 @@
 import * as bip39 from 'bip39'
-import SegmentedControl from '@react-native-segmented-control/segmented-control'
 import Box from 'components/common/Box'
 import Button from 'components/common/Button'
 import Heading from 'components/common/Heading'
 import useColorScheme from 'hooks/useColorScheme'
 import I18n from 'i18n-js'
 import { useState } from 'react'
-import { ScrollView, TextInput, StyleSheet } from 'react-native'
+import { ScrollView, TextInput, StyleSheet, Pressable } from 'react-native'
 import Colors from 'theme/Colors'
 import Fonts from 'theme/Fonts'
 import Styles from 'theme/Styles'
 import { parseMnemonic, parsePrivateKey } from 'chain/crypto'
 import { KeyStoreFile } from 'types'
 import Toast from 'utils/toast'
+import { Text } from 'components/Themed'
+import Radio from 'components/common/Radio'
 
 export default function RestoreForm({
   onNext,
@@ -20,9 +21,7 @@ export default function RestoreForm({
   onNext: (keyFile: KeyStoreFile) => void
 }) {
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const [value, setValue] = useState(
-    'project forest obtain curtain enough mutual pluck focus impulse cake lake frozen'
-  )
+  const [value, setValue] = useState('')
 
   const theme = useColorScheme()
 
@@ -32,14 +31,7 @@ export default function RestoreForm({
         <Heading>(1/2)</Heading>
         <Heading>{I18n.t('Restore')}</Heading>
       </Box>
-      <SegmentedControl
-        values={[I18n.t('Mnemonic'), I18n.t('Private Key')]}
-        selectedIndex={selectedIndex}
-        onChange={(event) => {
-          setSelectedIndex(event.nativeEvent.selectedSegmentIndex)
-        }}
-        tintColor={Colors.gray}
-      />
+
       <Box direction="column" gap="medium" style={{ marginTop: 20 }}>
         <TextInput
           multiline
@@ -50,9 +42,23 @@ export default function RestoreForm({
           onChangeText={(text: string) => setValue(text)}
         />
 
+        <Box direction="column" align="flex-start" full gap="small">
+          {[I18n.t('Mnemonic'), I18n.t('Private Key')].map((t, idx) => {
+            return (
+              <Pressable key={t} onPress={() => setSelectedIndex(idx)}>
+                <Box gap="small">
+                  <Radio checked={selectedIndex === idx} />
+                  <Text style={styles.title}>{t}</Text>
+                </Box>
+              </Pressable>
+            )
+          })}
+        </Box>
+
         <Button
           label={I18n.t('Confirm')}
           primary
+          disabled={!value.trim()}
           onPress={async () => {
             try {
               let _keyfile = null
@@ -94,5 +100,9 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 20,
     fontFamily: Fonts.variable,
+  },
+  title: {
+    fontSize: 16,
+    fontFamily: Fonts.heading,
   },
 })

@@ -219,6 +219,10 @@ const zh = {
   Change: '更改',
   'Staked Balance': '已质押余额',
   'Next Epoch Staked Balance': '下一个周期质押余额',
+  'Gas Fee': 'Gas 费',
+  Slow: '慢',
+  Fast: '快',
+  Default: '默认',
 }
 
 export default zh

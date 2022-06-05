@@ -223,6 +223,10 @@ const en = {
   Change: 'Change',
   'Staked Balance': 'Staked Balance',
   'Next Epoch Staked Balance': 'Next Epoch Staked Balance',
+  'Gas Fee': 'Gas Fee',
+  Slow: 'Slow',
+  Fast: 'Fast',
+  Default: 'Default',
 }
 
 export default en

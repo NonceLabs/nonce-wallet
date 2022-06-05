@@ -10,6 +10,7 @@ import Assets from 'components/Assets'
 import { fetcher, fetchFixer, fetchPrice } from 'utils/fetcher'
 import { parseAmount } from 'utils/format'
 import { MINA_TOKEN } from 'utils/configure'
+import TokenList from 'components/Assets/TokenList'
 
 export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
   const walletList = useAppSelector((state) => state.wallet.list)
@@ -76,7 +77,7 @@ export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
   return (
     <View style={styles.container}>
       <Banner />
-      <Assets />
+      <TokenList isLoading={false} />
     </View>
   )
 }

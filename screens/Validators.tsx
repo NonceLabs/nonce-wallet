@@ -19,7 +19,7 @@ import { useAppSelector } from 'store/hooks'
 import useSWR from 'swr'
 import Colors from 'theme/Colors'
 import { Chain, StakePreview, Validator } from 'types'
-import { MINA_TOKEN } from 'utils/configure'
+import { GAS_FEE_LEVELS, MINA_TOKEN } from 'utils/configure'
 import { fetcher } from 'utils/fetcher'
 import { parseAmount } from 'utils/format'
 import Toast from 'utils/toast'
@@ -68,7 +68,7 @@ export default function Validators() {
       from: wallet.publicKey,
       to: selected.public_key,
       nonce: detail?.nonce,
-      fee: '0.01',
+      fee: GAS_FEE_LEVELS[1].value,
     })
     confirmStakeRef.current?.open()
   }

@@ -1,4 +1,3 @@
-import { CheckCircledOutline, Circle } from 'iconoir-react-native'
 import { Pressable, StyleSheet } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import Colors from 'theme/Colors'
@@ -7,6 +6,7 @@ import Fonts from 'theme/Fonts'
 import { Text, View } from 'components/Themed'
 import SheetHeader from './SheetHeader'
 import I18n from 'i18n-js'
+import Radio from './Radio'
 
 export default function SheetModal({
   title,
@@ -51,19 +51,7 @@ export default function SheetModal({
               onPress={() => onSelect(item, idx)}
             >
               <View style={styles.itemRow}>
-                {isActive ? (
-                  <View
-                    style={{ backgroundColor: Colors.green, borderRadius: 12 }}
-                  >
-                    <CheckCircledOutline
-                      width={24}
-                      height={24}
-                      color={Colors.white}
-                    />
-                  </View>
-                ) : (
-                  <Circle width={24} height={24} color={Colors[theme].tint} />
-                )}
+                <Radio checked={isActive} />
                 <Text style={[styles.itemText, { color: Colors[theme].link }]}>
                   {isTranslate ? I18n.t(item) : item}
                 </Text>
