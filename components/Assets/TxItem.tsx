@@ -4,7 +4,7 @@ import { Text, View } from 'components/Themed'
 import dayjs from 'dayjs'
 import useColorScheme from 'hooks/useColorScheme'
 import I18n from 'i18n-js'
-import { ReceiveDollars, SendDollars } from 'iconoir-react-native'
+import { ArrowDown, ArrowUp, Bank } from 'iconoir-react-native'
 import { Pressable, StyleSheet } from 'react-native'
 import { useAppSelector } from 'store/hooks'
 import Colors from 'theme/Colors'
@@ -27,10 +27,12 @@ export default function TxItem({
     <Pressable onPress={() => onOpen(item)}>
       <Box full backgroundColor={Colors[theme].cardBackground} pad="medium">
         <Box direction="column">
-          {isSend ? (
-            <SendDollars width={30} height={30} color={Colors.gray9} />
+          {item.isDelegation ? (
+            <Bank width={30} height={30} color={Colors.gray9} />
+          ) : isSend ? (
+            <ArrowUp width={30} height={30} color={Colors.gray9} />
           ) : (
-            <ReceiveDollars width={30} height={30} color={Colors.gray9} />
+            <ArrowDown width={30} height={30} color={Colors.gray9} />
           )}
           <Text style={styles.time}>
             {dayjs(item.dateTime).format('HH:mm')}

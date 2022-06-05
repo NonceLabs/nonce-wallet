@@ -13,11 +13,10 @@ import Colors from 'theme/Colors'
 import useColorScheme from 'hooks/useColorScheme'
 import {
   AppNotification,
-  ChatBubble,
   Copy,
-  Glasses,
   Keyframes,
   Lifebelt,
+  Quote,
   StarOutline,
   UploadSquareOutline,
 } from 'iconoir-react-native'
@@ -138,7 +137,7 @@ export default function About({ navigation }: RootStackScreenProps<'About'>) {
           title=""
           items={[
             {
-              icon: Glasses,
+              icon: Quote,
               title: 'Privacy',
               value: '',
               onPress: () => Linking.openURL('#'),

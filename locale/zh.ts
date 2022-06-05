@@ -54,7 +54,7 @@ const zh = {
   Contract: '合约',
   Stake: '质押',
   'Search nodes': '搜索节点',
-  'My staking': '我的存款',
+  'My Delegation': '我的存款',
   Validators: '验证节点',
   Validator: '验证节点',
   'Total amount staked': '质押总数',
@@ -209,11 +209,16 @@ const zh = {
   Kind: '类型',
   'Block Height': '区块高度',
   Time: '时间',
-  'Not stake yet': '暂无质押',
-  'Stake Now': '立即质押',
+  'Not delegation yet': '暂无质押',
+  'Delegate Now': '立即质押',
   SNARKs: 'SNARKs',
   Help: '帮助',
   'More detail': '更多详情',
+  'Stake Preview': '质押预览',
+  Producer: '生产者',
+  Change: '更改',
+  'Staked Balance': '已质押余额',
+  'Next Epoch Staked Balance': '下一个周期质押余额',
 }
 
 export default zh

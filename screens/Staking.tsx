@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native'
 import Box from 'components/common/Box'
 import Button from 'components/common/Button'
 import Heading from 'components/common/Heading'
+import InfoItem from 'components/common/InfoItem'
 import { Empty } from 'components/common/Placeholder'
 import ScreenHeader from 'components/common/ScreenHeader'
 import { Text, View } from 'components/Themed'
@@ -9,11 +10,12 @@ import useColorScheme from 'hooks/useColorScheme'
 import I18n from 'i18n-js'
 import { ScrollView, StyleSheet } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { useAppSelector } from 'store/hooks'
 import useSWR from 'swr'
 import Colors from 'theme/Colors'
 import Fonts from 'theme/Fonts'
 import Styles from 'theme/Styles'
-import { MinaSummary } from 'types'
+import { MinaSummary, MinaProdocuer } from 'types'
 import { fetcher } from 'utils/fetcher'
 
 export default function Staking() {
@@ -24,8 +26,22 @@ export default function Staking() {
       refreshInterval: 30000,
     }
   )
+  const detail = useAppSelector((state) => state.wallet.detail)
   const theme = useColorScheme()
   const navigation = useNavigation()
+
+  const isDelegated = !!detail?.delegate && detail.delegate !== detail.publicKey
+
+  const { data: producer, error: producerError } = useSWR<{
+    account: MinaProdocuer
+  }>(
+    isDelegated
+      ? `https://api.minaexplorer.com/accounts/${detail?.delegate}`
+      : null,
+    fetcher
+  )
+
+  const pAccount = producer?.account
 
   return (
     <View style={{ flex: 1 }}>
@@ -79,7 +95,7 @@ export default function Staking() {
           justify="space-between"
           style={{ marginTop: 20, marginBottom: 10 }}
         >
-          <Heading level={2}>{I18n.t('My staking')}</Heading>
+          <Heading level={2}>{I18n.t('My Delegation')}</Heading>
         </Box>
         <Box
           direction="column"
@@ -90,14 +106,41 @@ export default function Staking() {
           }}
           pad="large"
         >
-          <Empty
-            title="Not stake yet"
-            style={{ width: '100%', paddingTop: 30 }}
-          />
+          {isDelegated ? (
+            <Box direction="column" align="flex-start" gap="medium">
+              {!!pAccount?.username && (
+                <InfoItem title="Name" value={pAccount.username} />
+              )}
+
+              <InfoItem title="Producer" value={detail.delegate} />
+
+              <InfoItem
+                title="Staked Balance"
+                value={
+                  pAccount
+                    ? Number(pAccount.epochTotalStakingBalance).toFixed(0)
+                    : '-'
+                }
+              />
+              <InfoItem
+                title="Next Epoch Staked Balance"
+                value={
+                  pAccount
+                    ? Number(pAccount.nextEpochTotalStakingBalance).toFixed(0)
+                    : '-'
+                }
+              />
+            </Box>
+          ) : (
+            <Empty
+              title="Not delegation yet"
+              style={{ width: '100%', paddingTop: 30 }}
+            />
+          )}
           <Button
-            label={I18n.t('Stake Now')}
+            label={I18n.t(isDelegated ? 'Change' : 'Delegate Now')}
             primary
-            style={{ width: 200, marginVertical: 30 }}
+            style={{ width: 200, marginTop: 30 }}
             size="medium"
             onPress={() => {
               navigation.navigate('Validators')

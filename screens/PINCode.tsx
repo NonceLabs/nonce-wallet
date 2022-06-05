@@ -35,9 +35,7 @@ export default function PINCode() {
           onChangeText={(text) => {
             setPINCode(text)
             if (text.length === 6 && _pincode === text) {
-              setTimeout(() => {
-                onConfirmed()
-              }, 300)
+              onConfirmed()
             }
           }}
           selectionColor="transparent"

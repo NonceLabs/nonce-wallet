@@ -109,29 +109,30 @@ export default function Transfer() {
 
   const onConfirmTx = () => {
     confirmTxRef.current?.close()
+    if (!payment) {
+      return
+    }
     auth(async () => {
-      if (payment) {
-        try {
-          navigation.goBack()
-          const _payment = {
-            ...payment,
-            amount: parseAmount(payment.amount, selectedToken).toString(),
-            fee: parseAmount(payment.fee, selectedToken).toString(),
-          }
-          const result = await WalletAPI.transfer(
-            Chain.MINA,
-            wallet!.publicKey,
-            _payment
-          )
-          const response = await sendTx(result!)
-          console.log(response)
-          if (!response.error) {
-            navigation.goBack()
-          }
-          Toast.success(response.message)
-        } catch (error) {
-          Toast.error(error)
+      try {
+        navigation.goBack()
+        const _payment = {
+          ...payment,
+          amount: parseAmount(payment.amount, selectedToken).toString(),
+          fee: parseAmount(payment.fee, MINA_TOKEN).toString(),
         }
+        const result = await WalletAPI.transfer(
+          Chain.MINA,
+          wallet!.publicKey,
+          _payment
+        )
+        const response = await sendTx(result!)
+
+        if (!response.error) {
+          navigation.goBack()
+        }
+        Toast.success(response.message)
+      } catch (error) {
+        Toast.error(error)
       }
     })
   }

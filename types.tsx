@@ -135,13 +135,16 @@ export interface KeyStoreFile {
 
 export interface Contact extends Wallet {}
 
-export interface PaymentPreview {
+export interface StakePreview {
   to: PublicKey
   from: PublicKey
   fee: string
-  amount: string
   nonce: number
   memo?: string
+}
+
+export interface PaymentPreview extends StakePreview {
+  amount: string
 }
 
 export interface MinaAccountDetail {
@@ -159,8 +162,9 @@ export interface MinaAccountDetail {
   totalBlocks: number
   totalSnarks: number
   totalTx: number
-  username: string
+  username?: string
   votingFor: string
+  delegate?: string
 }
 
 export interface MinaTransaction {
@@ -195,7 +199,7 @@ export interface MinaSignature {
 
 export interface Validator {
   public_key: PublicKey
-  identity_name: string
+  identity_name?: string
   start_height: number
   start_time: string
   last_height: number
@@ -207,4 +211,9 @@ export interface Validator {
   account_balance: string
   account_balance_unknown: string
   fee: number
+}
+
+export interface MinaProducer extends MinaAccountDetail {
+  nextEpochTotalStakingBalance: string
+  epochDelegators: any[]
 }

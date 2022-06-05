@@ -53,7 +53,7 @@ const en = {
   Contract: 'Contract',
   Stake: 'Stake',
   'Search nodes': 'Search nodes',
-  'My staking': 'My staking',
+  'My Delegation': 'My Delegation',
   Validators: 'Validators',
   Validator: 'Validator',
   'Total amount staked': 'Total amount staked',
@@ -213,11 +213,16 @@ const en = {
   Kind: 'Kind',
   'Block Height': 'Block Height',
   Time: 'Time',
-  'Not stake yet': 'Not stake yet',
-  'Stake Now': 'Stake Now',
+  'Not delegation yet': 'Not delegation yet',
+  'Delegate Now': 'Delegate Now',
   SNARKs: 'SNARKs',
   Help: 'Help',
   'More detail': 'More detail',
+  'Stake Preview': 'Stake Preview',
+  Producer: 'Producer',
+  Change: 'Change',
+  'Staked Balance': 'Staked Balance',
+  'Next Epoch Staked Balance': 'Next Epoch Staked Balance',
 }
 
 export default en

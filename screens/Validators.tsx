@@ -1,19 +1,30 @@
+import WalletAPI from 'chain/WalletAPI'
 import Box from 'components/common/Box'
 import Button from 'components/common/Button'
 import LottieAnim from 'components/common/LottieAnim'
 import ScreenHeader from 'components/common/ScreenHeader'
+import StakePreviewModal from 'components/Modals/StakePreviewModal'
 import ValidatorItem from 'components/Staking/ValidatorItem'
 import { View } from 'components/Themed'
+import useAuth from 'hooks/useAuth'
 import useColorScheme from 'hooks/useColorScheme'
 import I18n from 'i18n-js'
 import { Search } from 'iconoir-react-native'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { FlatList, StyleSheet, TextInput } from 'react-native'
+import { Modalize } from 'react-native-modalize'
+import { Portal } from 'react-native-portalize'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { useAppSelector } from 'store/hooks'
 import useSWR from 'swr'
 import Colors from 'theme/Colors'
-import { Validator } from 'types'
+import { Chain, StakePreview, Validator } from 'types'
+import { MINA_TOKEN } from 'utils/configure'
 import { fetcher } from 'utils/fetcher'
+import { parseAmount } from 'utils/format'
+import Toast from 'utils/toast'
+import { stakeTx } from 'utils/fetcher'
+import { useNavigation } from '@react-navigation/native'
 
 export default function Validators() {
   const theme = useColorScheme()
@@ -21,7 +32,11 @@ export default function Validators() {
   const [isFocused, setIsFocused] = useState(false)
   const [page, setPage] = useState(1)
   const [selected, setSelected] = useState<Validator | undefined>()
+  const confirmStakeRef = useRef<Modalize>(null)
+  const [delegation, setDelegation] = useState<StakePreview | undefined>()
 
+  const wallet = useAppSelector((state) => state.wallet.current)
+  const detail = useAppSelector((state) => state.wallet.detail)
   const { data, error } = useSWR<Validator[]>(
     `https://mina-mainnet-indexer.aurowallet.com/validators`,
     fetcher
@@ -33,13 +48,58 @@ export default function Validators() {
 
   let validators = data || []
   if (keyword.trim()) {
+    const _keyword = keyword.trim().toLowerCase()
     validators = validators?.filter((v) => {
       if (!v) {
         return false
       }
       return (
-        v.public_key.includes(keyword) || v.identity_name?.includes(keyword)
+        v.public_key.toLowerCase().includes(_keyword) ||
+        v.identity_name?.toLowerCase().includes(_keyword)
       )
+    })
+  }
+
+  const onNext = () => {
+    if (!selected || !wallet || !detail) {
+      return
+    }
+    setDelegation({
+      from: wallet.publicKey,
+      to: selected.public_key,
+      nonce: detail?.nonce,
+      fee: '0.01',
+    })
+    confirmStakeRef.current?.open()
+  }
+
+  const auth = useAuth()
+  const navigation = useNavigation()
+  const onConfirmStake = () => {
+    confirmStakeRef.current?.close()
+    if (!delegation || !wallet) {
+      return
+    }
+
+    auth(async () => {
+      try {
+        const _stake = {
+          ...delegation,
+          fee: parseAmount(delegation.fee, MINA_TOKEN).toString(),
+        }
+        const result = await WalletAPI.stake(
+          Chain.MINA,
+          wallet.publicKey,
+          _stake
+        )
+        const response = await stakeTx(result!)
+        if (!response.error) {
+          navigation.goBack()
+        }
+        Toast.success(response.message)
+      } catch (error) {
+        Toast.error(error)
+      }
     })
   }
 
@@ -112,10 +172,26 @@ export default function Validators() {
         <Button
           label={I18n.t('Next')}
           primary
-          onPress={() => {}}
+          onPress={onNext}
           disabled={!selected}
         />
       </Box>
+      <Portal>
+        <Modalize
+          ref={confirmStakeRef}
+          adjustToContentHeight
+          closeOnOverlayTap
+          withHandle={false}
+        >
+          <StakePreviewModal
+            delegation={delegation}
+            onCancel={() => {
+              confirmStakeRef.current?.close()
+            }}
+            onConfirm={onConfirmStake}
+          />
+        </Modalize>
+      </Portal>
     </View>
   )
 }
