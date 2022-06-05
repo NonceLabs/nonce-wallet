@@ -71,7 +71,9 @@ export default function Banner() {
 
           <TouchableOpacity
             activeOpacity={0.7}
-            onPress={() => networksRef?.current?.open()}
+            onPress={() => {
+              // networksRef?.current?.open()
+            }}
           >
             <View
               style={[Styles.row, styles.button, { borderColor: Colors.white }]}

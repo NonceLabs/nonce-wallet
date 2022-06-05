@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { Chain, Contact, Currency, CurrencyRate, NetworkType } from 'types'
+import { Contact, Currency, CurrencyRate, NetworkType } from 'types'
 
 interface SettingSlice {
   theme: string
@@ -20,17 +20,11 @@ const initialState: SettingSlice = {
   },
   currentCurrency: Currency.USD,
   network: NetworkType.MAINNET,
-  pincode: '111111',
+  pincode: '',
   bioAuthEnabled: false,
   pushToken: '',
   isDevMode: false,
-  contacts: [
-    {
-      publicKey: 'B62qnkfJEc2Q1ZPpFCnxX62ahJLvSuPbTUDuxwVhtk1rsHfrSLe3Fhq',
-      name: 'Jack',
-      chain: Chain.MINA,
-    },
-  ],
+  contacts: [],
 }
 
 export const settingSlice = createSlice({

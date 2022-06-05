@@ -1,4 +1,4 @@
-import { StyleSheet, useWindowDimensions } from 'react-native'
+import { Platform, StyleSheet, useWindowDimensions } from 'react-native'
 import PubSub from 'pubsub-js'
 
 import { View } from 'components/Themed'
@@ -14,7 +14,6 @@ import {
   DEFAULT_CURRENCY_RATE,
   MINA_TOKEN,
 } from 'utils/configure'
-import TokenList from 'components/Assets/TokenList'
 import useColorScheme from 'hooks/useColorScheme'
 import Colors from 'theme/Colors'
 import TokenItem from 'components/Assets/TokenItem'
@@ -53,11 +52,11 @@ export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
   }, [])
 
   useEffect(() => {
-    // setTimeout(() => {
-    //   if (walletList.length === 0 && !wallet) {
-    //     navigation.push('Start', { new: true })
-    //   }
-    // }, 500)
+    if (walletList.length === 0 && !wallet) {
+      navigation.push('Start', { new: true })
+      return
+    }
+
     async function syncWalletInfo() {
       if (wallet) {
         fetcher(`https://api.minaexplorer.com/accounts/${wallet.publicKey}`)
@@ -105,7 +104,9 @@ export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
         ref={tokenListRef}
         index={0}
         keyboardBehavior="fillParent"
-        snapPoints={[height - 320 - insets.bottom]}
+        snapPoints={[
+          height - 320 - insets.bottom + (Platform.OS === 'android' ? 30 : 0),
+        ]}
         backgroundStyle={{ backgroundColor: Colors[theme].cardBackground }}
         handleComponent={null}
       >

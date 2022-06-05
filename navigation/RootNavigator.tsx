@@ -96,21 +96,6 @@ export default function RootNavigator() {
         options={{ header: () => null }}
       />
       <Stack.Screen
-        name="Start"
-        component={Start}
-        options={{ header: () => null }}
-      />
-      <Stack.Screen
-        name="Restore"
-        component={Restore}
-        options={{ header: () => null }}
-      />
-      <Stack.Screen
-        name="Create"
-        component={Create}
-        options={{ header: () => null }}
-      />
-      <Stack.Screen
         name="TxDetail"
         component={TxDetail}
         options={{ header: () => null }}
@@ -128,9 +113,23 @@ export default function RootNavigator() {
           options={{ header: () => null }}
         />
       </Stack.Group>
-      <Stack.Group
-        screenOptions={{ presentation: 'fullScreenModal' }}
-      ></Stack.Group>
+      <Stack.Group screenOptions={{ presentation: 'fullScreenModal' }}>
+        <Stack.Screen
+          name="Start"
+          component={Start}
+          options={{ header: () => null }}
+        />
+        <Stack.Screen
+          name="Restore"
+          component={Restore}
+          options={{ header: () => null }}
+        />
+        <Stack.Screen
+          name="Create"
+          component={Create}
+          options={{ header: () => null }}
+        />
+      </Stack.Group>
     </Stack.Navigator>
   )
 }

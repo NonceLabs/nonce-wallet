@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "nonce",
-    "slug": "nonce",
+    "name": "Nonce",
+    "slug": "Nonce",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -9,7 +9,7 @@
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "updates": {
@@ -31,7 +31,14 @@
         "backgroundColor": "#ffffff"
       },
       "package": "io.nonce.wallet",
-      "versionCode": 1
+      "versionCode": 1,
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "RECEIVE_BOOT_COMPLETED",
+        "SCHEDULE_EXACT_ALARM"
+      ]
     },
     "web": {
       "favicon": "./assets/images/favicon.png"

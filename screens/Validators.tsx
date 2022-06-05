@@ -1,3 +1,4 @@
+import PubSub from 'pubsub-js'
 import WalletAPI from 'chain/WalletAPI'
 import Box from 'components/common/Box'
 import Button from 'components/common/Button'
@@ -18,13 +19,13 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useAppSelector } from 'store/hooks'
 import useSWR from 'swr'
 import Colors from 'theme/Colors'
-import { Chain, StakePreview, Validator } from 'types'
+import { Chain, PUB, StakePreview, Validator } from 'types'
 import { GAS_FEE_LEVELS, MINA_TOKEN } from 'utils/configure'
 import { fetcher } from 'utils/fetcher'
 import { parseAmount } from 'utils/format'
 import Toast from 'utils/toast'
 import { stakeTx } from 'utils/fetcher'
-import { useNavigation } from '@react-navigation/native'
+import { StackActions, useNavigation } from '@react-navigation/native'
 
 export default function Validators() {
   const theme = useColorScheme()
@@ -93,10 +94,9 @@ export default function Validators() {
           _stake
         )
         const response = await stakeTx(result!)
-        if (!response.error) {
-          navigation.goBack()
-        }
+        navigation.dispatch(StackActions.popToTop())
         Toast.success(response.message)
+        PubSub.publish(PUB.SYNC_WALLET_INFO)
       } catch (error) {
         Toast.error(error)
       }
@@ -168,7 +168,9 @@ export default function Validators() {
         }}
         contentContainerStyle={styles.listInner}
       />
-      <Box style={{ ...styles.bottomButton, paddingBottom: insets.bottom }}>
+      <Box
+        style={{ ...styles.bottomButton, paddingBottom: insets.bottom + 10 }}
+      >
         <Button
           label={I18n.t('Next')}
           primary
@@ -216,6 +218,6 @@ const styles = StyleSheet.create({
   },
   bottomButton: {
     paddingHorizontal: 20,
-    paddingTop: 10,
+    paddingVertical: 10,
   },
 })

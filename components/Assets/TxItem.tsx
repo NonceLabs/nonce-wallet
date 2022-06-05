@@ -50,7 +50,9 @@ export default function TxItem({
             </Box>
             {isSend ? (
               <Box gap="small" justify="flex-start">
-                <Text style={styles.label}>{I18n.t('To')}</Text>
+                <Text style={styles.label}>
+                  {I18n.t(item.isDelegation ? 'Stake' : 'To')}
+                </Text>
                 <Address
                   wallet={{ chain: Chain.MINA, publicKey: item.to }}
                   fontSize={14}

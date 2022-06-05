@@ -22,7 +22,7 @@ export default function ScreenLoading({
             width: 300,
             height: 300,
           }}
-          source={require('assets/lottie/pacman.json')}
+          source={require('assets/lottie/loading.json')}
         />
       </View>
     </Modal>

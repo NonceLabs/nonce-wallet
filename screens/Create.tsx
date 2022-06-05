@@ -63,7 +63,7 @@ export default function Create() {
           mnemonic={mnemonic}
         />
       )}
-      {step === CREATE_STEP.SETUP_PIN && <SetupPIN onNext={() => {}} />}
+      {step === CREATE_STEP.SETUP_PIN && <SetupPIN onNext={onConfirmed} />}
     </View>
   )
 }

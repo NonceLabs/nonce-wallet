@@ -19,7 +19,7 @@ import ScreenHeader from 'components/common/ScreenHeader'
 import LanguageModal from 'components/Setting/LanguageModal'
 import SettingBlock from 'components/Setting/SettingBlock'
 import ThemeModal from 'components/Setting/ThemeModal'
-import { Text, View } from 'components/Themed'
+import { View } from 'components/Themed'
 import Colors from 'theme/Colors'
 import useColorScheme from 'hooks/useColorScheme'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
@@ -110,17 +110,17 @@ export default function SettingScreen() {
         <SettingBlock
           title="Community"
           items={[
-            {
-              icon: Twitter,
-              title: 'Twitter',
-              value: '',
-              onPress: () => Linking.openURL('#'),
-            },
+            // {
+            //   icon: Twitter,
+            //   title: 'Twitter',
+            //   value: '',
+            //   onPress: () => Linking.openURL('#'),
+            // },
             {
               icon: Discord,
               title: 'Discord',
               value: '',
-              onPress: () => Linking.openURL('#'),
+              onPress: () => Linking.openURL('https://discord.gg/CSBWyQz9JA'),
             },
             {
               icon: GitHub,

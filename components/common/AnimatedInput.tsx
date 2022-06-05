@@ -8,16 +8,19 @@ import {
   TextInput,
   StyleSheet,
   Easing,
+  Platform,
 } from 'react-native'
 import Colors from 'theme/Colors'
 import Fonts from 'theme/Fonts'
+
+const INIT_Y = Platform.OS === 'android' ? 12 : 4
 
 export default function AnimatedInput(
   props: TextInputProps & { animatedLeft?: number }
 ) {
   const [focused, setFocused] = useState(false)
   const phPosX = useRef(new Animated.Value(4)).current
-  const phPosY = useRef(new Animated.Value(4)).current
+  const phPosY = useRef(new Animated.Value(INIT_Y)).current
   const phOpacity = useRef(new Animated.Value(0)).current
   const phScale = useRef(new Animated.Value(0)).current
 
@@ -58,7 +61,7 @@ export default function AnimatedInput(
           useNativeDriver: true,
         }),
         Animated.timing(phPosY, {
-          toValue: 4,
+          toValue: INIT_Y,
           duration: 200,
           easing: Easing.poly(1),
           useNativeDriver: true,

@@ -11,7 +11,13 @@ import I18n from 'i18n-js'
 import { Scanning } from 'iconoir-react-native'
 import _ from 'lodash'
 import { useRef, useState } from 'react'
-import { Pressable, ScrollView, StyleSheet, TextInput } from 'react-native'
+import {
+  Keyboard,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  TextInput,
+} from 'react-native'
 import { Modalize } from 'react-native-modalize'
 import { Portal } from 'react-native-portalize'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
@@ -130,7 +136,7 @@ export default function ContactNew() {
             }}
           >
             <AnimatedInput
-              placeholder={I18n.t('Wallet Address')}
+              placeholder={I18n.t('Address')}
               autoCapitalize="none"
               value={address}
               onChangeText={(_text) => setAddress(_text)}
@@ -141,7 +147,13 @@ export default function ContactNew() {
               multiline
               animatedLeft={-4}
             />
-            <Pressable hitSlop={15} onPress={() => qrscanRef.current?.open()}>
+            <Pressable
+              hitSlop={15}
+              onPress={() => {
+                qrscanRef.current?.open()
+                Keyboard.dismiss()
+              }}
+            >
               <Scanning width={30} height={30} color={Colors[theme].link} />
             </Pressable>
           </Box>

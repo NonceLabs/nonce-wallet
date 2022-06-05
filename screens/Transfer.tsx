@@ -1,3 +1,4 @@
+import PubSub from 'pubsub-js'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { useRef, useState } from 'react'
 import {
@@ -28,6 +29,7 @@ import {
   Currency,
   CurrencyRate,
   PaymentPreview,
+  PUB,
   Token,
 } from 'types'
 import {
@@ -135,6 +137,7 @@ export default function Transfer() {
         if (!response.error) {
           navigation.goBack()
         }
+        PubSub.publish(PUB.SYNC_WALLET_INFO)
         Toast.success(response.message)
       } catch (error) {
         Toast.error(error)

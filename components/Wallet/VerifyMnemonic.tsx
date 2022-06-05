@@ -10,6 +10,7 @@ import I18n from 'i18n-js'
 import _ from 'lodash'
 import Heading from 'components/common/Heading'
 import Box from 'components/common/Box'
+import AnimatedInput from 'components/common/AnimatedInput'
 
 export default function VerifyMnemonic({
   mnemonic,
@@ -43,16 +44,13 @@ export default function VerifyMnemonic({
       </Box>
 
       <View style={styles.mnemonicWrap}>
-        <TextInput
-          style={[
-            styles.input,
-            {
-              color: Colors[theme].text,
-              borderBottomColor: inputFocus
-                ? Colors[theme].text
-                : Colors[theme].borderColor,
-            },
-          ]}
+        <AnimatedInput
+          style={{
+            ...styles.input,
+            borderBottomColor: inputFocus
+              ? Colors[theme].text
+              : Colors[theme].borderColor,
+          }}
           value={word}
           onChangeText={(text) => setWord(text)}
           placeholder={`Enter the #${wordIndex} word`}
@@ -110,8 +108,6 @@ const styles = StyleSheet.create({
   input: {
     borderBottomWidth: 1,
     fontSize: 24,
-    fontFamily: Fonts.variable,
-    padding: 8,
     textAlign: 'center',
   },
 })
