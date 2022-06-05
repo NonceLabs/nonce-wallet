@@ -40,8 +40,6 @@ export default function TokenList({ isLoading }: { isLoading: boolean }) {
         styles.pageWrap,
         {
           backgroundColor: Colors[theme].background,
-          position: 'relative',
-          top: -8,
         },
       ]}
     >

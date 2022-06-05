@@ -1,20 +1,36 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, useWindowDimensions } from 'react-native'
 import PubSub from 'pubsub-js'
 
 import { View } from 'components/Themed'
-import { PUB, RootTabScreenProps } from 'types'
-import { useEffect } from 'react'
+import { Currency, CurrencyRate, PUB, RootTabScreenProps, Token } from 'types'
+import { useEffect, useRef } from 'react'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 import Banner from 'components/Banner'
-import Assets from 'components/Assets'
+import BottomSheet, { BottomSheetFlatList } from '@gorhom/bottom-sheet'
 import { fetcher, fetchFixer, fetchPrice } from 'utils/fetcher'
 import { parseAmount } from 'utils/format'
-import { MINA_TOKEN } from 'utils/configure'
+import {
+  CURRENCY_SYMBOL,
+  DEFAULT_CURRENCY_RATE,
+  MINA_TOKEN,
+} from 'utils/configure'
 import TokenList from 'components/Assets/TokenList'
+import useColorScheme from 'hooks/useColorScheme'
+import Colors from 'theme/Colors'
+import TokenItem from 'components/Assets/TokenItem'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
   const walletList = useAppSelector((state) => state.wallet.list)
   const wallet = useAppSelector((state) => state.wallet.current)
+  const tokenListRef = useRef<BottomSheet>(null)
+  const tokens: Token[] = useAppSelector((state) => state.asset.tokens)
+  const currencyRates: CurrencyRate = useAppSelector(
+    (state) => state.setting.currencyRates || DEFAULT_CURRENCY_RATE
+  )
+  const currency: Currency = useAppSelector(
+    (state) => state.setting.currentCurrency || Currency.USD
+  )
 
   const dispatch = useAppDispatch()
 
@@ -74,10 +90,43 @@ export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
     }
   }, [walletList, wallet])
 
+  const theme = useColorScheme()
+  const insets = useSafeAreaInsets()
+  const { height } = useWindowDimensions()
+
+  const onSelect = (item: Token) => {
+    navigation.navigate('Token', { token: item })
+  }
+
   return (
     <View style={styles.container}>
       <Banner />
-      <TokenList isLoading={false} />
+      <BottomSheet
+        ref={tokenListRef}
+        index={0}
+        keyboardBehavior="fillParent"
+        snapPoints={[height - 320 - insets.bottom]}
+        backgroundStyle={{ backgroundColor: Colors[theme].cardBackground }}
+        handleComponent={null}
+      >
+        <BottomSheetFlatList
+          data={tokens}
+          keyExtractor={(item: Token) => item.symbol}
+          renderItem={({ item }) => {
+            return (
+              <TokenItem
+                item={item}
+                onSelect={onSelect}
+                rate={currencyRates[currency]}
+                unit={CURRENCY_SYMBOL[currency]}
+              />
+            )
+          }}
+          contentContainerStyle={{
+            paddingBottom: insets.bottom,
+          }}
+        />
+      </BottomSheet>
     </View>
   )
 }

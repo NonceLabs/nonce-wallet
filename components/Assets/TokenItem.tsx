@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingLeft: 10,
+    paddingVertical: 10,
   },
   itemRight: {
     display: 'flex',
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   tokenName: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '600',
     fontFamily: Fonts.numberBold,
   },

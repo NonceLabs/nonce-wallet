@@ -227,6 +227,7 @@ const en = {
   Slow: 'Slow',
   Fast: 'Fast',
   Default: 'Default',
+  'No transactions': 'No transactions',
 }
 
 export default en

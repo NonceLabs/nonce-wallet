@@ -331,8 +331,11 @@ export default function Transfer() {
         <Button
           label={I18n.t('Next')}
           type={ButtonType.PRIMARY}
-          style={{ marginTop: 20 }}
+          style={{ marginTop: 40 }}
           onPress={onPreviewTx}
+          disabled={
+            !(isAddressValid(receiver) && isValidAmount(amount, selectedToken))
+          }
         />
       </ScrollView>
 
@@ -343,7 +346,7 @@ export default function Transfer() {
           enablePanDownToClose
           keyboardBehavior="fillParent"
           snapPoints={['60%']}
-          backgroundStyle={{ backgroundColor: Colors[theme].cardBackground }}
+          backgroundStyle={{ backgroundColor: Colors[theme].modalBackground }}
         >
           <BottomSheetFlatList
             data={tokens}
@@ -369,7 +372,7 @@ export default function Transfer() {
           enablePanDownToClose
           keyboardBehavior="fillParent"
           snapPoints={['60%']}
-          backgroundStyle={{ backgroundColor: Colors[theme].cardBackground }}
+          backgroundStyle={{ backgroundColor: Colors[theme].modalBackground }}
         >
           <BottomSheetFlatList
             data={contacts}

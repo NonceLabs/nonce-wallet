@@ -103,7 +103,7 @@ export default function TokenScreen({
           </Box>
 
           {!isLoading && (data?.transactions ?? []).length === 0 && (
-            <Empty title="No transactions" />
+            <Empty title="No transactions" style={{ paddingTop: 50 }} />
           )}
 
           {isLoading && (
@@ -113,7 +113,7 @@ export default function TokenScreen({
                   width: 200,
                   height: 200,
                 }}
-                source={require('assets/lottie/pacman.json')}
+                source={require('assets/lottie/loading.json')}
               />
             </Box>
           )}

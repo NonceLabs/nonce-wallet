@@ -83,7 +83,7 @@ export default function Banner() {
             </View>
           </TouchableOpacity>
 
-          <Icon
+          {/* <Icon
             isTransparent
             icon={
               <View style={{ position: 'relative' }}>
@@ -91,7 +91,7 @@ export default function Banner() {
               </View>
             }
             onPress={() => {}}
-          />
+          /> */}
         </View>
         <Box direction="column" gap="medium" style={{ paddingTop: 10 }}>
           <Address wallet={wallet} color={Colors.white} fontSize={16} />
@@ -159,7 +159,7 @@ export default function Banner() {
 
 const styles = StyleSheet.create({
   banner: {
-    height: 280,
+    height: 300,
   },
   balanceWrap: {
     display: 'flex',
@@ -180,8 +180,8 @@ const styles = StyleSheet.create({
   button: {
     borderWidth: 1,
     paddingLeft: 6,
-    paddingTop: 4,
-    paddingBottom: 2,
+    paddingTop: 2,
+    paddingBottom: 1,
     borderRadius: 4,
   },
   buttonGroup: {
@@ -201,6 +201,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     paddingVertical: 0,
     paddingHorizontal: 10,
+    paddingRight: 20,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

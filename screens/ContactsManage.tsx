@@ -32,6 +32,7 @@ export default function ContactsManage() {
             onPress={() => {
               navigation.navigate('ContactNew', {})
             }}
+            hitSlop={20}
           >
             <AddCircledOutline
               width={24}

@@ -223,6 +223,7 @@ const zh = {
   Slow: '慢',
   Fast: '快',
   Default: '默认',
+  'No transactions': '没有交易记录',
 }
 
 export default zh

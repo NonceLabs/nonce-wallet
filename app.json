@@ -17,13 +17,21 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "io.nonce.wallet",
+      "buildNumber": "1",
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSFaceIDUsageDescription": "Face ID is required to use the app",
+        "NSCameraUsageDescription": "Scanning QR code to add contacts"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "io.nonce.wallet",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/images/favicon.png"

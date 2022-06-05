@@ -3,13 +3,16 @@ import { isAddressValid } from 'chain/crypto'
 import Box from 'components/common/Box'
 import Button from 'components/common/Button'
 import ScreenHeader from 'components/common/ScreenHeader'
+import QRScanModal from 'components/Modals/QRScanModal'
 import { View } from 'components/Themed'
 import useColorScheme from 'hooks/useColorScheme'
 import I18n from 'i18n-js'
 import { Scanning } from 'iconoir-react-native'
 import _ from 'lodash'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Pressable, ScrollView, StyleSheet, TextInput } from 'react-native'
+import { Modalize } from 'react-native-modalize'
+import { Portal } from 'react-native-portalize'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 import Colors from 'theme/Colors'
 import Fonts from 'theme/Fonts'
@@ -25,6 +28,7 @@ export default function ContactNew() {
 
   const [nameFocus, setNameFocus] = useState(false)
   const [addressFocus, setAddressFocus] = useState(false)
+  const qrscanRef = useRef<Modalize>(null)
 
   const contacts = useAppSelector((state) => state.setting.contacts)
   const theme = useColorScheme()
@@ -134,7 +138,7 @@ export default function ContactNew() {
               numberOfLines={2}
               multiline
             />
-            <Pressable>
+            <Pressable hitSlop={15} onPress={() => qrscanRef.current?.open()}>
               <Scanning width={20} height={20} color={Colors[theme].link} />
             </Pressable>
           </Box>
@@ -158,6 +162,22 @@ export default function ContactNew() {
           </Box>
         </Box>
       </ScrollView>
+      <Portal>
+        <Modalize
+          ref={qrscanRef}
+          adjustToContentHeight
+          closeOnOverlayTap
+          handlePosition="inside"
+        >
+          <QRScanModal
+            onCancel={() => qrscanRef.current?.close()}
+            onConfirm={(data: string) => {
+              qrscanRef.current?.close()
+              setAddress(data)
+            }}
+          />
+        </Modalize>
+      </Portal>
     </View>
   )
 }

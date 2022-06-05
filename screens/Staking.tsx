@@ -108,9 +108,10 @@ export default function Staking() {
         >
           {isDelegated ? (
             <Box direction="column" align="flex-start" gap="medium">
-              {!!pAccount?.username && (
-                <InfoItem title="Name" value={pAccount.username} />
-              )}
+              <InfoItem
+                title="Name"
+                value={pAccount ? pAccount.username ?? '-' : '-'}
+              />
 
               <InfoItem title="Producer" value={detail.delegate} />
 
@@ -140,7 +141,7 @@ export default function Staking() {
           <Button
             label={I18n.t(isDelegated ? 'Change' : 'Delegate Now')}
             primary
-            style={{ width: 200, marginTop: 30 }}
+            style={{ width: 200, marginTop: 20 }}
             size="medium"
             onPress={() => {
               navigation.navigate('Validators')
