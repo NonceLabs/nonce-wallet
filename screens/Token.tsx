@@ -43,22 +43,7 @@ export default function TokenScreen({
 
   return (
     <View style={styles.container}>
-      <ScreenHeader
-        title="Token"
-        rightEle={
-          <Icon
-            isTransparent
-            icon={
-              <OpenInBrowser
-                width={24}
-                height={24}
-                color={Colors[theme].link}
-              />
-            }
-            onPress={() => {}}
-          />
-        }
-      />
+      <ScreenHeader title="Token" />
       <View style={styles.content}>
         <ScrollView
           contentContainerStyle={{

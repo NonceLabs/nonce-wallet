@@ -30,7 +30,15 @@ export default function TxDetail() {
       <ScreenHeader title="Tx Detail" />
 
       <ScrollView style={Styles.page}>
-        <Box justify="center" pad="medium">
+        <Box
+          justify="center"
+          pad="medium"
+          style={{
+            borderBottomWidth: 2,
+            borderColor: Colors[theme].borderColor,
+            marginBottom: 20,
+          }}
+        >
           <Heading>
             {isSend ? '-' : '+'}
             {formatBalance(tx.amount, MINA_TOKEN.decimals, MINA_TOKEN.decimals)}
@@ -57,7 +65,7 @@ export default function TxDetail() {
             value={dayjs(tx.dateTime).format('MMM D, YYYY HH:mm:ss')}
           />
         </Box>
-        <Box justify="flex-end" pad="medium" style={{ marginTop: 20 }}>
+        <Box justify="center" pad="medium" style={{ marginTop: 20 }}>
           <Pressable
             onPress={() => {
               WebBrowser.openBrowserAsync(`https://minablock.xyz/tx/${tx.hash}`)
@@ -65,7 +73,7 @@ export default function TxDetail() {
             style={Styles.row}
           >
             <Compass width={20} height={20} color={Colors.purple} />
-            <Text style={{ color: Colors.purple, marginLeft: 6 }}>
+            <Text style={{ color: Colors.purple, marginLeft: 6, fontSize: 16 }}>
               {I18n.t('More detail')}
             </Text>
           </Pressable>
