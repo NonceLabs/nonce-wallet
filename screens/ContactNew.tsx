@@ -1,5 +1,6 @@
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { isAddressValid } from 'chain/crypto'
+import AnimatedInput from 'components/common/AnimatedInput'
 import Box from 'components/common/Box'
 import Button from 'components/common/Button'
 import ScreenHeader from 'components/common/ScreenHeader'
@@ -90,46 +91,47 @@ export default function ContactNew() {
       <ScreenHeader title={isEdit ? 'Edit Contact' : 'New Contact'} />
 
       <ScrollView
-        style={Styles.page}
-        contentContainerStyle={[Styles.center, { flex: 1, paddingBottom: 200 }]}
+        style={{ flex: 1 }}
+        contentContainerStyle={{
+          padding: 20,
+        }}
+        keyboardShouldPersistTaps="handled"
       >
-        <Box direction="column" gap="xlarge" full>
+        <Box direction="column" gap="xxlarge" full>
           <Box
             full
             style={{
+              paddingVertical: 4,
               borderBottomWidth: 1,
               borderBottomColor: nameFocus
                 ? Colors[theme].text
                 : Colors[theme].borderColor,
             }}
           >
-            <TextInput
+            <AnimatedInput
               placeholder={I18n.t('Name')}
-              style={[styles.input, { color: Colors[theme].text }]}
               value={name}
               onChangeText={(_text) => setName(_text)}
               onFocus={() => setNameFocus(true)}
               onBlur={() => setNameFocus(false)}
               placeholderTextColor={Colors.gray9}
+              animatedLeft={0}
             />
           </Box>
           <Box
             full
             align="center"
             style={{
+              paddingVertical: 4,
               borderBottomWidth: 1,
               borderBottomColor: addressFocus
                 ? Colors[theme].text
                 : Colors[theme].borderColor,
             }}
           >
-            <TextInput
+            <AnimatedInput
               placeholder={I18n.t('Wallet Address')}
               autoCapitalize="none"
-              style={[
-                styles.input,
-                { fontFamily: Fonts.variable, color: Colors[theme].text },
-              ]}
               value={address}
               onChangeText={(_text) => setAddress(_text)}
               onFocus={() => setAddressFocus(true)}
@@ -137,9 +139,10 @@ export default function ContactNew() {
               placeholderTextColor={Colors.gray9}
               numberOfLines={2}
               multiline
+              animatedLeft={-4}
             />
             <Pressable hitSlop={15} onPress={() => qrscanRef.current?.open()}>
-              <Scanning width={20} height={20} color={Colors[theme].link} />
+              <Scanning width={30} height={30} color={Colors[theme].link} />
             </Pressable>
           </Box>
 

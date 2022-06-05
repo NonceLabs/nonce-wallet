@@ -31,7 +31,7 @@ export default function Box({
   direction?: 'row' | 'column'
   style?: ViewStyle
   border?: boolean
-  gap?: 'none' | 'small' | 'medium' | 'large' | 'xlarge'
+  gap?: 'none' | 'small' | 'medium' | 'large' | 'xlarge' | 'xxlarge'
   pad?: 'none' | 'small' | 'medium' | 'large'
   margin?: 'none' | 'small' | 'medium' | 'large'
   full?: boolean
@@ -88,5 +88,9 @@ const styles = StyleSheet.create({
   xlarge: {
     width: 32,
     height: 32,
+  },
+  xxlarge: {
+    height: 50,
+    width: 50,
   },
 })

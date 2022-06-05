@@ -49,6 +49,7 @@ import WalletAPI from 'chain/WalletAPI'
 import { sendTx } from 'utils/fetcher'
 import Heading from 'components/common/Heading'
 import Radio from 'components/common/Radio'
+import AnimatedInput from 'components/common/AnimatedInput'
 
 export default function Transfer() {
   const currencyRates: CurrencyRate = useAppSelector(
@@ -177,10 +178,10 @@ export default function Transfer() {
                   : Colors[theme].borderColor,
               }}
             >
-              <TextInput
-                placeholder={I18n.t('Receiver Address')}
+              <AnimatedInput
+                placeholder={I18n.t('Address')}
                 autoCapitalize="none"
-                style={[styles.input, { color: Colors[theme].text }]}
+                style={{}}
                 value={receiver}
                 onChangeText={(_text) => setReceiver(_text)}
                 onFocus={() => {
@@ -241,10 +242,10 @@ export default function Transfer() {
                   : Colors[theme].borderColor,
               }}
             >
-              <TextInput
+              <AnimatedInput
                 placeholder={I18n.t('Amount')}
                 autoCapitalize="none"
-                style={[styles.input, { color: Colors[theme].text }]}
+                style={{}}
                 value={amount}
                 keyboardType="numeric"
                 onChangeText={(_text) => setAmount(_text)}
@@ -286,11 +287,12 @@ export default function Transfer() {
                 : Colors[theme].borderColor,
             }}
           >
-            <TextInput
+            <AnimatedInput
               placeholder={`${I18n.t('Memo')}(${I18n.t('Optional')})`}
               autoCapitalize="none"
-              style={[styles.input, { color: Colors[theme].text }]}
+              style={{}}
               value={memo}
+              animatedLeft={-16}
               onChangeText={(_text) => setMemo(_text)}
               onFocus={() => {
                 setMemoFocus(true)

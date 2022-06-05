@@ -224,6 +224,7 @@ const zh = {
   Fast: '快',
   Default: '默认',
   'No transactions': '没有交易记录',
+  Address: '地址',
 }
 
 export default zh
