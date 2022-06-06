@@ -7,6 +7,7 @@
     "icon": "./assets/images/icon.png",
     "scheme": "nonce",
     "userInterfaceStyle": "automatic",
+    "runtimeVersion": "1.0.0",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "cover",
