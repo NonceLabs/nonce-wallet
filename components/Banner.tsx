@@ -2,7 +2,13 @@ import { Portal } from 'react-native-portalize'
 import { useRef } from 'react'
 import { Modalize } from 'react-native-modalize'
 import I18n from 'i18n-js'
-import { ImageBackground, StyleSheet, TouchableOpacity } from 'react-native'
+import {
+  ImageBackground,
+  Pressable,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native'
+import * as Clipboard from 'expo-clipboard'
 import {
   ArrowUp,
   Bell,
@@ -29,6 +35,7 @@ import Box from './common/Box'
 import icons from 'utils/icons'
 import NetworksModal from './Modals/NetworksModal'
 import Address from './common/Address'
+import Toast from 'utils/toast'
 
 export default function Banner() {
   const wallet = useAppSelector((state) => state.wallet.current)
@@ -96,7 +103,18 @@ export default function Banner() {
           /> */}
         </View>
         <Box direction="column" gap="medium" style={{ paddingTop: 10 }}>
-          <Address wallet={wallet} color={Colors.white} fontSize={16} />
+          <Pressable
+            onPress={async () => {
+              try {
+                await Clipboard.setStringAsync(wallet?.publicKey ?? '')
+                Toast.info('Copied')
+              } catch (error) {
+                Toast.error(error)
+              }
+            }}
+          >
+            <Address wallet={wallet} color={Colors.white} fontSize={16} />
+          </Pressable>
           <Text style={styles.total}>
             {I18n.toCurrency(
               Number(calcTotal(tokens, currencyRates[currency])),

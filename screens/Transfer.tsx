@@ -226,7 +226,13 @@ export default function Transfer() {
                   )
                 }}
               >
-                <Text style={{ color: Colors[theme].link, fontSize: 14 }}>
+                <Text
+                  style={{
+                    color: Colors[theme].link,
+                    fontSize: 14,
+                    fontFamily: Fonts.symbol,
+                  }}
+                >
                   {`${I18n.t('Balance')}: ${formatBalance(
                     selectedToken.balance,
                     selectedToken.decimals
@@ -312,7 +318,7 @@ export default function Transfer() {
               <Heading level={3}>{I18n.t('Gas Fee')}</Heading>
               <Text
                 style={{
-                  fontFamily: Fonts.variable,
+                  fontFamily: Fonts.symbol,
                   color: Colors[theme].link,
                   fontSize: 16,
                 }}

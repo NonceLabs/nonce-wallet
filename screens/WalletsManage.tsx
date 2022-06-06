@@ -16,8 +16,8 @@ import Radio from 'components/common/Radio'
 export default function WalletsManage({
   navigation,
 }: RootStackScreenProps<'WalletsManage'>) {
-  const accountIds: Wallet[] = useAppSelector((state) => state.wallet.list)
-  const currentAccountId = useAppSelector((state) => state.wallet.current)
+  const wallets: Wallet[] = useAppSelector((state) => state.wallet.list)
+  const wallet = useAppSelector((state) => state.wallet.current)
   const theme = useColorScheme()
   const insets = useSafeAreaInsets()
 
@@ -25,7 +25,7 @@ export default function WalletsManage({
     <View style={styles.container}>
       <ScreenHeader title="Wallets" />
       <FlatList
-        data={accountIds}
+        data={wallets}
         keyExtractor={(t) => t.publicKey}
         renderItem={({ item }) => {
           return (
@@ -43,7 +43,10 @@ export default function WalletsManage({
                 ]}
               >
                 <Address wallet={item} />
-                <Radio checked={currentAccountId === item} disabled />
+                <Radio
+                  checked={wallet?.publicKey === item.publicKey}
+                  disabled
+                />
               </View>
             </TouchableOpacity>
           )

@@ -14,7 +14,7 @@ const BG_COLORS = {
   warning: Colors.yellow,
 }
 
-export default function Toast() {
+export default function ToastMessage() {
   const insets = useSafeAreaInsets()
   const { width } = useWindowDimensions()
   const [message, setMessage] = useState('')
@@ -56,6 +56,10 @@ export default function Toast() {
       token && PubSub.unsubscribe(token)
     }
   }, [])
+
+  if (!message) {
+    return null
+  }
 
   return (
     <Animated.View

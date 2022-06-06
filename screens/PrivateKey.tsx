@@ -48,7 +48,7 @@ export default function PrivateKey() {
           <Pressable
             onPress={async () => {
               await ClipBoard.setStringAsync(wallet.publicKey)
-              Toast.success('Copied')
+              Toast.info('Copied')
             }}
           >
             {copy}
@@ -70,7 +70,7 @@ export default function PrivateKey() {
               <Pressable
                 onPress={async () => {
                   await ClipBoard.setStringAsync(keyStore?.publicKey)
-                  Toast.success(I18n.t('Copied'))
+                  Toast.info(I18n.t('Copied'))
                 }}
               >
                 {copy}
@@ -96,7 +96,7 @@ export default function PrivateKey() {
           <Pressable
             onPress={async () => {
               await ClipBoard.setStringAsync(keyStore?.privateKey)
-              Toast.success(I18n.t('Copied'))
+              Toast.info(I18n.t('Copied'))
             }}
           >
             {copy}

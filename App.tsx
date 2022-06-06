@@ -10,7 +10,7 @@ import useCachedResources from './hooks/useCachedResources'
 import Navigation from './navigation'
 import { store, persistor } from './store'
 import { polyfillWebCrypto } from 'expo-standard-web-crypto'
-import Toast from 'components/common/Toast'
+import ToastMessage from 'components/common/ToastMessage'
 
 polyfillWebCrypto()
 
@@ -27,7 +27,7 @@ export default function App() {
             <SafeAreaProvider>
               <Host>
                 <Navigation />
-                <Toast />
+                <ToastMessage />
               </Host>
             </SafeAreaProvider>
           </PersistGate>

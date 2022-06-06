@@ -9,6 +9,7 @@ import { useState } from 'react'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 import { KeyStoreFile } from 'types'
 import useAuth from 'hooks/useAuth'
+import ToastMessage from 'components/common/ToastMessage'
 
 enum RESTORE_STEP {
   RESTORE = 'RESTORE',
@@ -48,6 +49,7 @@ export default function Restore() {
   return (
     <View style={{ flex: 1 }}>
       <ScreenHeader title="Start" />
+      <ToastMessage />
 
       {step === RESTORE_STEP.RESTORE && (
         <RestoreForm
