@@ -218,3 +218,8 @@ export interface MinaProducer extends MinaAccountDetail {
   nextEpochTotalStakingBalance: string
   epochDelegators: any[]
 }
+
+export enum ValidatorSort {
+  NAME = 'Name',
+  STAKE = 'Stake',
+}

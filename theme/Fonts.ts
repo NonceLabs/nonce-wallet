@@ -1,7 +1,7 @@
 export default {
   variable: 'DMMono',
-  heading: 'Oxanium',
-  common: 'Inter',
+  heading: 'LexendDeca',
+  common: 'Alata',
   number: 'Lato-Regular',
   numberBold: 'Lato-Bold',
 }

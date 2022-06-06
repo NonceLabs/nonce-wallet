@@ -17,8 +17,8 @@ export default function useCachedResources() {
           ...Feather.font,
           'Lato-Bold': require('assets/fonts/Lato-Bold.ttf'),
           'Lato-Regular': require('assets/fonts/Lato-Regular.ttf'),
-          Inter: require('assets/fonts/Inter.ttf'),
-          Oxanium: require('assets/fonts/Oxanium.ttf'),
+          Alata: require('assets/fonts/Alata.ttf'),
+          LexendDeca: require('assets/fonts/LexendDeca.ttf'),
           DMMono: require('assets/fonts/DMMono.ttf'),
         })
       } catch (e) {

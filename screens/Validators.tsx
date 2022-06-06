@@ -10,22 +10,24 @@ import { View } from 'components/Themed'
 import useAuth from 'hooks/useAuth'
 import useColorScheme from 'hooks/useColorScheme'
 import I18n from 'i18n-js'
-import { Search } from 'iconoir-react-native'
+import { Search, SortDown } from 'iconoir-react-native'
 import { useRef, useState } from 'react'
-import { FlatList, StyleSheet, TextInput } from 'react-native'
+import { FlatList, Pressable, StyleSheet, TextInput } from 'react-native'
 import { Modalize } from 'react-native-modalize'
 import { Portal } from 'react-native-portalize'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useAppSelector } from 'store/hooks'
 import useSWR from 'swr'
 import Colors from 'theme/Colors'
-import { Chain, PUB, StakePreview, Validator } from 'types'
+import { Chain, PUB, StakePreview, Validator, ValidatorSort } from 'types'
 import { GAS_FEE_LEVELS, MINA_TOKEN } from 'utils/configure'
 import { fetcher } from 'utils/fetcher'
 import { parseAmount } from 'utils/format'
 import Toast from 'utils/toast'
 import { stakeTx } from 'utils/fetcher'
 import { StackActions, useNavigation } from '@react-navigation/native'
+import SortValidatorModal from 'components/Modals/SortValidatorModal'
+import _ from 'lodash'
 
 export default function Validators() {
   const theme = useColorScheme()
@@ -35,6 +37,8 @@ export default function Validators() {
   const [selected, setSelected] = useState<Validator | undefined>()
   const confirmStakeRef = useRef<Modalize>(null)
   const [delegation, setDelegation] = useState<StakePreview | undefined>()
+  const [sortBy, setSortBy] = useState<ValidatorSort>(ValidatorSort.STAKE)
+  const sortByRef = useRef<Modalize>(null)
 
   const wallet = useAppSelector((state) => state.wallet.current)
   const detail = useAppSelector((state) => state.wallet.detail)
@@ -48,6 +52,12 @@ export default function Validators() {
   const insets = useSafeAreaInsets()
 
   let validators = data || []
+  if (sortBy === ValidatorSort.STAKE) {
+    validators = _.sortBy(validators, (t) => Number(t.stake)).reverse()
+  } else if (sortBy === ValidatorSort.NAME) {
+    validators = _.sortBy(validators, 'identity_name')
+  }
+
   if (keyword.trim()) {
     const _keyword = keyword.trim().toLowerCase()
     validators = validators?.filter((v) => {
@@ -105,7 +115,14 @@ export default function Validators() {
 
   return (
     <View style={{ flex: 1, backgroundColor: Colors[theme].background }}>
-      <ScreenHeader title="Validators" />
+      <ScreenHeader
+        title="Validators"
+        rightEle={
+          <Pressable onPress={() => sortByRef?.current?.open()}>
+            <SortDown width={24} height={24} color={Colors[theme].link} />
+          </Pressable>
+        }
+      />
       <Box
         style={{
           ...styles.inputWrap,
@@ -191,6 +208,16 @@ export default function Validators() {
               confirmStakeRef.current?.close()
             }}
             onConfirm={onConfirmStake}
+          />
+        </Modalize>
+        <Modalize ref={sortByRef} adjustToContentHeight closeOnOverlayTap>
+          <SortValidatorModal
+            sortBy={sortBy}
+            onClose={() => sortByRef.current?.close()}
+            onSelect={(sort: ValidatorSort) => {
+              setSortBy(sort)
+              sortByRef.current?.close()
+            }}
           />
         </Modalize>
       </Portal>

@@ -231,6 +231,7 @@ const en = {
   Address: 'Address',
   'Change PIN Code': 'Change PIN Code',
   'New PIN Code': 'New PIN Code',
+  Sort: 'Sort',
 }
 
 export default en

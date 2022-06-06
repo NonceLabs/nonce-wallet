@@ -227,6 +227,7 @@ const zh = {
   Address: '地址',
   'Change PIN Code': '修改 PIN 码',
   'New PIN Code': '新 PIN 码',
+  Sort: '排序',
 }
 
 export default zh

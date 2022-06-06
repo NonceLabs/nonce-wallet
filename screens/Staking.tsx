@@ -69,9 +69,12 @@ export default function Staking() {
 
           <Box align="flex-start" direction="column" full>
             <Text style={styles.title}>Slot</Text>
-            <Box direction="row">
+            <Box direction="row" align="flex-end">
               <Heading>{data?.slot ?? '-'}</Heading>
-              <Text style={[styles.title, styles.number]}> / 7140</Text>
+              <Text style={[styles.title, styles.number, { lineHeight: 34 }]}>
+                {' '}
+                / 7140
+              </Text>
             </Box>
             <View
               style={[
