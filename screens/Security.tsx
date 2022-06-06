@@ -30,7 +30,10 @@ export default function Security() {
               value: '',
               onPress: () => {
                 navigation.navigate('PINCode', {
-                  onConfirmed: () => {},
+                  onConfirmed: () => {
+                    navigation.goBack()
+                    navigation.navigate('ChangePINCode')
+                  },
                 })
               },
             },

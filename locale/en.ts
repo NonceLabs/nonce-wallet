@@ -229,6 +229,8 @@ const en = {
   Default: 'Default',
   'No transactions': 'No transactions',
   Address: 'Address',
+  'Change PIN Code': 'Change PIN Code',
+  'New PIN Code': 'New PIN Code',
 }
 
 export default en

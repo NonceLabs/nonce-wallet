@@ -225,6 +225,8 @@ const zh = {
   Default: '默认',
   'No transactions': '没有交易记录',
   Address: '地址',
+  'Change PIN Code': '修改 PIN 码',
+  'New PIN Code': '新 PIN 码',
 }
 
 export default zh

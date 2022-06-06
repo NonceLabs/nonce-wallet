@@ -35,6 +35,7 @@ export type RootStackParamList = {
   PrivateKey: { wallet?: Wallet }
   TxDetail: { tx: MinaTransaction }
   Validators: undefined
+  ChangePINCode: undefined
   Modal: undefined
   NotFound: undefined
 }

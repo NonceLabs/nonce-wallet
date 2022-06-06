@@ -140,13 +140,15 @@ export default function About({ navigation }: RootStackScreenProps<'About'>) {
               icon: Quote,
               title: 'Privacy',
               value: '',
-              onPress: () => Linking.openURL('#'),
+              onPress: () =>
+                Linking.openURL('https://noncelabs.xyz/nonce-wallet/privacy'),
             },
             {
               icon: Lifebelt,
               title: 'Help',
               value: '',
-              onPress: () => Linking.openURL('#'),
+              onPress: () =>
+                Linking.openURL('https://noncelabs.xyz/nonce-wallet/help'),
             },
             {
               icon: StarOutline,
