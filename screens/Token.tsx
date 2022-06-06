@@ -44,7 +44,7 @@ export default function TokenScreen({
   return (
     <View style={styles.container}>
       <ScreenHeader title="Token" />
-      <View style={styles.content}>
+      <View style={styles.container}>
         <ScrollView
           contentContainerStyle={{
             padding: 20,
@@ -129,9 +129,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  content: {
-    flex: 1,
-  },
   banner: {
     paddingBottom: 15,
     borderBottomWidth: StyleSheet.hairlineWidth,
@@ -149,10 +146,4 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: Fonts.heading,
   },
-  date: {
-    fontSize: 18,
-    fontFamily: Fonts.heading,
-    marginVertical: 10,
-  },
-  txGroup: {},
 })

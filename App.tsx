@@ -1,5 +1,4 @@
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import Toast from 'react-native-toast-message'
 import { PersistGate } from 'redux-persist/integration/react'
 import { Provider } from 'react-redux'
 import { Host } from 'react-native-portalize'
@@ -9,9 +8,9 @@ import './shim'
 import './locale'
 import useCachedResources from './hooks/useCachedResources'
 import Navigation from './navigation'
-import { toastConfig } from './components/common/ToastConfig'
 import { store, persistor } from './store'
 import { polyfillWebCrypto } from 'expo-standard-web-crypto'
+import Toast from 'components/common/Toast'
 
 polyfillWebCrypto()
 
@@ -28,7 +27,7 @@ export default function App() {
             <SafeAreaProvider>
               <Host>
                 <Navigation />
-                <Toast config={toastConfig} />
+                <Toast />
               </Host>
             </SafeAreaProvider>
           </PersistGate>

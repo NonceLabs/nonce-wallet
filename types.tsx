@@ -97,6 +97,7 @@ export type Token = {
 export enum PUB {
   REFRESH_TOKENLIST = 'REFRESH_TOKENLIST',
   SYNC_WALLET_INFO = 'SYNC_WALLET_INFO',
+  TOAST_MESSAGE = 'TOAST_MESSAGE',
 }
 
 export interface MinaSummary {
@@ -222,4 +223,10 @@ export interface MinaProducer extends MinaAccountDetail {
 export enum ValidatorSort {
   NAME = 'Name',
   STAKE = 'Stake',
+}
+
+export interface ToastPayload {
+  type: ToastType
+  message: string
+  duration: number
 }

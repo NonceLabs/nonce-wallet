@@ -19,6 +19,7 @@ import ConfirmModal from 'components/Modals/ConfirmModal'
 import WalletAPI from 'chain/WalletAPI'
 import { useAppDispatch } from 'store/hooks'
 import useAuth from 'hooks/useAuth'
+import Toast from 'utils/toast'
 
 export default function WalletDetail() {
   const { params } = useRoute()
@@ -36,6 +37,7 @@ export default function WalletDetail() {
       type: 'wallet/remove',
       payload: wallet,
     })
+    Toast.error('Wallet deleted')
     navigation.dispatch(StackActions.popToTop())
   }
 

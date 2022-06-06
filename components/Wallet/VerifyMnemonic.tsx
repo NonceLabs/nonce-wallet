@@ -57,6 +57,7 @@ export default function VerifyMnemonic({
           autoCapitalize="none"
           onFocus={() => setInputFocus(true)}
           onBlur={() => setInputFocus(false)}
+          animatedLeft={70}
         />
       </View>
 

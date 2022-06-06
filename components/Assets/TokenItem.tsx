@@ -93,19 +93,16 @@ const styles = StyleSheet.create({
   },
   tokenBalance: {
     fontSize: 16,
-    fontWeight: '600',
     textAlign: 'right',
     lineHeight: 20,
   },
   tokenValue: {
     fontSize: 16,
     textAlign: 'right',
-    color: '#666',
-    fontFamily: Fonts.common,
+    color: Colors.gray,
     lineHeight: 20,
   },
   tokenPrice: {
-    color: '#666',
-    fontFamily: Fonts.common,
+    color: Colors.gray,
   },
 })

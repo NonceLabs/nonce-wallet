@@ -97,11 +97,6 @@ const styles = StyleSheet.create({
     color: Colors.gray9,
     fontFamily: Fonts.variable,
   },
-  title: {
-    fontSize: 16,
-    fontFamily: Fonts.heading,
-    opacity: 0.7,
-  },
   label: {
     fontFamily: Fonts.symbol,
   },

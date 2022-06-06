@@ -44,5 +44,4 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.heading,
     marginVertical: 10,
   },
-  txGroup: {},
 })

@@ -33,7 +33,7 @@ export default function ChangePINCode() {
 
   return (
     <View style={{ flex: 1 }}>
-      <ScreenHeader title={I18n.t('Back')} />
+      <ScreenHeader title="Back" />
       <ScrollView style={styles.container}>
         <Box direction="column">
           <Heading>{I18n.t('New PIN Code')}</Heading>

@@ -1,11 +1,13 @@
-import Toasty from 'react-native-toast-message'
-import { ToastType } from '../types'
+import PubSub from 'pubsub-js'
+import { PUB, ToastType } from '../types'
 
-export const toast = (type: ToastType, message: string): void => {
-  Toasty.show({
+const DURATION = 2000
+
+const toast = (type: ToastType, message: string) => {
+  PubSub.publish(PUB.TOAST_MESSAGE, {
     type,
-    text1: message,
-    visibilityTime: 2000,
+    message,
+    duration: DURATION,
   })
 }
 
@@ -20,5 +22,13 @@ export default class Toast {
 
   static success(message: string) {
     toast('success', message)
+  }
+
+  static info(message: string) {
+    toast('info', message)
+  }
+
+  static warning(message: string) {
+    toast('warning', message)
   }
 }

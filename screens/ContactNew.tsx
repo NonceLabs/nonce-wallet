@@ -92,6 +92,8 @@ export default function ContactNew() {
     }
   }
 
+  const isDisabled = !name.trim() || !isAddressValid(address)
+
   return (
     <View style={{ flex: 1 }}>
       <ScreenHeader title={isEdit ? 'Edit Contact' : 'New Contact'} />
@@ -173,6 +175,7 @@ export default function ContactNew() {
               primary
               onPress={onAdd}
               size={isEdit ? 'medium' : 'large'}
+              disabled={isDisabled}
             />
           </Box>
         </Box>
