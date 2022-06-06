@@ -66,6 +66,6 @@ const styles = StyleSheet.create({
   },
   staked: {
     fontSize: 16,
-    fontFamily: Fonts.numberBold,
+    fontFamily: Fonts.heading,
   },
 })

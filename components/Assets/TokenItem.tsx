@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   tokenName: {
     fontSize: 18,
     fontWeight: '600',
-    fontFamily: Fonts.numberBold,
+    fontFamily: Fonts.heading,
   },
   tokenBalance: {
     fontSize: 16,
@@ -101,11 +101,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'right',
     color: '#666',
-    fontFamily: Fonts.number,
+    fontFamily: Fonts.common,
     lineHeight: 20,
   },
   tokenPrice: {
     color: '#666',
-    fontFamily: Fonts.number,
+    fontFamily: Fonts.common,
   },
 })

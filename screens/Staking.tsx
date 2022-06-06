@@ -163,10 +163,10 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.variable,
   },
   heading: {
-    fontFamily: Fonts.numberBold,
+    fontFamily: Fonts.heading,
   },
   number: {
-    fontFamily: Fonts.numberBold,
+    fontFamily: Fonts.heading,
     fontSize: 18,
   },
   progressWrap: {

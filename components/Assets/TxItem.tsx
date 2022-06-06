@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.heading,
   },
   amount: {
-    fontFamily: Fonts.numberBold,
+    fontFamily: Fonts.heading,
     fontSize: 20,
   },
 })

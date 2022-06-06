@@ -15,8 +15,6 @@ export default function useCachedResources() {
         // Load fonts
         await Font.loadAsync({
           ...Feather.font,
-          'Lato-Bold': require('assets/fonts/Lato-Bold.ttf'),
-          'Lato-Regular': require('assets/fonts/Lato-Regular.ttf'),
           Alata: require('assets/fonts/Alata.ttf'),
           LexendDeca: require('assets/fonts/LexendDeca.ttf'),
           DMMono: require('assets/fonts/DMMono.ttf'),

@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
   total: {
     fontSize: 30,
     fontWeight: '800',
-    fontFamily: Fonts.numberBold,
+    fontFamily: Fonts.heading,
     color: Colors.white,
   },
   button: {
