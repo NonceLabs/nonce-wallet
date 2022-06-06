@@ -13,10 +13,6 @@
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
-    "updates": {
-      "fallbackToCacheTimeout": 0,
-      "url": "https://u.expo.dev/98a3eb09-ee9e-4327-90c0-561cf9ab21c1"
-    },
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "io.noncelabs.wallet",

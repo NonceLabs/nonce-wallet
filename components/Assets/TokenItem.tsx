@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   tokenName: {
     fontSize: 18,
     fontWeight: '600',
-    fontFamily: Fonts.heading,
+    fontFamily: Fonts.symbol,
   },
   tokenBalance: {
     fontSize: 16,

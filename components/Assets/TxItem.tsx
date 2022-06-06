@@ -41,13 +41,15 @@ export default function TxItem({
 
         <View style={styles.detail}>
           <Box direction="column" align="flex-start">
-            <Box gap="small" justify="flex-start" align="flex-end">
-              <Text style={styles.label}>{I18n.t('Amount')}</Text>
-              <Text style={[styles.amount]}>
-                {isSend ? '-' : '+'}
-                {formatBalance(item.amount, MINA_TOKEN.decimals)}
-              </Text>
-            </Box>
+            {!item.isDelegation && (
+              <Box gap="small" justify="flex-start" align="flex-end">
+                <Text style={styles.label}>{I18n.t('Amount')}</Text>
+                <Text style={[styles.amount]}>
+                  {isSend ? '-' : '+'}
+                  {formatBalance(item.amount, MINA_TOKEN.decimals)}
+                </Text>
+              </Box>
+            )}
             {isSend ? (
               <Box gap="small" justify="flex-start">
                 <Text style={styles.label}>
@@ -101,7 +103,7 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   label: {
-    fontFamily: Fonts.heading,
+    fontFamily: Fonts.symbol,
   },
   amount: {
     fontFamily: Fonts.heading,

@@ -18,6 +18,7 @@ export default function useCachedResources() {
           Alata: require('assets/fonts/Alata.ttf'),
           LexendDeca: require('assets/fonts/LexendDeca.ttf'),
           DMMono: require('assets/fonts/DMMono.ttf'),
+          BeVietnamPro: require('assets/fonts/BeVietnamPro.ttf'),
         })
       } catch (e) {
         // We might want to provide this error information to an error reporting service
