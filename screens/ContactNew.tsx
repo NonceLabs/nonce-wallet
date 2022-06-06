@@ -124,6 +124,7 @@ export default function ContactNew() {
               onBlur={() => setNameFocus(false)}
               placeholderTextColor={Colors.gray9}
               animatedLeft={0}
+              maxLength={30}
             />
           </Box>
           <Box

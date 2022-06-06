@@ -310,6 +310,7 @@ export default function Transfer() {
               }}
               onBlur={() => setMemoFocus(false)}
               placeholderTextColor={Colors.gray9}
+              maxLength={256}
             />
           </Box>
 

@@ -1,19 +1,16 @@
-import { Platform, StyleSheet } from 'react-native'
+import { StyleSheet, ViewStyle } from 'react-native'
 import Fonts from 'theme/Fonts'
 import { Text, View } from 'components/Themed'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-export default function SheetHeader({ title }: { title: string }) {
-  const insets = useSafeAreaInsets()
+export default function SheetHeader({
+  title,
+  style,
+}: {
+  title: string
+  style?: ViewStyle
+}) {
   return (
-    <View
-      style={[
-        styles.header,
-        {
-          paddingTop: Platform.OS === 'android' ? insets.top : 10,
-        },
-      ]}
-    >
+    <View style={[styles.header, style]}>
       <Text style={styles.headerText}>{title}</Text>
     </View>
   )

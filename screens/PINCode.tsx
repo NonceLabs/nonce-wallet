@@ -6,7 +6,8 @@ import useColorScheme from 'hooks/useColorScheme'
 import I18n from 'i18n-js'
 import _ from 'lodash'
 import { useRef, useState } from 'react'
-import { TextInput, StyleSheet, Pressable } from 'react-native'
+import { TextInput, StyleSheet, Pressable, Platform } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useAppSelector } from 'store/hooks'
 import Colors from 'theme/Colors'
 import Styles from 'theme/Styles'
@@ -16,13 +17,17 @@ export default function PINCode() {
   const [pinCode, setPINCode] = useState('')
   const inputRef = useRef<TextInput>(null)
   const theme = useColorScheme()
+  const insets = useSafeAreaInsets()
 
   const { params } = useRoute()
   const onConfirmed = (params as any)?.onConfirmed as () => void
 
   return (
     <View style={{ flex: 1 }}>
-      <SheetHeader title={I18n.t('Confirm PIN Code')} />
+      <SheetHeader
+        title={I18n.t('Confirm PIN Code')}
+        style={{ paddingTop: Platform.OS === 'android' ? insets.top : 10 }}
+      />
       <View style={[Styles.page, Styles.center, { paddingBottom: 300 }]}>
         <TextInput
           ref={inputRef}
