@@ -5,13 +5,27 @@
   "build": {
     "development": {
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "android": {
+        "image": "default",
+        "env": {
+          "PLATFORM": "android"
+        }
+      }
     },
     "preview": {
-      "distribution": "internal"
+      "ios": {
+        "simulator": true
+      }
     },
     "production": {
-      "node": "16.13.0"
+      "node": "16.13.0",
+      "android": {
+        "image": "default",
+        "env": {
+          "PLATFORM": "android"
+        }
+      }
     }
   },
   "submit": {
