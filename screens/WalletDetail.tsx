@@ -37,7 +37,7 @@ export default function WalletDetail() {
       type: 'wallet/remove',
       payload: wallet,
     })
-    Toast.error('Wallet deleted')
+    Toast.success('Wallet deleted')
     navigation.dispatch(StackActions.popToTop())
   }
 

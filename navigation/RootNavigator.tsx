@@ -1,13 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import * as React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import {
-  HomeAlt,
-  Settings,
-  Svg3DSelectFace,
-  Svg3DSelectSolid,
-  Tunnel,
-} from 'iconoir-react-native'
+import { Settings, Svg3DSelectFace, Tunnel } from 'iconoir-react-native'
 import I18n from 'i18n-js'
 import { StyleProp, TextStyle } from 'react-native'
 
@@ -163,10 +157,10 @@ function BottomTabNavigator() {
         component={Home}
         options={({ navigation }: RootTabScreenProps<'Home'>) => ({
           tabBarIcon: ({ color }) => (
-            <HomeAlt width={30} height={30} color={color} />
+            <Tunnel width={30} height={30} color={color} />
           ),
           headerShown: false,
-          title: I18n.t('Asset'),
+          title: I18n.t('Wallet'),
           tabBarLabelStyle,
         })}
       />
