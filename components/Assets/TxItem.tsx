@@ -11,7 +11,7 @@ import Colors from 'theme/Colors'
 import Fonts from 'theme/Fonts'
 import { Chain, MinaTransaction } from 'types'
 import { MINA_TOKEN } from 'utils/configure'
-import { ellipsis, formatBalance } from 'utils/format'
+import { formatBalance } from 'utils/format'
 
 export default function TxItem({
   item,
@@ -40,42 +40,30 @@ export default function TxItem({
         </Box>
 
         <View style={styles.detail}>
-          <Box direction="column" align="flex-start">
-            {!item.isDelegation && (
-              <Box gap="small" justify="flex-start" align="flex-end">
-                <Text style={styles.label}>{I18n.t('Amount')}</Text>
-                <Text style={[styles.amount]}>
-                  {isSend ? '-' : '+'}
-                  {formatBalance(item.amount, MINA_TOKEN.decimals)}
-                </Text>
-              </Box>
-            )}
-            {isSend ? (
-              <Box gap="small" justify="flex-start">
-                <Text style={styles.label}>
-                  {I18n.t(item.isDelegation ? 'Stake' : 'To')}
-                </Text>
-                <Address
-                  wallet={{ chain: Chain.MINA, publicKey: item.to }}
-                  fontSize={14}
-                />
-              </Box>
-            ) : (
-              <Box gap="small" justify="flex-start">
-                <Text style={styles.label}>{I18n.t('From')}</Text>
-                <Address
-                  wallet={{ chain: Chain.MINA, publicKey: item.from }}
-                  fontSize={14}
-                />
-              </Box>
-            )}
-
-            <Box gap="small" justify="flex-start">
-              <Text style={styles.label}>{I18n.t('Hash')}</Text>
-              <Text style={[styles.actionDesc, { color: Colors[theme].link }]}>
-                {ellipsis(item.hash, 16)}
+          <Box direction="row" align="flex-start" justify="space-between">
+            <Box
+              direction="column"
+              gap="small"
+              align="flex-start"
+              justify="flex-start"
+            >
+              <Text style={styles.label}>
+                {I18n.t(isSend ? (item.isDelegation ? 'Stake' : 'To') : 'From')}
               </Text>
+              <Address
+                wallet={{
+                  chain: Chain.MINA,
+                  publicKey: isSend || item.isDelegation ? item.to : item.from,
+                }}
+                fontSize={14}
+              />
             </Box>
+            {!item.isDelegation && (
+              <Text style={[styles.amount]}>
+                {isSend ? '-' : '+'}
+                {formatBalance(item.amount, MINA_TOKEN.decimals)}
+              </Text>
+            )}
           </Box>
         </View>
       </Box>
@@ -101,7 +89,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.symbol,
   },
   amount: {
-    fontFamily: Fonts.heading,
-    fontSize: 20,
+    fontSize: 16,
+    fontFamily: Fonts.number,
   },
 })

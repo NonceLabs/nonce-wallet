@@ -146,7 +146,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: 'bold',
     color: Colors.link,
     fontFamily: Fonts.variable,
     width: 310,

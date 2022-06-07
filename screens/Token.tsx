@@ -52,11 +52,19 @@ export default function TokenScreen({
         >
           <Box direction="column" gap="small" style={styles.banner}>
             <TokenLogo token={token} size={80} />
-            <Text style={[styles.balance, { color: Colors[theme].link }]}>
-              {`${formatBalance(token.balance, token.decimals)} ${
-                token.symbol
-              }`}
-            </Text>
+            <Box gap="small">
+              <Text
+                style={[
+                  styles.balance,
+                  { color: Colors[theme].link, fontFamily: Fonts.number },
+                ]}
+              >
+                {formatBalance(token.balance, token.decimals)}
+              </Text>
+              <Text style={[styles.balance, { color: Colors[theme].link }]}>
+                {token.symbol}
+              </Text>
+            </Box>
             <View style={styles.buttonGroup}>
               <Icon
                 icon={
@@ -144,6 +152,6 @@ const styles = StyleSheet.create({
   balance: {
     marginTop: 10,
     fontSize: 20,
-    fontFamily: Fonts.heading,
+    fontFamily: Fonts.symbol,
   },
 })
