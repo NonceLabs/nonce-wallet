@@ -169,7 +169,7 @@ export default function SettingScreen() {
         <Modalize ref={languageRef} adjustToContentHeight>
           <LanguageModal
             onClose={() => {
-              setClickCount(1)
+              setClickCount(clickCount + 1)
               languageRef.current?.close()
               navigation.goBack()
             }}

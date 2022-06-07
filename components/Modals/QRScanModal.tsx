@@ -48,10 +48,20 @@ export default function QRScanModal({
         borderTopRightRadius: 8,
       }}
     >
-      <BarCodeScanner
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={{ width: width - 40, height: width - 40 }}
-      />
+      {hasPermission ? (
+        <BarCodeScanner
+          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+          style={{ width: width - 40, height: width - 40 }}
+        />
+      ) : (
+        <View
+          style={{
+            width: width - 40,
+            height: width - 40,
+            backgroundColor: Colors.black,
+          }}
+        ></View>
+      )}
 
       {hasPermission === null && (
         <Text style={styles.tip}>Requesting for camera permission</Text>
