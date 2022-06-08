@@ -42,7 +42,7 @@ export default function Start() {
       {!isNew && <ScreenHeader title="Back" />}
       <View style={{ flex: 1, padding: 20 }}>
         <Heading>{I18n.t('Welcome to')}</Heading>
-        <Heading>Nonce Wallet</Heading>
+        <Heading>NonceX Wallet</Heading>
 
         <Box
           direction="column"

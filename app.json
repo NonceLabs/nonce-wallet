@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "Nonce",
+    "name": "NonceX",
     "slug": "Nonce",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "nonce",
+    "scheme": "noncex",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
@@ -14,8 +14,8 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "bundleIdentifier": "io.noncelabs.wallet",
-      "buildNumber": "1",
+      "bundleIdentifier": "xyz.noncelabs.noncex",
+      "buildNumber": "2",
       "supportsTablet": true,
       "infoPlist": {
         "NSFaceIDUsageDescription": "Face ID is required to use the app",
@@ -27,8 +27,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "io.noncelabs.wallet",
-      "versionCode": 1,
+      "package": "xyz.noncelabs.noncex",
+      "versionCode": 2,
       "permissions": [
         "CAMERA",
         "READ_EXTERNAL_STORAGE",

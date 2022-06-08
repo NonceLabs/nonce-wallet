@@ -173,6 +173,7 @@ const en = {
   'Confirm PIN Code': 'Confirm PIN Code',
   'PIN code does not match': 'PIN code does not match',
   Nonce: 'Nonce',
+  NonceX: 'NonceX',
   Start: 'Start',
   'PIN Code': 'PIN Code',
   'Bio Auth': 'Bio Auth',

@@ -136,7 +136,7 @@ export default function SettingScreen() {
           items={[
             {
               icon: Tunnel,
-              title: 'Nonce',
+              title: 'NonceX',
               value: '',
               onPress: () => navigation.navigate('About'),
             },

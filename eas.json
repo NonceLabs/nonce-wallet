@@ -3,13 +3,20 @@
     "version": ">= 0.52.0"
   },
   "build": {
+    "base": {
+      "env": {
+        "NODE_OPTIONS": "--max_old_space_size=4096"
+      },
+      "node": "16.13.0",
+      "yarn": "1.22.17"
+    },
     "development": {
       "developmentClient": true,
       "distribution": "internal"
     },
     "preview": {},
     "production": {
-      "node": "16.13.0"
+      "extends": "base"
     }
   },
   "submit": {

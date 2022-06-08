@@ -169,6 +169,7 @@ const zh = {
   'Confirm PIN Code': '确认 PIN 码',
   'PIN code does not match': 'PIN 码不匹配',
   Nonce: 'Nonce',
+  NonceX: 'NonceX',
   Start: 'Start',
   'PIN Code': '修改 PIN 码',
   'Bio Auth': '生物识别',
