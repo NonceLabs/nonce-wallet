@@ -1,6 +1,5 @@
-import { Text, View } from 'components/Themed'
+import { View } from 'components/Themed'
 import useColorScheme from 'hooks/useColorScheme'
-import { EaseIn } from 'iconoir-react-native'
 import { useEffect, useRef, useState } from 'react'
 import {
   TextInputProps,

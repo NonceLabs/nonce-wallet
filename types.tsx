@@ -9,7 +9,6 @@ import {
   NavigatorScreenParams,
 } from '@react-navigation/native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { PublicKey } from 'mina-signer/dist/src/TSTypes'
 import { ImageSourcePropType } from 'react-native'
 
 declare global {

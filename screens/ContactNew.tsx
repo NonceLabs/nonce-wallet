@@ -11,19 +11,11 @@ import I18n from 'i18n-js'
 import { Scanning } from 'iconoir-react-native'
 import _ from 'lodash'
 import { useRef, useState } from 'react'
-import {
-  Keyboard,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  TextInput,
-} from 'react-native'
+import { Keyboard, Pressable, ScrollView, StyleSheet } from 'react-native'
 import { Modalize } from 'react-native-modalize'
 import { Portal } from 'react-native-portalize'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 import Colors from 'theme/Colors'
-import Fonts from 'theme/Fonts'
-import Styles from 'theme/Styles'
 import { Chain, Contact } from 'types'
 import Toast from 'utils/toast'
 
