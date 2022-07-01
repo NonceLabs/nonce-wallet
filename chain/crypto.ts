@@ -5,7 +5,7 @@ import * as Random from 'expo-random'
 import Client from 'mina-signer'
 import { MNEMONIC_STRENGTH } from '../utils/configure'
 import { Chain, KeyStoreFile, Token } from 'types'
-import { formatTokenBalance, parseAmount } from 'utils/format'
+import { parseAmount } from 'utils/format'
 import { BN } from 'bn.js'
 
 const getDerivedPath = (index: number) => `m/44'/12586'/${index}'/0/0`

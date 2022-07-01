@@ -1,7 +1,6 @@
 import { useRoute } from '@react-navigation/native'
 import * as ClipBoard from 'expo-clipboard'
 import WalletAPI from 'chain/WalletAPI'
-import Button from 'components/common/Button'
 import ScreenHeader from 'components/common/ScreenHeader'
 import { Text, View } from 'components/Themed'
 import useColorScheme from 'hooks/useColorScheme'

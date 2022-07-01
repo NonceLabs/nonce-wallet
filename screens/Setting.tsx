@@ -110,12 +110,12 @@ export default function SettingScreen() {
         <SettingBlock
           title="Community"
           items={[
-            // {
-            //   icon: Twitter,
-            //   title: 'Twitter',
-            //   value: '',
-            //   onPress: () => Linking.openURL('#'),
-            // },
+            {
+              icon: Twitter,
+              title: 'Twitter',
+              value: '',
+              onPress: () => Linking.openURL('https://twitter.com/noncelabs'),
+            },
             {
               icon: Discord,
               title: 'Discord',
