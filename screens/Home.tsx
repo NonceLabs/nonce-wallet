@@ -1,9 +1,14 @@
-import { Platform, StyleSheet, useWindowDimensions } from 'react-native'
+import {
+  Platform,
+  RefreshControl,
+  StyleSheet,
+  useWindowDimensions,
+} from 'react-native'
 import PubSub from 'pubsub-js'
 
 import { View } from 'components/Themed'
 import { Currency, CurrencyRate, PUB, RootTabScreenProps, Token } from 'types'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 import Banner from 'components/Banner'
 import BottomSheet, { BottomSheetFlatList } from '@gorhom/bottom-sheet'
@@ -30,6 +35,7 @@ export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
   const currency: Currency = useAppSelector(
     (state) => state.setting.currentCurrency || Currency.USD
   )
+  const [refreshing, setRefreshing] = useState(false)
 
   const dispatch = useAppDispatch()
 
@@ -59,8 +65,11 @@ export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
 
     async function syncWalletInfo() {
       if (wallet) {
+        console.log('syncing wallet info')
         fetcher(`https://api.minaexplorer.com/accounts/${wallet.publicKey}`)
           .then((result) => {
+            console.log('synced')
+            setRefreshing(false)
             if (result.account) {
               dispatch({
                 type: 'wallet/setDetail',
@@ -76,7 +85,11 @@ export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
               })
             }
           })
-          .catch(console.error)
+          .catch((error) => {
+            console.log('error', error)
+
+            setRefreshing(false)
+          })
       }
     }
 
@@ -84,8 +97,11 @@ export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
 
     const token = PubSub.subscribe(PUB.SYNC_WALLET_INFO, syncWalletInfo)
 
+    const tick = setInterval(syncWalletInfo, 10000)
+
     return () => {
       token && PubSub.unsubscribe(token)
+      tick && clearInterval(tick)
     }
   }, [walletList, wallet])
 
@@ -126,6 +142,16 @@ export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
           contentContainerStyle={{
             paddingBottom: insets.bottom,
           }}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={() => {
+                console.log('onRefresh')
+                setRefreshing(true)
+                PubSub.publish(PUB.SYNC_WALLET_INFO)
+              }}
+            />
+          }
         />
       </BottomSheet>
     </View>

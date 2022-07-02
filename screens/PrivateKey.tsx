@@ -18,7 +18,7 @@ import { Copy } from 'iconoir-react-native'
 export default function PrivateKey() {
   const { params } = useRoute()
   const wallet = (params as any)?.wallet as Wallet
-  const [keyStore, setKeyStore] = useState<KeyStoreFile>('')
+  const [keyStore, setKeyStore] = useState<KeyStoreFile>()
   const theme = useColorScheme()
 
   useEffect(() => {
@@ -68,7 +68,7 @@ export default function PrivateKey() {
               <Text style={styles.title}>{I18n.t('Mnemonic')}</Text>
               <Pressable
                 onPress={async () => {
-                  await ClipBoard.setStringAsync(keyStore?.publicKey)
+                  await ClipBoard.setStringAsync(keyStore?.mnemonic!)
                   Toast.info(I18n.t('Copied'))
                 }}
               >

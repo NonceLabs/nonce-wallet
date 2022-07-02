@@ -15,6 +15,7 @@ import { Check, Copy, ShareAndroid, InfoEmpty } from 'iconoir-react-native'
 import { useState } from 'react'
 import { Wallet } from 'types'
 import Heading from 'components/common/Heading'
+import I18n from 'i18n-js'
 
 export default function AddressQRModal({
   wallet,
@@ -68,6 +69,20 @@ export default function AddressQRModal({
             logoSize={40}
             value={wallet?.publicKey ?? ''}
           />
+        </View>
+        <View
+          style={{
+            borderRadius: 4,
+            backgroundColor: Colors[theme].bannerBackground,
+            padding: 10,
+            marginTop: 15,
+          }}
+        >
+          <Text>
+            If the receiving account has not received any transactions, there
+            will be an additional Account Creation Fee of 1 MINA that will be
+            deducted from the transaction amount.
+          </Text>
         </View>
         <View style={styles.buttonGroup}>
           <Icon

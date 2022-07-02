@@ -26,7 +26,7 @@ export const post = async (url: string, json: object) => {
 }
 
 export const fetcher = async (url: string, headers = {}) => {
-  console.log('###GET', url)
+  // console.log('###GET', url)
   const controller = new AbortController()
   const id = setTimeout(() => controller.abort(), 30000)
   const response = await fetch(url, {

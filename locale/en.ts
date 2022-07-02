@@ -233,6 +233,8 @@ const en = {
   'Change PIN Code': 'Change PIN Code',
   'New PIN Code': 'New PIN Code',
   Sort: 'Sort',
+  'If the receiving account has not received any transactions, there will be an additional Account Creation Fee of 1 MINA that will be deducted from the transaction amount.':
+    'If the receiving account has not received any transactions, there will be an additional Account Creation Fee of 1 MINA that will be deducted from the transaction amount.',
 }
 
 export default en

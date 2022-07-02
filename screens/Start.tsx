@@ -7,7 +7,13 @@ import useColorScheme from 'hooks/useColorScheme'
 import I18n from 'i18n-js'
 import { KeyAltPlus, Wallet } from 'iconoir-react-native'
 import { useEffect } from 'react'
-import { Image, Pressable, StyleSheet, useWindowDimensions } from 'react-native'
+import {
+  Image,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  useWindowDimensions,
+} from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useAppSelector } from 'store/hooks'
 import Colors from 'theme/Colors'
@@ -40,7 +46,7 @@ export default function Start() {
       }}
     >
       {!isNew && <ScreenHeader title="Back" />}
-      <View style={{ flex: 1, padding: 20 }}>
+      <ScrollView style={{ flex: 1, padding: 20 }}>
         <Heading>{I18n.t('Welcome to')}</Heading>
         <Heading>NonceX Wallet</Heading>
 
@@ -137,7 +143,7 @@ export default function Start() {
             </Box>
           </Box>
         </Box>
-      </View>
+      </ScrollView>
     </View>
   )
 }

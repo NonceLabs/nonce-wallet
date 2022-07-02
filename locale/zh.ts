@@ -229,6 +229,8 @@ const zh = {
   'Change PIN Code': '修改 PIN 码',
   'New PIN Code': '新 PIN 码',
   Sort: '排序',
+  'If the receiving account has not received any transactions, there will be an additional Account Creation Fee of 1 MINA that will be deducted from the transaction amount.':
+    '如果接收账户没有收到任何交易，将有一个额外的账户创建费1MINA，将从交易金额中扣除。',
 }
 
 export default zh
