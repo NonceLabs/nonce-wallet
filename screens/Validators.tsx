@@ -25,7 +25,7 @@ import { fetcher } from 'utils/fetcher'
 import { parseAmount } from 'utils/format'
 import Toast from 'utils/toast'
 import { stakeTx } from 'utils/fetcher'
-import { StackActions, useNavigation } from '@react-navigation/native'
+import { StackActions, useNavigation, useRoute } from '@react-navigation/native'
 import SortValidatorModal from 'components/Modals/SortValidatorModal'
 import _ from 'lodash'
 
@@ -39,6 +39,9 @@ export default function Validators() {
   const [delegation, setDelegation] = useState<StakePreview | undefined>()
   const [sortBy, setSortBy] = useState<ValidatorSort>(ValidatorSort.STAKE)
   const sortByRef = useRef<Modalize>(null)
+
+  const { params } = useRoute()
+  const onChangeValidator = (params as any).onChangeValidator
 
   const wallet = useAppSelector((state) => state.wallet.current)
   const detail = useAppSelector((state) => state.wallet.detail)
@@ -107,6 +110,7 @@ export default function Validators() {
         navigation.dispatch(StackActions.popToTop())
         Toast.success(response.message)
         PubSub.publish(PUB.SYNC_WALLET_INFO)
+        onChangeValidator(selected)
       } catch (error) {
         Toast.error(error)
       }

@@ -235,6 +235,7 @@ const en = {
   Sort: 'Sort',
   'If the receiving account has not received any transactions, there will be an additional Account Creation Fee of 1 MINA that will be deducted from the transaction amount.':
     'If the receiving account has not received any transactions, there will be an additional Account Creation Fee of 1 MINA that will be deducted from the transaction amount.',
+  Confirming: 'Confirming',
 }
 
 export default en

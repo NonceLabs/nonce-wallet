@@ -231,6 +231,7 @@ const zh = {
   Sort: '排序',
   'If the receiving account has not received any transactions, there will be an additional Account Creation Fee of 1 MINA that will be deducted from the transaction amount.':
     '如果接收账户没有收到任何交易，将有一个额外的账户创建费1MINA，将从交易金额中扣除。',
+  Confirming: '确认中',
 }
 
 export default zh

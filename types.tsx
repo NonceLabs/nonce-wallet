@@ -33,7 +33,7 @@ export type RootStackParamList = {
   PINCode: { onConfirmed: () => void }
   PrivateKey: { wallet?: Wallet }
   TxDetail: { tx: MinaTransaction }
-  Validators: undefined
+  Validators: { onChangeValidator: (v: Validator) => void }
   ChangePINCode: undefined
   Modal: undefined
   NotFound: undefined
